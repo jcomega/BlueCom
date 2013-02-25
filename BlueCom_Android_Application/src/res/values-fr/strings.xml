@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <string name="app_name">BlueCom</string>
+    
+    <string name="bt_connect">Connexion</string>
+    <string name="bt_Exit">Quitter</string>
+    <string name="bt_disconnect">Déconnexion</string>
+
+    
+    <string name="title_main">BlueCom</string>
+    <string name="title_main2">Télécommande.</string>
+    <string name="status_main_nc">Statut : Non connecté</string>   
+    <string name="status_main_c">Statut : Connecté</string>  
+    <string name="status_main_cc">Statut : Connection en cours</string>  
+    
+    <!--  String for Blucom structure -->
+    <string name="txt_1RELAYS">BlueCom 1 relay</string>
+    <string name="txt_4RELAYS">4 Relays board</string>
+    
+    <!--  String for main.xml-->
+    <string name="txt_output1">Sortie 1 :</string>
+    <string name="txt_output2">Sortie 2 :</string>
+    <string name="txt_output3">Sortie 3 :</string>
+    <string name="txt_output4">Sortie 4 :</string>
+    <string name="txt_output_rgb">Sortie RGB :</string> 
+    
+    <string name="txt_setting">Réglage</string>
+    <string name="txt_alarm_on">Alarme on :</string>
+    <string name="txt_alarm_off">Alarme off :</string>
+    
+    <!--  String for main.xml - alarm -->   
+    <string name="txt_alarm_title">Statut alarme  :</string>      
+    <string name="txt_alarm_start">Début à : </string>
+    <string name="txt_alarm_stop">Arrêt à : </string>
+    <string name="txt_alarm_status">La sortie sera à : </string>  
+    <string name="txt_alarm_noconfig">Alarme non configuré.</string>   
+
+    <!--  String for BlueComTimeSet -->    
+    <string name="title_time_set">"Réglage de l'alarme"</string>
+    <string name="title_alarm_start">"L'alarme débutera à (H:M):"</string>
+    <string name="title_alarm_stop">"L'alarme stoppera à (H:M):"</string>
+    <string name="title_alarm_out">"Statut de la sortie quand l'alarme sera active :"</string>
+    <string name="bt_time_set">"Réglage de l'alarme"</string> 
+    <string name="title_clock"> 00:00 </string> 
+    <string name="title_space"> AAAAAA </string> 
+    <string name="txt_rtn_mess1">"L'alarme de début et de fin doit être différente</string> 
+    <string name="txt_rtn_mess2">"Réglage de l'alarme annulé"</string>
+    <string name="txt_rtn_mess3">"L'alarme débutera à: "</string>  
+    <string name="txt_rtn_mess4">", la sortie sera '"</string>  
+    <string name="txt_rtn_mess5">"' et stoppera à: "</string>  
+    
+    
+    <!--  DeviceListActivity -->
+    <string name="title_paired_devices">Appareils appairé :</string>
+    <string name="title_other_devices">Autre appareils disponible</string>
+    <string name="button_scan">Rechercher des appareils</string>
+    <string name="select_device">Sélectionner un appareil</string>
+    <string name="none_paired">"Aucun appareil n'a été appairé"</string>
+    <string name="scanning">"Recherche d'appareils..."</string>
+    <string name="none_found">"Pas d'appareils trouvé"</string>
+    
+    <string name="bt_not_enabled_leaving">Bluetooth non activé. Fermeture de BueCom.</string>
+    <string name="not_connected">"Vous n'êtes pas connecté à un appareil"</string>
+    <string name="status_label">Statut</string>
+    <string name="Version_Soft">Version : 11/02/13</string>
+
+    
+</resources>

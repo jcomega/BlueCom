@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <string name="app_name">BlueCom</string>
+    
+    <string name="bt_connect">Connect</string>
+    <string name="bt_Exit">Exit</string>
+    <string name="bt_disconnect">Disconnect</string>
+
+    
+    <string name="title_main">BlueCom</string>
+    <string name="title_main2">Remote Control.</string>
+    <string name="status_main_nc">Status : Not connected</string>   
+    <string name="status_main_c">Status : Connected</string>  
+    <string name="status_main_cc">Status : Connecting...</string>  
+    
+    <!--  String for Blucom structure -->
+    <string name="txt_1RELAYS">BlueCom 1 relay</string>
+    <string name="txt_4RELAYS">4 Relays board</string>
+    
+    <!--  String for main.xml-->
+    <string name="txt_output1">Output 1 :</string>
+    <string name="txt_output2">Output 2 :</string>
+    <string name="txt_output3">Output 3 :</string>
+    <string name="txt_output4">Output 4 :</string>
+    <string name="txt_output_rgb">Output RGB :</string> 
+    
+    <string name="txt_setting">Setting</string>
+    <string name="txt_alarm_on">Alarm on :</string>
+    <string name="txt_alarm_off">Alarm off :</string>
+    
+    <!--  String for main.xml - alarm -->   
+    <string name="txt_alarm_title">Alarm Status :</string>      
+    <string name="txt_alarm_start">Start at : </string>
+    <string name="txt_alarm_stop">Stop at : </string>
+    <string name="txt_alarm_status">Output will be : </string>  
+    <string name="txt_alarm_noconfig">Alarm not configured.</string>   
+
+    <!--  String for BlueComTimeSet -->    
+    <string name="title_time_set">Output Alarm Setting</string>
+    <string name="title_alarm_start">Alarm Start at (H:M):</string>
+    <string name="title_alarm_stop">Alarm Stop at (H:M):</string>
+    <string name="title_alarm_out">Output state when alarm will be activated :</string>
+    <string name="bt_time_set">Set Alarm Clock</string> 
+    <string name="title_clock"> 00:00 </string> 
+    <string name="title_space"> AAAAAA </string> 
+    <string name="txt_rtn_mess1">"Alarm time Start and alarm time stop must be different"</string> 
+    <string name="txt_rtn_mess2">"Alarm setting aborded"</string>
+    <string name="txt_rtn_mess3">"Alarm will start at: "</string>  
+    <string name="txt_rtn_mess4">", Output will be '"</string>  
+    <string name="txt_rtn_mess5">"' and will stop at: "</string>  
+    
+    <!--  DeviceListActivity -->
+    <string name="title_paired_devices">Paired Devices :</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="scanning">"scanning for devices..."</string>
+    <string name="none_found">No devices found</string>
+    
+
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth BueCom.</string>
+    <string name="not_connected">You are not connected to a device</string>
+    <string name="status_label">Status</string>
+    <string name="Version_Soft">Version : 11/02/13</string>
+
+    
+</resources>

@@ -1,0 +1,266 @@
+/*********************************************************************
+ * TITLE - USART library module for 'C' programming language.
+ * FileName:        UARTIntC.PIC18.ex.ext
+ * Version:			1.0
+ * Overview:
+ * The following main() program demonstrates use of library module. 
+ * There are various test cases, which are grouped together by 
+ * comments. User can uncomment only one test case at a time and run 
+ * the application and see the results. There are lot of freeware and
+ * shareware utilities which deal with serial port are avaialable. 
+ * They can be used to monitor the data.
+
+ * Author               Date        Comment
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Reddy TE	  Sept. 19,2003	     Original Release
+ * 
+ * Reddy TE	  Sept. 24,2003	     Changed return values of func-
+ *				     tions to unsigned char
+ *
+ ********************************************************************/
+#include "UARTIntC.h"
+#include "delays.h"
+
+#include <p18f452.h>
+
+
+void low_isr(void);
+
+// serial interrupt taken as low priority interrupt
+#pragma code uart_int_service = 0x08
+void uart_int_service(void)
+{
+	_asm	goto low_isr	_endasm
+	
+}
+#pragma code
+
+#pragma	interruptlow low_isr save=section(".tmpdata")
+void low_isr(void)
+{	
+	// call of library module function, MUST
+	UARTIntISR();
+}
+
+void main(void)
+{
+	// Test data array
+	unsigned char cArray[10]
+	   = { 'A','B', 'C', 'D', 'E', 'F', 'G','H','I' , 'J'};
+	
+	// temporary local array	   
+	unsigned char writtenArray[10];
+	
+	// local variables for all test cases and their initialisation
+	unsigned char chData;
+	unsigned char *pReadArray;
+	unsigned char *pWriteArray;
+	unsigned char j = 0;
+	unsigned char i  = 0;
+	unsigned char l = 0;
+	unsigned char k = 0;			
+	pReadArray = pWriteArray = writtenArray;	
+
+
+	// call of library module , MUST
+	UARTIntInit();	
+
+
+// TEST 1
+// Sending Test array data, 100 times, from micro-controller to PC
+// and waiting infinitely at the end.
+
+   for(j = 0; j < 100; j++)
+	{
+		k = 0;
+		while(k < 10)
+		{
+			if(UARTIntPutChar(cArray[k]))
+				 k++;			
+		}		   
+	}	
+	while(1);
+
+
+// TEST 2
+// Similar to TEST1
+	/*
+	
+	for(j = 0; j < 100; j++)
+	{
+		k = 0;
+		while(k < 10)
+		{  
+			if(!vUARTIntStatus.UARTIntTxBufferFull)
+			 UARTIntPutChar(cArray[k++]);
+		}		   
+	}	
+	while(1);
+	
+	*/
+
+
+// TEST 3
+//	Sending Test array data, continuously, from micro-controller to PC
+//  Usage of status flag can be seen in below example
+	/*
+	
+	while(1)  
+	{
+		i = 0;
+		while(i<10)
+		{   //status flag
+			if(!vUARTIntStatus.UARTIntTxBufferFull)
+			{
+				 UARTIntPutChar(cArray[i]);		
+				 i++;
+			 }
+		 }		
+	}
+
+	*/
+	
+//	TEST 4
+//	Sending Test array data, continuously, from micro-controller to PC
+// 	Usage of UARTIntGetTxBufferEmptySpace() function can be seen below
+	/*
+	
+	while(1)
+	{
+		i = 0;
+		while(i < 10) //works  change to pointer
+		{   
+			l = 0;
+			l = UARTIntGetTxBufferEmptySpace();
+			for(k = 0; k < l; k++)
+			{   if((i+k) < 10)
+				UARTIntPutChar(cArray[i+k]);			
+			}
+			i = i+ k;						
+		}					
+	}	
+
+	*/
+
+
+//	TEST 5
+//  Checking transmission and reception simultaneously.
+//  Sending Test array data, 100 times ,from micro-controller to PC.
+//  During this transmission, a single character 'A' or 'B' or 'C' 
+//  can be sent from PC to micro-controller. This can be seen as LED
+//  glows on PICDEM2 board. At the end of transmission micro-controller
+//  waits infinitely at the end.
+	/*		
+  
+  	TRISB = 0;
+	PORTB = 0;
+    k = 0;
+
+	while(k < 100)
+	{
+		for(j = 0; j < 100; j++)
+		{
+			i = 0;
+			do{
+				if(vUARTIntStatus.UARTIntTxBufferEmpty)
+					UARTIntPutChar(cArray[i++]);
+			}while(i < 10);
+		}
+		
+		if( !(vUARTIntStatus.UARTIntRxError) && 
+		    !(vUARTIntStatus.UARTIntRxOverFlow) &&
+		    !(vUARTIntStatus.UARTIntRxBufferEmpty))
+		{    
+			if(UARTIntGetChar(&chData))
+			PORTB = chData;
+		}
+		
+		k++;
+	}
+	
+	while(1);			
+
+	*/
+
+
+//	TEST 6
+//  Chunk of 30 characters can be sent from PC to micro-controller.
+//  Each received character at micro-controller is read and immediately 
+//	sent back to PC.
+	/*
+	
+	while(1)
+	{
+		while(!vUARTIntStatus.UARTIntRxBufferEmpty)
+		{
+			UARTIntGetChar(&chData);			
+			if(!vUARTIntStatus.UARTIntTxBufferFull)
+				UARTIntPutChar(chData);
+		};
+	};
+
+	*/
+
+
+//	TEST 7
+// 	Chunk of data is sent from PC to micro. Data received at micro is
+//	read in to temporary buffer. The data is immediately sent back to 
+//  PC. Usage of pointers is displayed in below example
+	/*
+	
+	while(1)   
+	{		   
+		l = 0;
+		l = UARTIntGetRxBufferDataSize();	
+		while(l > 0)
+		{
+			if(UARTIntGetChar(pWriteArray))
+			{				
+				if(!vUARTIntStatus.UARTIntTxBufferFull)
+				    UARTIntPutChar(*pWriteArray);
+				l--; pWriteArray++;
+				if(pWriteArray == (writtenArray + 10))
+					pWriteArray = writtenArray;
+			}
+		}
+	}
+		
+	*/
+	
+
+//	TEST 8
+// 	Chunk of data is sent from PC to micro. Data received at micro is
+//	read in to temporary buffer. The data is sent back to PC. Here 
+//  reception and transmission is done independently.
+	/*
+	
+	
+	while(1)   
+	{					   
+		l = 0;
+		l = UARTIntGetRxBufferDataSize();	
+		while(l > 0)
+		{
+			if(UARTIntGetChar(pReadArray))
+			{				
+				l--; pReadArray++;
+				if(pReadArray == (writtenArray + 10))
+					pReadArray = writtenArray;
+			}
+		}		
+		if((pWriteArray < pReadArray) || ((pWriteArray - pReadArray) == 9 ))
+		{  
+			if(!vUARTIntStatus.UARTIntTxBufferFull)
+			{
+				UARTIntPutChar(*pWriteArray);
+	    		i--; pWriteArray++;
+ 			    if(pWriteArray == (writtenArray + 10))				  			
+					pWriteArray = writtenArray;		
+			}
+		}									
+	}
+	
+	*/
+	
+	
+}

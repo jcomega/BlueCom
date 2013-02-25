@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    tools:context=".BlueComActivity" >
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dip" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </TableRow>
+
+        
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp" >
+        
+        <ImageView
+            android:id="@+id/imageView_bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bluetooth_black" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/title_main2"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView_bluetooth"
+            android:text="@string/title_main"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0000FF"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <View android:layout_height="10dp" />
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <View android:layout_height="10dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="3dp" >
+
+        <TextView
+            android:id="@+id/textView_out1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/txt_output1"
+            android:textColor="#0000FF" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingLeft="10dp" >
+
+            <TextView
+                android:id="@+id/title_Alarm"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingBottom="5dp"
+                android:text="@string/txt_alarm_title"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/title_Alarm_start_out1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/txt_alarm_start"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/title_Alarm_stop_out1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/txt_alarm_stop"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/title_Alarm_status_out1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/txt_alarm_status"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="5dp" >
+
+                <Button
+                    android:id="@+id/button_alarm_set_out1"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bluecom_button_normal"
+                    android:paddingLeft="10dp"
+                    android:text="@string/txt_setting" />
+
+                <Button
+                    android:id="@+id/Button_alarmONOFF_out1"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/bluecom_button_off"
+                    android:hint="@string/txt_alarm_off"
+                    android:text="@string/txt_alarm_off" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imageButton_OnOff_out1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/linearLayout1"
+            android:background="@drawable/power_off_button"
+            android:src="@drawable/power_off_button" />
+    </RelativeLayout>
+
+    <View android:layout_height="5dp" />
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+    
+    <View android:layout_height="10dp" />
+    
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="1dp" 
+    android:layout_marginLeft="3dp" >
+
+    <TextView
+        android:id="@+id/textView_out2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/txt_output_rgb"
+        android:textColor="#0000FF" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@+id/title_Alarm2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingBottom="5dp"
+            android:text="@string/txt_alarm_title"
+            android:textColor="#0000FF" />
+
+        <TextView
+            android:id="@+id/title_Alarm_start_rgb"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/txt_alarm_start"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/title_Alarm_stop_rgb"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/txt_alarm_stop"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/title_Alarm_status_rgb"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/txt_alarm_status"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp" >
+
+            <Button
+                android:id="@+id/button_alarm_set_rgb"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/bluecom_button_normal"
+                android:paddingLeft="10dp"
+                android:text="@string/txt_setting" />
+
+            <Button
+                android:id="@+id/Button_alarmONOFF_rgb"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bluecom_button_off"
+                android:hint="@string/txt_alarm_off"
+                android:text="@string/txt_alarm_off" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton_OnOff_rgb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/linearLayout2"
+        android:background="@drawable/power_off_button_m"
+        android:src="@drawable/power_off_button_m" />
+
+    <ImageButton
+        android:id="@+id/imageButton_RGB_rgb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/rgb_button"
+        android:src="@drawable/rgb_button" />
+
+</RelativeLayout>
+        
+    <View android:layout_height="5dp" />
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="2dp" >
+
+        <TextView
+            android:id="@+id/title_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="false"
+            android:text="@string/status_main_nc" />
+
+        <TextView
+            android:id="@+id/title_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/Version_Soft"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+    <TableRow>
+
+        <Button
+            android:id="@+id/button_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bluecom_button_normal"
+            android:text="@string/bt_connect" />
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:background="@drawable/bluecom_button_normal"
+            android:text="@string/bt_Exit" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/button_test"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bluecom_button_normal"
+            android:text="Alarm setting" />
+
+        <Button
+            android:id="@+id/Button_test2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/bluecom_button_normal"
+            android:text="Alarm read" />
+
+        <Button
+            android:id="@+id/Button_test3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/bluecom_button_normal"
+            android:text="Time read" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+
+    </TableRow>
+    
+    <TextView
+            android:id="@+id/textView_debug_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="---"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/textView_debug_alarm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="---"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</TableLayout>
