@@ -162,6 +162,15 @@ Bool    Flag_alarm_previous_state;  //= true if alarm is activate
 Bool    Flag_manual_disable;  //= true si alarm is disabled during activating (button for example)
 }BLUECOM_ALARM_DAY__STRUCTURE;
 
+typedef struct {
+    // BCD code
+unsigned char pwm_red;       // PWM value for red
+unsigned char pwm_green;    // PWM value for green
+unsigned char pwm_blue;     // PWM value for blue
+
+unsigned char status;  // 1= output active
+}BLUECOM_RGB_PWM_LED__STRUCTURE;
+
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /*! \fn  GetSystemClock()
 *  \brief This macro returns the system clock frequency in Hertz.

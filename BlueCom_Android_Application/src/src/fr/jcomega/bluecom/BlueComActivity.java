@@ -63,7 +63,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     // Bluecom length for transmit and receive  (#define in C )
     public static final int BLUECOM_RX_TRAME_LENGTH = 13;
     public static final int BLUECOM_TX_TRAME_LENGTH = 13;
-    public static final int BLUECOM_TIME_MS_TIMER_TASK = 150;  
+    public static final int BLUECOM_TIME_MS_TIMER_TASK = 200;  
     
  // Bluetooth command with uart
     public static final int CMD_DONOTHING = 0x00;
@@ -407,17 +407,17 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 
           		       Log.i("BlueCom", "ACTION : Bouton rgb on/off detect true");
           		       //Transmit : output rgb must be OFF
-          		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button01 = new Bluetooth_structure_trame(CMD_SET_DIGITAL_OUTPUT,0,-1,-1,-1,-1,-1,-1,-1);   				
-          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button01); 
+          		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button_rgb = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT,-1,-1,-1,-1,-1,-1,-1,0);   				
+          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button_rgb); 
           		       if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
          			}
          			else if (Flag_imageButton_OnOff_rgb == false) {
  
          		       Log.i("BlueCom", "ACTION : Bouton rgb on/off detect false");
-         		       //Transmit : output rgb must be OFF
-          		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button01 = new Bluetooth_structure_trame(CMD_SET_DIGITAL_OUTPUT,1,-1,-1,-1,-1,-1,-1,-1);   				
-          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button01); 
+         		       //Transmit : output rgb must be ON
+          		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button_rgb = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT,-1,-1,-1,-1,-1,-1,-1,1);   				
+          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button_rgb); 
           		       if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
          			}        			
@@ -532,7 +532,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         if (value_green == 255) value_green=254;
         if (value_blue == 255) value_blue=254;
         
-		Bluetooth_structure_trame BlueCom_Trame_Transmit_green = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT,value_red,value_green,value_blue,0,0,0,0,0); 
+		Bluetooth_structure_trame BlueCom_Trame_Transmit_green = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT,value_red,value_green,value_blue,-1,-1,-1,-1,-1); 
  	    TransmitFifo.put(BlueCom_Trame_Transmit_green);  
   	    if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK);   
    
@@ -577,7 +577,11 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				
     				//trame n°3 : read alarm time for output 0
     	        	Bluetooth_structure_trame BlueCom_Trame_Transmit_Connect03 = new Bluetooth_structure_trame(CMD_READ_ALARM_DAY_TIME,-1,-1,-1,-1,0,-1,-1,-1);   				
-    				TransmitFifo.put(BlueCom_Trame_Transmit_Connect03); 			
+    				TransmitFifo.put(BlueCom_Trame_Transmit_Connect03); 
+    				
+    				//trame n°4 :  output RGB
+    	        	Bluetooth_structure_trame BlueCom_Trame_Transmit_ConnectRGB = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT);   				
+    				TransmitFifo.put(BlueCom_Trame_Transmit_ConnectRGB); 
     				
                 	if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
@@ -737,6 +741,21 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
           	} 
           	// same code for other output...
           	break;
+    	case CMD_SET_RGB_OUTPUT:  
+            if(BlueCom_Trame_Receive.data7==0x01)
+           	{
+            	imageButton_OnOff_rgb.setImageResource(R.drawable.power_on_button_m); 
+          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB : On");
+          		Flag_imageButton_OnOff_rgb = true;
+          	}
+          	if(BlueCom_Trame_Receive.data7==0x00)
+          	{
+          		imageButton_OnOff_rgb.setImageResource(R.drawable.power_off_button_m); 
+          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT :Output RGB : Off");
+          		Flag_imageButton_OnOff_rgb = false; 
+          	} 
+          	// same code for other output...
+          	break;	
     	case CMD_SET_CURRENT_TIME:  
         	Log.d("BlueCom","Reception : CMD_SET_CURRENT_TIME : Date read:" + bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+ bcd2dec(BlueCom_Trame_Receive.data2) + "s | day="+
         			bcd2dec(BlueCom_Trame_Receive.data3) +" month="+bcd2dec(BlueCom_Trame_Receive.data4)+ " Year=20"+bcd2dec(BlueCom_Trame_Receive.data5) +" Weekday="+ bcd2dec(BlueCom_Trame_Receive.data6));

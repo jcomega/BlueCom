@@ -78,7 +78,7 @@
     <string name="bt_not_enabled_leaving">Bluetooth non activé. Fermeture de BueCom.</string>
     <string name="not_connected">"Vous n'êtes pas connecté à un appareil"</string>
     <string name="status_label">Statut</string>
-    <string name="Version_Soft">Version : 11/02/13</string>
+    <string name="Version_Soft">Version : 26/02/13</string>
 
     
 </resources>

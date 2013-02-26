@@ -17,6 +17,7 @@
 #include "../Includes/BC_rtcc.h"
 #include "../Includes/BC_pwm.h"
 #include "../Includes/device.h"
+#include "BlueCom/Includes/GenericTypeDefs.h"
 
 
 
@@ -31,6 +32,7 @@ unsigned char uBCM_RxBuffer[BLUECOM_RX_BUFFER_SIZE];
 BLUECOM_STRUCTURE BlueCom_Struct;
 BLUETOOTH_DATA BlueCom_Data_TX, BlueCom_Data_RX;
 BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
+BLUECOM_RGB_PWM_LED__STRUCTURE BlueCom_outputRGB;
 
 #pragma code    // declare executable instructions
 
@@ -134,21 +136,40 @@ unsigned char BCM_Decode(void)
 
         case CMD_SET_PWM:
             PWM_Setvalue(BlueCom_Data_RX.Data0,0); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data1,1); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data2,2); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data3,3); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data4,4); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data5,5); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data6,6); // set PWM value for output 0
-            PWM_Setvalue(BlueCom_Data_RX.Data7,7); // set PWM value for output 0
+            PWM_Setvalue(BlueCom_Data_RX.Data1,1); // set PWM value for output 1
+            PWM_Setvalue(BlueCom_Data_RX.Data2,2); // set PWM value for output 2
+            PWM_Setvalue(BlueCom_Data_RX.Data3,3); // set PWM value for output 3
+            PWM_Setvalue(BlueCom_Data_RX.Data4,4); // set PWM value for output 4
+            PWM_Setvalue(BlueCom_Data_RX.Data5,5); // set PWM value for output 5
+            PWM_Setvalue(BlueCom_Data_RX.Data6,6); // set PWM value for output 6
+            PWM_Setvalue(BlueCom_Data_RX.Data7,7); // set PWM value for output 7
         break;
 
         case CMD_SET_RGB_OUTPUT:
-            
-            if (BlueCom_Data_RX.Data0!=255) PWM_Setvalue(BlueCom_Data_RX.Data0,0); // set PWM value for output 0
-            if (BlueCom_Data_RX.Data1!=255) PWM_Setvalue(BlueCom_Data_RX.Data1,1); // set PWM value for output 0
-            if (BlueCom_Data_RX.Data2!=255) PWM_Setvalue(BlueCom_Data_RX.Data2,2); // set PWM value for output 0
-             
+            // save value
+            if (BlueCom_Data_RX.Data0!=255) BlueCom_outputRGB.pwm_red = BlueCom_Data_RX.Data0;
+            if (BlueCom_Data_RX.Data1!=255) BlueCom_outputRGB.pwm_green = BlueCom_Data_RX.Data1;
+            if (BlueCom_Data_RX.Data2!=255) BlueCom_outputRGB.pwm_blue = BlueCom_Data_RX.Data2;
+
+            if (BlueCom_Data_RX.Data7==1) BlueCom_outputRGB.status = 1;
+            else if (BlueCom_Data_RX.Data7==0) BlueCom_outputRGB.status = 0;
+            //else no change
+
+            if (BlueCom_outputRGB.status==1)
+                {
+                 PWM_Setvalue(BlueCom_outputRGB.pwm_red,0); // set PWM value for output 0
+                 PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
+                 PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
+                }
+            else
+                {
+                 PWM_Setvalue(0,0); // set PWM value for output 0
+                 PWM_Setvalue(0,1); // set PWM value for output 1
+                 PWM_Setvalue(0,2); // set PWM value for output 2
+                }
+
+            BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;
+            BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
 
 // TIME AND DATE COMMAND ;
@@ -289,10 +310,11 @@ unsigned char BCM_Encode(void)
 
         case CMD_SET_RGB_OUTPUT:
             
-            BlueCom_Data_TX.Data0 = PWM_Readvalue(0); // read PWM value for output 0
-            BlueCom_Data_TX.Data1 = PWM_Readvalue(1);
-            BlueCom_Data_TX.Data2 = PWM_Readvalue(2);
+            BlueCom_Data_TX.Data0 = BlueCom_outputRGB.pwm_red; // read PWM value for output 0
+            BlueCom_Data_TX.Data1 = BlueCom_outputRGB.pwm_green;
+            BlueCom_Data_TX.Data2 = BlueCom_outputRGB.pwm_blue;
 
+            BlueCom_Data_TX.Data7 = BlueCom_outputRGB.status;
 
         break;
 
