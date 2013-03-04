@@ -160,12 +160,14 @@ unsigned char BCM_Decode(void)
                  PWM_Setvalue(BlueCom_outputRGB.pwm_red,0); // set PWM value for output 0
                  PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
                  PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
+                 RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
                 }
-            else
+            else if (BlueCom_outputRGB.status==0)
                 {
                  PWM_Setvalue(0,0); // set PWM value for output 0
                  PWM_Setvalue(0,1); // set PWM value for output 1
                  PWM_Setvalue(0,2); // set PWM value for output 2
+                 RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
                 }
 
             BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;
@@ -194,7 +196,11 @@ unsigned char BCM_Decode(void)
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
         case CMD_SET_ALARM_DAY_TIME:
-            RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutput0);   //transfert data recetion to RtccAlarmOutput0 objet for save information
+            if(BlueCom_Data_RX.Data4==0) RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutput0);   //transfert data recetion to RtccAlarmOutput0 objet for save information
+            //else if(BlueCom_Data_RX.Data4==1) RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutput1);   //transfert data recetion to RtccAlarmOutput1 objet for save information
+            //...
+            else if(BlueCom_Data_RX.Data4==99) RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutputRGB);   //transfert data recetion to RtccAlarmOutputRGB objet for save information
+
             BlueCom_Data_TX.Command_return = CMD_SET_ALARM_DAY_TIME;
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
@@ -331,12 +337,14 @@ unsigned char BCM_Encode(void)
             RTCC_readAlarmTime(&BlueCom_Data_TX);   //read date and time on this board
         break;
         case CMD_SET_ALARM_DAY_TIME:
-            RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput0);   //transfert to RtccAlarmOutput0 objet for load information
+            if (BlueCom_Data_RX.Data4==0) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput0);   //transfert RtccAlarmOutput0 objet for load information
+            //else if (BlueCom_Data_RX.Data4==1) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput1);   //transfert RtccAlarmOutput1 objet for load information
+            else if (BlueCom_Data_RX.Data4==99) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutputRGB);   //transfert RtccAlarmOutputRGB objet for load information
         break;
         case CMD_READ_ALARM_DAY_TIME:
             if (BlueCom_Data_RX.Data4==0) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput0);   //transfert RtccAlarmOutput0 objet for load information
-            //if (BlueCom_Data_RX.Data4==1) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput1);   //transfert RtccAlarmOutput0 objet for load information
-            //
+            //if (BlueCom_Data_RX.Data4==1) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput1);   //transfert RtccAlarmOutput objet for load information
+            else if (BlueCom_Data_RX.Data4==99) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutputRGB);   //transfert RtccAlarmOutputRGB objet for load information
         break;
 
 

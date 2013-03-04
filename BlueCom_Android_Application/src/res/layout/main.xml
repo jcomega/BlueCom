@@ -65,11 +65,11 @@
         android:layout_marginLeft="3dp" >
 
         <TextView
-            android:id="@+id/textView_out1"
+            android:id="@+id/textView_out0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/txt_output1"
+            android:text="@string/txt_output0"
             android:textColor="#0000FF" />
 
         <LinearLayout
@@ -90,21 +90,21 @@
                 android:textColor="#0000FF" />
 
             <TextView
-                android:id="@+id/title_Alarm_start_out1"
+                android:id="@+id/title_Alarm_start_out0"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="@string/txt_alarm_start"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/title_Alarm_stop_out1"
+                android:id="@+id/title_Alarm_stop_out0"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="@string/txt_alarm_stop"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/title_Alarm_status_out1"
+                android:id="@+id/title_Alarm_status_out0"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="@string/txt_alarm_status"
@@ -117,7 +117,7 @@
                 android:layout_marginTop="5dp" >
 
                 <Button
-                    android:id="@+id/button_alarm_set_out1"
+                    android:id="@+id/button_alarm_set_out0"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
@@ -127,7 +127,7 @@
                     android:text="@string/txt_setting" />
 
                 <Button
-                    android:id="@+id/Button_alarmONOFF_out1"
+                    android:id="@+id/Button_alarmONOFF_out0"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -138,7 +138,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/imageButton_OnOff_out1"
+            android:id="@+id/imageButton_OnOff_out0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -179,7 +179,7 @@
         android:paddingLeft="10dp" >
 
         <TextView
-            android:id="@+id/title_Alarm2"
+            android:id="@+id/title_Alarm_rgb"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:paddingBottom="5dp"

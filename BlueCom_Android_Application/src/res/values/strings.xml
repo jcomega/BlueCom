@@ -34,6 +34,7 @@
     <string name="txt_4RELAYS">4 Relays board</string>
     
     <!--  String for main.xml-->
+    <string name="txt_output0">Output 0 :</string>
     <string name="txt_output1">Output 1 :</string>
     <string name="txt_output2">Output 2 :</string>
     <string name="txt_output3">Output 3 :</string>
@@ -56,7 +57,7 @@
     <string name="title_alarm_start">Alarm Start at (H:M):</string>
     <string name="title_alarm_stop">Alarm Stop at (H:M):</string>
     <string name="title_alarm_out">Output state when alarm will be activated :</string>
-    <string name="bt_time_set">Set Alarm Clock</string> 
+    <string name="bt_time_set">Set Alarm Clock : Output </string> 
     <string name="title_clock"> 00:00 </string> 
     <string name="title_space"> AAAAAA </string> 
     <string name="txt_rtn_mess1">"Alarm time Start and alarm time stop must be different"</string> 
@@ -78,7 +79,7 @@
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth BueCom.</string>
     <string name="not_connected">You are not connected to a device</string>
     <string name="status_label">Status</string>
-    <string name="Version_Soft">Version : 26/02/13</string>
+    <string name="Version_Soft">Version : 03/03/13</string>
 
     
 </resources>

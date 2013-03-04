@@ -42,7 +42,7 @@
 #pragma udata   // declare statically allocated uinitialized variables
 extern BLUECOM_STRUCTURE BlueCom_Struct;
 extern BLUETOOTH_DATA BlueCom_Data_TX, BlueCom_Data_RX;
-extern BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0;
+extern BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
 
 
 /** D E C L A R A T I O N S *******************************************/
@@ -92,6 +92,7 @@ SET_DIGITAL_OUTPUT1 = 0;
 SET_DIGITAL_OUTPUT2 = 0;
 SET_DIGITAL_OUTPUT3 = 0;
 RTCC_initAlarmDayTime(&RtccAlarmOutput0,0); //INIT output alarm day structure
+RTCC_initAlarmDayTime(&RtccAlarmOutputRGB,99); //INIT output alarm day structure
 
 while (1)
 {

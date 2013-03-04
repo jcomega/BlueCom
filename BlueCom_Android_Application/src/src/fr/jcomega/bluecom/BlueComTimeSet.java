@@ -37,6 +37,7 @@ import android.app.TimePickerDialog;
 public class BlueComTimeSet extends Activity {
 	// Return Intent extra
     public static String EXTRA_ALARM_STATE = "alarm_state";
+    public static String EXTRA_ALARM_OUTPUT_SELECT = "output_select";
     
     public static String EXTRA_ALARM_TIME_START = "alarm_time_start";  
     public static String EXTRA_ALARM_HOUR_START="alarm_hour_start";
@@ -55,6 +56,7 @@ public class BlueComTimeSet extends Activity {
 	private int hour_stop;
 	private int minute_stop;
 	private int state=1;	
+	private int output_select;
 
 	//graphique interface
 	//private TimePicker timePicker_Start;
@@ -73,9 +75,10 @@ public class BlueComTimeSet extends Activity {
         // Set result CANCELED incase the user backs out
         setResult(Activity.RESULT_CANCELED); 
         
+        output_select = getIntent().getExtras().getInt("Output Select"); //get output number how must be setting
+        
         //get current time
-  
-		final Calendar c = Calendar.getInstance();
+  		final Calendar c = Calendar.getInstance();
 		hour_start = c.get(Calendar.HOUR_OF_DAY);
 		minute_start = c.get(Calendar.MINUTE);
 		hour_stop = c.get(Calendar.HOUR_OF_DAY);
@@ -112,8 +115,13 @@ public class BlueComTimeSet extends Activity {
 				.append(":").append(pad(minute_stop)));
 			
 
-        // Initialize the button to perform the clock return
+        // Initialize the button to perform the clock return / quit menu
         TimeSetButton = (Button) findViewById(R.id.button_Time_Set);
+        
+        //button text
+        if(output_select!=99) TimeSetButton.setText(new StringBuilder().append(getString(R.string.bt_time_set)).append(output_select));
+        else TimeSetButton.setText(new StringBuilder().append(getString(R.string.bt_time_set)).append("RGB"));
+        
         TimeSetButton.setOnClickListener(new View.OnClickListener(){
         	public void onClick(View v){
         		
@@ -129,6 +137,7 @@ public class BlueComTimeSet extends Activity {
                 
                 intent.putExtra(EXTRA_ALARM_HOUR_START, hour_start);
                 intent.putExtra(EXTRA_ALARM_MINUTE_START, minute_start);
+                intent.putExtra(EXTRA_ALARM_OUTPUT_SELECT, output_select);
                 intent.putExtra(EXTRA_ALARM_STATE, state);              
                 // Set result and finish this Activity
                 setResult(Activity.RESULT_OK, intent);

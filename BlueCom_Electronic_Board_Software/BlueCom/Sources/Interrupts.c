@@ -26,7 +26,8 @@
 #pragma udata   // declare statically allocated uinitialized variables
 extern BLUECOM_STRUCTURE BlueCom_Struct;
 extern BLUETOOTH_DATA BlueCom_Data_TX, BlueCom_Data_RX;
-extern BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0;
+extern BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
+extern BLUECOM_RGB_PWM_LED__STRUCTURE BlueCom_outputRGB;
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /** \name 	High priority interrupt vector
@@ -67,22 +68,52 @@ unsigned char AlarmDayTime_return;
         RTCC_SetAlarmRptCount(10);	//set alarm repeat count
         PIR3bits.RTCCIF=0;
 
+
+
         //alarm check for output 0:
-        AlarmDayTime_return = RTCC_checkAlarmDayTime(&RtccAlarmOutput0);
-        if (AlarmDayTime_return!=0)
+        if (BlueCom_Struct.FlagTx==0)   // do not read this alarm if a transmit is early in progress : read next time (1s)
         {
-           if (AlarmDayTime_return == 99) SET_DIGITAL_OUTPUT0 =1;      // output ON
-           else if (AlarmDayTime_return == 88)  SET_DIGITAL_OUTPUT0 =0;
-           BlueCom_Data_TX.Command_return = CMD_SET_DIGITAL_OUTPUT;    //send the new output status to the android device
-           BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+            AlarmDayTime_return = RTCC_checkAlarmDayTime(&RtccAlarmOutput0);
+            if (AlarmDayTime_return!=0) // do not
+            {
+               if (AlarmDayTime_return == 99) SET_DIGITAL_OUTPUT0 =1;      // output ON
+               else if (AlarmDayTime_return == 88)  SET_DIGITAL_OUTPUT0 =0;
+               BlueCom_Data_TX.Command_return = CMD_SET_DIGITAL_OUTPUT;    //send the new output status to the android device
+               BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+            }
         }
+
+        //alarm check for output RGB:
+        if (BlueCom_Struct.FlagTx==0)   // do not read this alarm if a transmit is early in progress : read next time (1s)
+        {
+            AlarmDayTime_return = RTCC_checkAlarmDayTime(&RtccAlarmOutputRGB);
+            if (AlarmDayTime_return!=0)
+            {
+               if (AlarmDayTime_return == 99)
+               {     // output ON
+                  PWM_Setvalue(BlueCom_outputRGB.pwm_red,0); // set PWM value for output 0
+                  PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
+                  PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
+                  BlueCom_outputRGB.status=1;   //output ON = status ON
+               }
+               else if (AlarmDayTime_return == 88)
+               {
+                  PWM_Setvalue(0,0); // set PWM value for output 0
+                  PWM_Setvalue(0,1); // set PWM value for output 1
+                  PWM_Setvalue(0,2); // set PWM value for output 2
+                  BlueCom_outputRGB.status=0;
+               }
+               BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;    //send the new output status to the android device
+               BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+            }
+        }
+
     }
 
-
-    //Interrupt programme for UART gestion (TX+RX)
-    PIE1bits.TMR2IE = 0;          // desactive interruption PWM
-    UARTIntISR();
-    PIE1bits.TMR2IE = 1;          // active interruption PWM
+        //Interrupt programme for UART gestion (TX+RX)
+        PIE1bits.TMR2IE = 0;          // desactive interruption PWM
+        UARTIntISR();
+        PIE1bits.TMR2IE = 1;          // active interruption PWM
 
     // Check for another interrupt, examples:
     // if (PIR1bits.TMR1IF)     // Timer 1

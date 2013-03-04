@@ -34,6 +34,7 @@
     <string name="txt_4RELAYS">4 Relays board</string>
     
     <!--  String for main.xml-->
+    <string name="txt_output0">Sortie 0 :</string> 
     <string name="txt_output1">Sortie 1 :</string>
     <string name="txt_output2">Sortie 2 :</string>
     <string name="txt_output3">Sortie 3 :</string>
@@ -56,7 +57,7 @@
     <string name="title_alarm_start">"L'alarme débutera à (H:M):"</string>
     <string name="title_alarm_stop">"L'alarme stoppera à (H:M):"</string>
     <string name="title_alarm_out">"Statut de la sortie quand l'alarme sera active :"</string>
-    <string name="bt_time_set">"Réglage de l'alarme"</string> 
+    <string name="bt_time_set">"Réglage de l'alarme : Sortie "</string> 
     <string name="title_clock"> 00:00 </string> 
     <string name="title_space"> AAAAAA </string> 
     <string name="txt_rtn_mess1">"L'alarme de début et de fin doit être différente</string> 
@@ -78,7 +79,7 @@
     <string name="bt_not_enabled_leaving">Bluetooth non activé. Fermeture de BueCom.</string>
     <string name="not_connected">"Vous n'êtes pas connecté à un appareil"</string>
     <string name="status_label">Statut</string>
-    <string name="Version_Soft">Version : 26/02/13</string>
+    <string name="Version_Soft">Version : 03/03/13</string>
 
     
 </resources>
