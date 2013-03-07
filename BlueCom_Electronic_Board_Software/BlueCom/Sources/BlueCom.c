@@ -123,7 +123,11 @@ unsigned char BCM_Decode(void)
     switch (BlueCom_Data_RX.Command_return)
     {
     // Application configurations
-
+        case CMD_STATUS_SYSTEMS:
+            BlueCom_Data_TX.Command_return = CMD_STATUS_SYSTEMS;
+            BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+        break;
+    // input/output
         case CMD_SET_DIGITAL_OUTPUT:
             if (BlueCom_Data_RX.Data0==1) { SET_DIGITAL_OUTPUT0 =1; RtccAlarmOutput0.Flag_manual_disable =  true; }
             else if (BlueCom_Data_RX.Data0==0) { SET_DIGITAL_OUTPUT0 =0; RtccAlarmOutput0.Flag_manual_disable =  true; }
@@ -286,7 +290,17 @@ unsigned char BCM_Encode(void)
     switch (BlueCom_Data_TX.Command_return)
     {
     // Application configurations
-
+        case CMD_STATUS_SYSTEMS:
+            BlueCom_Data_TX.Data0 = BC_TYPE_1RELAYS_RGBLED; // type of board
+            BlueCom_Data_TX.Data1 = 0xFF;   //board status;
+            BlueCom_Data_TX.Data2 = 0xFF;   //Reserved
+            BlueCom_Data_TX.Data3 = 0xFF;   //Reserved
+            BlueCom_Data_TX.Data4 = 0xFF;   //Reserved
+            BlueCom_Data_TX.Data5 = 0xFF;   //Soft_Revision_1
+            BlueCom_Data_TX.Data6 = 0xFF;   //Soft_Revision_2
+            BlueCom_Data_TX.Data7 = 0xFF;   //Soft_Revision_3
+        break;
+    // input/output
         case CMD_SET_DIGITAL_OUTPUT:
             // read output status directly on the port
             BlueCom_Data_TX.Data0 = READ_DIGITAL_OUTPUT0;

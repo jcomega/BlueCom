@@ -21,7 +21,10 @@
     <string name="bt_connect">Connexion</string>
     <string name="bt_Exit">Quitter</string>
     <string name="bt_disconnect">Déconnexion</string>
-
+    <string name="bt_about">A propos</string>
+    
+        <!--  String for About Dialogue -->
+    <string name="txt_title_diag">A propos de BlueCom</string>
     
     <string name="title_main">BlueCom</string>
     <string name="title_main2">Télécommande.</string>
@@ -79,7 +82,7 @@
     <string name="bt_not_enabled_leaving">Bluetooth non activé. Fermeture de BueCom.</string>
     <string name="not_connected">"Vous n'êtes pas connecté à un appareil"</string>
     <string name="status_label">Statut</string>
-    <string name="Version_Soft">Version : 03/03/13</string>
+    <string name="Version_Soft">Version : 05/03/13</string>
 
     
 </resources>

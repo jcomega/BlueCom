@@ -21,7 +21,10 @@
     <string name="bt_connect">Connect</string>
     <string name="bt_Exit">Exit</string>
     <string name="bt_disconnect">Disconnect</string>
+    <string name="bt_about">About</string>
 
+    <!--  String for About Dialogue -->
+    <string name="txt_title_diag">About BlueCom</string>
     
     <string name="title_main">BlueCom</string>
     <string name="title_main2">Remote Control.</string>
@@ -79,7 +82,7 @@
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth BueCom.</string>
     <string name="not_connected">You are not connected to a device</string>
     <string name="status_label">Status</string>
-    <string name="Version_Soft">Version : 03/03/13</string>
+    <string name="Version_Soft">Version : 05/03/13</string>
 
     
 </resources>

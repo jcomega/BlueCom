@@ -30,12 +30,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.widget.SeekBar;
-//import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import java.util.Calendar;
-
-import java.util.LinkedList;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -82,7 +80,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     public static final int CMD_SET_ANALOG_OUTPUT =			0x23;
     public static final int CMD_READ_ANALOG_INPUT = 		0x24;
     public static final int CMD_SET_RGB_OUTPUT  = 			0x25;		//set LED RGB OUTPUT
-
+    
 	//////////////////////////////////////////////////////
 	//VARIABLE OUTPUT 1
 	// Button output 1
@@ -120,6 +118,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	// Button general
     private Button mConnectButton;
     private Button mExitButton;
+    private Button mAboutButton;
     TextView title_status = null;
     // Image logo bluetooth
 	private ImageView img_bluetooth;
@@ -127,16 +126,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	// adresse MAC puce bluetooth 
 	private String address;
 	
-	
-	//////////////////////////////////////////////////////
-	// DEBUG VARIABLE
-    // test button
-    private Button mTestButton;
-    private Button mTestButton2;
-    private Button mTestButton3;
-    TextView title_debug_time = null;
-    TextView title_debug_alarm = null;
-
 	//VARIABLES FOR TRANSMITION + RECEPTION TRAME	
 	//Bluetooth_structure_trame BlueCom_Trame_Transmit = new Bluetooth_structure_trame();
 	Bluetooth_structure_trame BlueCom_Trame_Receive = new Bluetooth_structure_trame();
@@ -296,16 +285,10 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         // button/textview genral
         mConnectButton = (Button) findViewById(R.id.button_connect);
         mExitButton = (Button) findViewById(R.id.button_exit);
+        mAboutButton =  (Button) findViewById(R.id.button_about);
         title_status = (TextView)findViewById(R.id.title_status); 
         img_bluetooth = (ImageView)findViewById(R.id.imageView_bluetooth);  
-        
-        // test
-        mTestButton = (Button) findViewById(R.id.button_test);    
-        mTestButton2 = (Button) findViewById(R.id.Button_test2); 
-        mTestButton3 = (Button) findViewById(R.id.Button_test3);         
-        title_debug_time = (TextView)findViewById(R.id.textView_debug_time);  
-        title_debug_alarm = (TextView)findViewById(R.id.textView_debug_alarm);  
-        
+      
         
         /////////////////////////////////////   GENERAL  LISTENER	//////////////////////////
         
@@ -319,7 +302,13 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
        	   }
        	  });
         
-
+        mAboutButton.setOnClickListener( new View.OnClickListener() {  
+        	   @Override
+        	   public void onClick(View v) {   
+        		   BTDialog();
+        	   }
+        	  });
+        
         mConnectButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				//BTConnect();
@@ -474,34 +463,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
              }	
      	}
      });    
-
-        /////////////////////////////////////   TEST  LISTENER	//////////////////////////
-        
-        mTestButton2.setOnClickListener( new View.OnClickListener() {  
-     	   @Override
-     	   public void onClick(View arg0) {   
-
-     		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test3 = new Bluetooth_structure_trame(CMD_READ_ALARM_DAY_TIME,-1,-1,-1,-1,0,-1,-1,-1);
-     		  //Bluetooth_structure_trame BlueCom_Trame_Transmit_test3 = new Bluetooth_structure_trame(CMD_SET_PWM,-1,100,-1,0,0,0,0,0); 
-     	        TransmitFifo.put(BlueCom_Trame_Transmit_test3);  
-
-      	        if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK);    
-
-     		    
-     	   }
-     	  });	
-        mTestButton3.setOnClickListener( new View.OnClickListener() {  
-      	   @Override
-      	   public void onClick(View arg0) {   
-      		   
-      		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test4 = new Bluetooth_structure_trame(CMD_READ_CURRENT_TIME); 
-      	        TransmitFifo.put(BlueCom_Trame_Transmit_test4);  
-
-       	        if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK);    
-
-      	   }
-      	  });
- 
   
     	// Initialize the BluetoothRfcommClient to perform bluetooth connections
         mRfcommClient = new BluetoothRfcommClient(this, mHandler);
@@ -520,9 +481,38 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	Intent serverIntent = new Intent(this, DeviceListActivity.class);
     	startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);	
     }
+    private void BTDialog(){
+    
+    Resources res = getResources();	
+    	
+    AlertDialog.Builder boite;
+   boite = new AlertDialog.Builder(this);
+   boite.setTitle(R.string.txt_title_diag);
+   boite.setIcon(R.drawable.ic_launcher);
+   
+   String mot1="salut";
+   String mot2=res.getString(R.string.Version_Soft);
+   String Newligne=System.getProperty("line.separator");
+   String resultat=mot1+Newligne+mot2+R.string.bt_connect; 
+   boite.setMessage(mot1+Newligne+mot2+Newligne+res.getString(R.string.status_main_c));
+
+   boite.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+      
+       public void onClick(DialogInterface dialog, int which) {
+
+       }
+       }
+   );
+   boite.show();
+    
+    }
+    
+    
 	public int getConnectionState() {
 		return mRfcommClient.getState();
 	}
+	
+
 	
 /////////////////////////////      RGB OUTPUT FUNCTION        ////////////////////////////////////////  
     private void ColorP(){
@@ -588,6 +578,10 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				mConnectButton.setText(R.string.bt_disconnect);
     	        	Bluetooth_structure_trame BlueCom_Trame_Transmit_Connect00 = new Bluetooth_structure_trame(CMD_DONOTHING);   				
     				TransmitFifo.put(BlueCom_Trame_Transmit_Connect00); 
+    				
+    				// init trame : get type of board and status
+    	        	Bluetooth_structure_trame BlueCom_Trame_Transmit_ConnectInit = new Bluetooth_structure_trame(CMD_STATUS_SYSTEMS);   				
+    				TransmitFifo.put(BlueCom_Trame_Transmit_ConnectInit); 
 		
     				//first trame
     	        	Bluetooth_structure_trame BlueCom_Trame_Transmit_Connect01 = new Bluetooth_structure_trame(CMD_SET_DIGITAL_OUTPUT);   				
@@ -642,8 +636,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 				//Log.d("BlueCom", "RECEPTION Trame: D0:" + readBuf[0] + " D1:"+readBuf[1]+ " D2:"+readBuf[2]+ " D3:"+readBuf[3]+ " D4:"+readBuf[4]+ " D5:"+readBuf[5]+ " D6:"+readBuf[6]+ " D7:"+readBuf[7]+ " D8:"+readBuf[8] + " D9:"+readBuf[9] +" D10:"+readBuf[10] +" D11:"+readBuf[11]+ " D12:"+readBuf[12]);
     			// decoding recever Bluecom trame
     			if (readBuf[0]==2 && readBuf[1]==13 && readBuf[12]==3)  // data0==STX(2) && data1==nbr data in trame && last data == ETX (3)
-    			{
-    				
+    			{				
     				BlueCom_Trame_Receive.command = readBuf[2];
     				BlueCom_Trame_Receive.data0 = readBuf[3];
     				BlueCom_Trame_Receive.data1 = readBuf[4];
@@ -696,10 +689,8 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     			else
     			{
     				// bad message or message traited
-    				BlueCom_Structure_Receive.Board_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;
-    				
-    			}
-    			
+    				BlueCom_Structure_Receive.Board_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;  				
+    			}			
 				// Gestion information receved and command button
 				DecodeBlueCom();
     			break;
@@ -762,6 +753,11 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	// Commande scan
     	switch(BlueCom_Trame_Receive.command)
     	{
+    	case CMD_STATUS_SYSTEMS:  
+
+    		
+    		
+          	break;	
     	case CMD_SET_DIGITAL_OUTPUT:  
             if(BlueCom_Trame_Receive.data0==0x01)
            	{
@@ -800,7 +796,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         	Log.d("BlueCom","Reception : CMD_READ_CURRENT_TIME : Date read:" + bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+ bcd2dec(BlueCom_Trame_Receive.data2) + "s | day="+
         			bcd2dec(BlueCom_Trame_Receive.data3) +" month="+bcd2dec(BlueCom_Trame_Receive.data4)+ " Year=20"+bcd2dec(BlueCom_Trame_Receive.data5) +" Weekday="+ bcd2dec(BlueCom_Trame_Receive.data6));
           	//debug
-        	title_debug_time.setText("Current time: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+bcd2dec(BlueCom_Trame_Receive.data2) + "s");
         	break;
     	case CMD_SET_ALARM_TIME:  
         	Log.d("BlueCom","Reception : CMD_SET_ALARM_TIME : Alarm read:" + bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+ bcd2dec(BlueCom_Trame_Receive.data2) + "s | day="+
@@ -815,7 +810,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         	if (BlueCom_Trame_Receive.data5==1) Status_alarm_set = "On"; else Status_alarm_set = "Off";
         	Log.d("BlueCom", "Reception : CMD_SET_ALARM_DAY_TIME : Alarm will start at: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+", Output "+ BlueCom_Trame_Receive.data4 +" will be '"+ Status_alarm_set + "' and will stop at: " + bcd2dec(BlueCom_Trame_Receive.data2) + "h "+ bcd2dec(BlueCom_Trame_Receive.data3) +"min");
         	//change status
-        	
+        	//display alarm value
         	DecodeBlueCom_display_alarm(BlueCom_Trame_Receive.data4);
 	
     		break;
@@ -846,7 +841,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	        		mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_off); // button off : alarm OFF
 	        		mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
 	        		Flag_alarmONOFF_rgb = false;
-	        		
 	        		break;
             	}	
     			break; 
@@ -856,15 +850,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         	if (BlueCom_Trame_Receive.data5==1) Status_alarm_read = "On"; else Status_alarm_read = "Off";
         	Log.d("BlueCom", "Reception : CMD_READ_ALARM_DAY_TIME : Alarm will start at: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+", Output "+ BlueCom_Trame_Receive.data4 +" will be '"+ Status_alarm_read + "' and will stop at: " + bcd2dec(BlueCom_Trame_Receive.data2) + "h "+ bcd2dec(BlueCom_Trame_Receive.data3) +"min ");
         	//change status
-        	
+        	//display alarm value
         	DecodeBlueCom_display_alarm(BlueCom_Trame_Receive.data4);
         	break; 
-        	
-        	
+    	
     	}	
-	
     }
     
+    // display text
     private void DecodeBlueCom_display_alarm(byte output_select){
     	// this function display text message for alarm read
     	String chaine_info;
@@ -955,6 +948,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
             	int Clock_alarm_active;
             	int Clock_output_select_rtn;
             	
+            	// get data
             	String Clock_return_start = data.getExtras().getString(BlueComTimeSet.EXTRA_ALARM_TIME_START);
             	Clock_hour_alarmR_start = data.getExtras().getInt(BlueComTimeSet.EXTRA_ALARM_HOUR_START);    	
             	Clock_minute_alarmR_start = data.getExtras().getInt(BlueComTimeSet.EXTRA_ALARM_MINUTE_START);  
@@ -993,7 +987,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 				TransmitFifo.put(BlueCom_Trame_Transmit_Alarm); 	
 				
             	if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
-
             	
             }else{
 

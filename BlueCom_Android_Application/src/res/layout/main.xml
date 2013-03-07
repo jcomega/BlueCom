@@ -273,13 +273,7 @@
             android:layout_alignParentRight="false"
             android:text="@string/status_main_nc" />
 
-        <TextView
-            android:id="@+id/title_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/Version_Soft"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+        
     </RelativeLayout>
 
     <TableRow>
@@ -291,6 +285,15 @@
             android:background="@drawable/bluecom_button_normal"
             android:text="@string/bt_connect" />
 
+                <Button
+            android:id="@+id/button_about"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/bluecom_button_normal"
+            android:text="@string/bt_about" />
+                
         <Button
             android:id="@+id/button_exit"
             android:layout_width="wrap_content"
@@ -299,59 +302,5 @@
             android:background="@drawable/bluecom_button_normal"
             android:text="@string/bt_Exit" />
     </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/button_test"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/bluecom_button_normal"
-            android:text="Alarm setting" />
-
-        <Button
-            android:id="@+id/Button_test2"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@drawable/bluecom_button_normal"
-            android:text="Alarm read" />
-
-        <Button
-            android:id="@+id/Button_test3"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@drawable/bluecom_button_normal"
-            android:text="Time read" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-
-    </TableRow>
-    
-    <TextView
-            android:id="@+id/textView_debug_time"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="---"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    <TextView
-        android:id="@+id/textView_debug_alarm"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="---"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </TableLayout>
