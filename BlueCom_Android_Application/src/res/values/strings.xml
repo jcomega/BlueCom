@@ -29,8 +29,13 @@
     <string name="title_main">BlueCom</string>
     <string name="title_main2">Remote Control.</string>
     <string name="status_main_nc">Status : Not connected</string>   
-    <string name="status_main_c">Status : Connected</string>  
+    <string name="status_main_c">Status : Connected to </string>  
     <string name="status_main_cc">Status : Connecting...</string>  
+    <string name="status_state">State : </string>  
+    
+    <!--  String for Electronic board type -->
+    <string name="txt_board_1relay"> BlueCom \"1 Relay\"</string>
+
     
     <!--  String for Blucom structure -->
     <string name="txt_1RELAYS">BlueCom 1 relay</string>

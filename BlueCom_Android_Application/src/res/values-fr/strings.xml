@@ -23,14 +23,19 @@
     <string name="bt_disconnect">Déconnexion</string>
     <string name="bt_about">A propos</string>
     
-        <!--  String for About Dialogue -->
+    <!--  String for About Dialogue -->
     <string name="txt_title_diag">A propos de BlueCom</string>
     
     <string name="title_main">BlueCom</string>
     <string name="title_main2">Télécommande.</string>
     <string name="status_main_nc">Statut : Non connecté</string>   
-    <string name="status_main_c">Statut : Connecté</string>  
+    <string name="status_main_c">Statut : Connecté à </string>  
     <string name="status_main_cc">Statut : Connection en cours</string>  
+    <string name="status_state">Etat : </string>  
+    
+    <!--  String for Electronic board type -->
+    <string name="txt_board_1relay">BlueCom \"1 Relais\"</string>
+
     
     <!--  String for Blucom structure -->
     <string name="txt_1RELAYS">BlueCom 1 relay</string>

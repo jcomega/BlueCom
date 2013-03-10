@@ -122,6 +122,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     TextView title_status = null;
     // Image logo bluetooth
 	private ImageView img_bluetooth;
+	private ImageView img_state;
 	private boolean Flag_TimerTask_BC_Transmit = false;	
 	// adresse MAC puce bluetooth 
 	private String address;
@@ -288,7 +289,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         mAboutButton =  (Button) findViewById(R.id.button_about);
         title_status = (TextView)findViewById(R.id.title_status); 
         img_bluetooth = (ImageView)findViewById(R.id.imageView_bluetooth);  
-      
+        img_state = (ImageView)findViewById(R.id.imageView_state);       
         
         /////////////////////////////////////   GENERAL  LISTENER	//////////////////////////
         
@@ -495,7 +496,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
    String Newligne=System.getProperty("line.separator");
    String resultat=mot1+Newligne+mot2+R.string.bt_connect; 
    boite.setMessage(mot1+Newligne+mot2+Newligne+res.getString(R.string.status_main_c));
-
+/*
    boite.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
       
        public void onClick(DialogInterface dialog, int which) {
@@ -503,6 +504,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
        }
        }
    );
+   */
    boite.show();
     
     }
@@ -572,6 +574,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     			case BluetoothRfcommClient.STATE_CONNECTED:
     				img_bluetooth.setImageResource(R.drawable.bluetooth_blue); 
     				Log.w("BlueCom","BT connected");
+    				img_state.setImageResource(R.drawable.stat_red); // state logo : orange
 
     				// change button text:
     				//wakeup trame
@@ -618,12 +621,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				break;
     			case BluetoothRfcommClient.STATE_CONNECTING:
     				Log.w("BlueCom","BT connecting...");
+    				img_state.setImageResource(R.drawable.stat_orange); // state logo : orange
 
     				title_status.setText(R.string.status_main_cc);
     				break;
     			case BluetoothRfcommClient.STATE_NONE:
     				img_bluetooth.setImageResource(R.drawable.bluetooth_black); 
     				Log.w("BlueCom","BT not connected");
+    				img_state.setImageResource(R.drawable.stat_red); // state logo : orange
 
     				// change button :
     				title_status.setText(R.string.status_main_nc);
@@ -683,13 +688,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 //    				// DATA6 : Read the output status :Binaire format : 1=input high state, 0=input low state (8 output Max)			
 //        			BlueCom_Trame_Receive.Output_Status = readBuf[6];
 //    				
-
+    				img_state.setImageResource(R.drawable.stat_green); // state logo : orange
     		      	
     			}
     			else
     			{
     				// bad message or message traited
-    				BlueCom_Structure_Receive.Board_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;  				
+    				BlueCom_Structure_Receive.Board_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;  
+    				img_state.setImageResource(R.drawable.stat_orange); // state logo : orange
     			}			
 				// Gestion information receved and command button
 				DecodeBlueCom();
@@ -728,11 +734,12 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     		
     		//title_status.setText(chaine1);
     		//Log.d("BlueCom",chaine1);
+    		
     		break;
     		
     	default:
     		// setup message
-    		String chaine2 = res.getString(R.string.status_main_c) + " to BlueCom Board";
+    		String chaine2 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_1relay);
     		
     		title_status.setText(chaine2);
     		//Log.d("BlueCom",chaine2);
