@@ -161,6 +161,8 @@ unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
     unsigned char checkAlarm;
     int Current_time_min, Alarm_start_min, Alarm_stop_min;
 
+    checkAlarm=0;
+
     if (pAD_struct->Flag_alarm_active == true)   // alarm active ?
     {
        RtccReadTimeDate(&Rtcc_read_TimeDate);      // read current time

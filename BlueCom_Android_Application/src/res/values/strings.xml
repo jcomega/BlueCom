@@ -24,8 +24,25 @@
     <string name="bt_about">About</string>
 
     <!--  String for About Dialogue -->
-    <string name="txt_title_diag">About BlueCom</string>
+    <string name="txt_title_diag">About </string>
+    <string name="txt_diag_auteur">Author: </string>
+    <string name="txt_diag_auteur_name">Jean-Christophe Papelard </string>
+    <string name="txt_diag_mail">E-Mail: </string>
+    <string name="txt_diag_blog">Blog: </string>
+    <string name="txt_diag_git">GitHub: </string>
+    <string name="txt_diag_apk">BlueCom Android App.</string>
+    <string name="txt_diag_apk_rev">1.0.0</string>
+    <string name="txt_diag_board">BlueCom module</string> 
+    <string name="txt_diag_board_rev">"?.?.?"</string>     
+    <string name="txt_diag_board_type">Type:</string>
+    <string name="txt_diag_board_status">Status:</string>
+    <string name="txt_diag_board_status_ok">Work correctly</string> 
+    <string name="txt_diag_board_status_ee"> Broken functioning </string> 
+    <string name="txt_diag_board_status_d"> Degraded functioning </string>   
+    <string name="txt_diag_board_status_e">Unknown</string>
+    <string name="txt_diag_empty">  </string>
     
+    <!--  String for main title -->
     <string name="title_main">BlueCom</string>
     <string name="title_main2">Remote Control.</string>
     <string name="status_main_nc">Status : Not connected</string>   
@@ -35,11 +52,9 @@
     
     <!--  String for Electronic board type -->
     <string name="txt_board_1relay"> BlueCom \"1 Relay\"</string>
-
-    
-    <!--  String for Blucom structure -->
-    <string name="txt_1RELAYS">BlueCom 1 relay</string>
-    <string name="txt_4RELAYS">4 Relays board</string>
+    <string name="txt_board_4relay"> BlueCom \"4 Relay\"</string>
+    <string name="txt_board_1relay_rgb"> BlueCom \"1 Relay + RGB LED\"</string>
+    <string name="txt_board_Unknown"> BlueCom \"Unknown\"</string>
     
     <!--  String for main.xml-->
     <string name="txt_output0">Output 0 :</string>
@@ -87,7 +102,6 @@
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth BueCom.</string>
     <string name="not_connected">You are not connected to a device</string>
     <string name="status_label">Status</string>
-    <string name="Version_Soft">Version : 05/03/13</string>
 
     
 </resources>

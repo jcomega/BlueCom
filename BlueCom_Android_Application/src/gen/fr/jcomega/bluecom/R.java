@@ -42,9 +42,13 @@ public final class R {
     public static final class id {
         public static final int Button_alarmONOFF_out0=0x7f07000f;
         public static final int Button_alarmONOFF_rgb=0x7f070018;
-        public static final int button_Alarm_Start=0x7f070022;
-        public static final int button_Alarm_Stop=0x7f070024;
-        public static final int button_Time_Set=0x7f070027;
+        public static final int Text_board_status=0x7f07002b;
+        public static final int Text_board_status_www=0x7f07002c;
+        public static final int Text_board_type=0x7f070029;
+        public static final int Text_board_type_www=0x7f07002a;
+        public static final int button_Alarm_Start=0x7f070036;
+        public static final int button_Alarm_Stop=0x7f070038;
+        public static final int button_Time_Set=0x7f07003b;
         public static final int button_about=0x7f07001f;
         public static final int button_alarm_set_out0=0x7f07000e;
         public static final int button_alarm_set_rgb=0x7f070017;
@@ -54,6 +58,8 @@ public final class R {
         public static final int imageButton_OnOff_out0=0x7f070010;
         public static final int imageButton_OnOff_rgb=0x7f070019;
         public static final int imageButton_RGB_rgb=0x7f07001a;
+        public static final int imageView1=0x7f070022;
+        public static final int imageView2=0x7f070021;
         public static final int imageView_bluetooth=0x7f070005;
         public static final int imageView_state=0x7f07001d;
         public static final int linearLayout1=0x7f070009;
@@ -62,11 +68,25 @@ public final class R {
         public static final int paired_devices=0x7f070001;
         public static final int textView1=0x7f070007;
         public static final int textView2=0x7f070006;
-        public static final int textView_active_time=0x7f070025;
-        public static final int textView_alarm_start=0x7f070021;
-        public static final int textView_alarm_stop=0x7f070023;
+        public static final int textView_active_time=0x7f070039;
+        public static final int textView_alarm_start=0x7f070035;
+        public static final int textView_alarm_stop=0x7f070037;
         public static final int textView_out0=0x7f070008;
         public static final int textView_out2=0x7f070011;
+        public static final int text_about=0x7f070023;
+        public static final int text_apk_main=0x7f070024;
+        public static final int text_apk_rev=0x7f070025;
+        public static final int text_auteur=0x7f07002d;
+        public static final int text_auteur_name=0x7f07002e;
+        public static final int text_blog=0x7f070031;
+        public static final int text_blog_www=0x7f070032;
+        public static final int text_board_main=0x7f070027;
+        public static final int text_board_rev=0x7f070028;
+        public static final int text_diag_status=0x7f070026;
+        public static final int text_git=0x7f07002f;
+        public static final int text_git_www=0x7f070030;
+        public static final int text_mail=0x7f070033;
+        public static final int text_mail_www=0x7f070034;
         public static final int title_Alarm=0x7f07000a;
         public static final int title_Alarm_rgb=0x7f070013;
         public static final int title_Alarm_start_out0=0x7f07000b;
@@ -79,84 +99,101 @@ public final class R {
         public static final int title_paired_devices=0x7f070000;
         public static final int title_state2=0x7f07001c;
         public static final int title_status=0x7f07001b;
-        public static final int toggle_Time_Status=0x7f070026;
+        public static final int toggle_Time_Status=0x7f07003a;
     }
     public static final class layout {
         public static final int device_list=0x7f030000;
         public static final int device_name=0x7f030001;
         public static final int main=0x7f030002;
-        public static final int time_setting=0x7f030003;
+        public static final int main_dialogue=0x7f030003;
+        public static final int time_setting=0x7f030004;
     }
     public static final class string {
-        public static final int Version_Soft=0x7f050033;
         public static final int app_name=0x7f050000;
         public static final int bt_Exit=0x7f050002;
         public static final int bt_about=0x7f050004;
         public static final int bt_connect=0x7f050001;
         public static final int bt_disconnect=0x7f050003;
-        public static final int bt_not_enabled_leaving=0x7f050030;
-        public static final int bt_time_set=0x7f050021;
-        public static final int button_scan=0x7f05002b;
-        public static final int none_found=0x7f05002f;
-        public static final int none_paired=0x7f05002d;
-        public static final int not_connected=0x7f050031;
-        public static final int scanning=0x7f05002e;
-        public static final int select_device=0x7f05002c;
-        public static final int status_label=0x7f050032;
-        public static final int status_main_c=0x7f050009;
-        public static final int status_main_cc=0x7f05000a;
-        public static final int status_main_nc=0x7f050008;
-        public static final int status_state=0x7f05000b;
-        public static final int title_alarm_out=0x7f050020;
-        public static final int title_alarm_start=0x7f05001e;
-        public static final int title_alarm_stop=0x7f05001f;
-        public static final int title_clock=0x7f050022;
-        public static final int title_main=0x7f050006;
-        public static final int title_main2=0x7f050007;
-        public static final int title_other_devices=0x7f05002a;
+        public static final int bt_not_enabled_leaving=0x7f050041;
+        public static final int bt_time_set=0x7f050032;
+        public static final int button_scan=0x7f05003c;
+        public static final int none_found=0x7f050040;
+        public static final int none_paired=0x7f05003e;
+        public static final int not_connected=0x7f050042;
+        public static final int scanning=0x7f05003f;
+        public static final int select_device=0x7f05003d;
+        public static final int status_label=0x7f050043;
+        public static final int status_main_c=0x7f050019;
+        public static final int status_main_cc=0x7f05001a;
+        public static final int status_main_nc=0x7f050018;
+        public static final int status_state=0x7f05001b;
+        public static final int title_alarm_out=0x7f050031;
+        public static final int title_alarm_start=0x7f05002f;
+        public static final int title_alarm_stop=0x7f050030;
+        public static final int title_clock=0x7f050033;
+        /**   String for main title 
+  String for main title 
+         */
+        public static final int title_main=0x7f050016;
+        public static final int title_main2=0x7f050017;
+        public static final int title_other_devices=0x7f05003b;
         /**   DeviceListActivity 
   DeviceListActivity 
          */
-        public static final int title_paired_devices=0x7f050029;
-        public static final int title_space=0x7f050023;
+        public static final int title_paired_devices=0x7f05003a;
+        public static final int title_space=0x7f050034;
         /**   String for BlueComTimeSet 
   String for BlueComTimeSet 
          */
-        public static final int title_time_set=0x7f05001d;
-        /**   String for Blucom structure 
-  String for Blucom structure 
-         */
-        public static final int txt_1RELAYS=0x7f05000d;
-        public static final int txt_4RELAYS=0x7f05000e;
-        public static final int txt_alarm_noconfig=0x7f05001c;
-        public static final int txt_alarm_off=0x7f050017;
-        public static final int txt_alarm_on=0x7f050016;
-        public static final int txt_alarm_start=0x7f050019;
-        public static final int txt_alarm_status=0x7f05001b;
-        public static final int txt_alarm_stop=0x7f05001a;
+        public static final int title_time_set=0x7f05002e;
+        public static final int txt_alarm_noconfig=0x7f05002d;
+        public static final int txt_alarm_off=0x7f050028;
+        public static final int txt_alarm_on=0x7f050027;
+        public static final int txt_alarm_start=0x7f05002a;
+        public static final int txt_alarm_status=0x7f05002c;
+        public static final int txt_alarm_stop=0x7f05002b;
         /**   String for main.xml - alarm 
   String for main.xml - alarm 
          */
-        public static final int txt_alarm_title=0x7f050018;
+        public static final int txt_alarm_title=0x7f050029;
         /**   String for Electronic board type 
   String for Electronic board type 
          */
-        public static final int txt_board_1relay=0x7f05000c;
+        public static final int txt_board_1relay=0x7f05001c;
+        public static final int txt_board_1relay_rgb=0x7f05001e;
+        public static final int txt_board_4relay=0x7f05001d;
+        public static final int txt_board_Unknown=0x7f05001f;
+        public static final int txt_diag_apk=0x7f05000b;
+        public static final int txt_diag_apk_rev=0x7f05000c;
+        public static final int txt_diag_auteur=0x7f050006;
+        public static final int txt_diag_auteur_name=0x7f050007;
+        public static final int txt_diag_blog=0x7f050009;
+        public static final int txt_diag_board=0x7f05000d;
+        public static final int txt_diag_board_rev=0x7f05000e;
+        public static final int txt_diag_board_status=0x7f050010;
+        public static final int txt_diag_board_status_d=0x7f050013;
+        public static final int txt_diag_board_status_e=0x7f050014;
+        public static final int txt_diag_board_status_ee=0x7f050012;
+        public static final int txt_diag_board_status_ok=0x7f050011;
+        public static final int txt_diag_board_type=0x7f05000f;
+        public static final int txt_diag_empty=0x7f050015;
+        public static final int txt_diag_git=0x7f05000a;
+        public static final int txt_diag_mail=0x7f050008;
         /**   String for main.xml
   String for main.xml
          */
-        public static final int txt_output0=0x7f05000f;
-        public static final int txt_output1=0x7f050010;
-        public static final int txt_output2=0x7f050011;
-        public static final int txt_output3=0x7f050012;
-        public static final int txt_output4=0x7f050013;
-        public static final int txt_output_rgb=0x7f050014;
-        public static final int txt_rtn_mess1=0x7f050024;
-        public static final int txt_rtn_mess2=0x7f050025;
-        public static final int txt_rtn_mess3=0x7f050026;
-        public static final int txt_rtn_mess4=0x7f050027;
-        public static final int txt_rtn_mess5=0x7f050028;
-        public static final int txt_setting=0x7f050015;
+        public static final int txt_output0=0x7f050020;
+        public static final int txt_output1=0x7f050021;
+        public static final int txt_output2=0x7f050022;
+        public static final int txt_output3=0x7f050023;
+        public static final int txt_output4=0x7f050024;
+        public static final int txt_output_rgb=0x7f050025;
+        public static final int txt_rtn_mess1=0x7f050035;
+        public static final int txt_rtn_mess2=0x7f050036;
+        public static final int txt_rtn_mess3=0x7f050037;
+        public static final int txt_rtn_mess4=0x7f050038;
+        public static final int txt_rtn_mess5=0x7f050039;
+        public static final int txt_setting=0x7f050026;
         /**   String for About Dialogue 
   String for About Dialogue 
          */

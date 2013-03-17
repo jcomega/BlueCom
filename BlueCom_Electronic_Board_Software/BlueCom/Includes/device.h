@@ -15,9 +15,22 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#define VERSION_SOFT_BLUECOM		06 	// 1.0.
-
 #include "p18f44j11.h"
+
+//#define VERSION_SOFT_BLUECOM		06 	// 1.0.
+#define SOFT_REVISION_1     0
+#define SOFT_REVISION_2     9
+#define SOFT_REVISION_3     3
+// Version = SOFT_REVISION_1.SOFT_REVISION_2.SOFT_REVISION_3
+
+#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS_RGBLED
+
+
+
+#define BC_TYPE_1RELAYS             1    // only 1 relay output
+#define BC_TYPE_4RELAYS             2      // 4 relay output
+#define BC_TYPE_1RELAYS_RGBLED      3 // 1 relay output and 3 PWM output for controling RGB LED projector
+
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,16 +114,10 @@ typedef enum {false, true} Bool;
 //	Enumeration definition
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
-typedef enum
-{
-BC_TYPE_1RELAYS= 0,     // only 1 relay output
-BC_TYPE_4RELAYS,        // 4 relay output
-BC_TYPE_1RELAYS_RGBLED  // 1 relay output and 3 PWM output for controling RGB LED projector
-}BLUECOM_Type;
 
 typedef enum
 {
-BC_STATUS_OK= 0,
+BC_STATUS_OK= 1,
 BC_STATUS_FAIL,
 BC_STATUS_DEGRADED,
 BC_STATUS_OTHER
@@ -122,11 +129,7 @@ BC_STATUS_OTHER
  */
 //--------------------------------------------------------------------------------------------------------------------------------------------
 typedef struct {
-BLUECOM_Type BlueCom_Type ; //bluecom board type
-unsigned char Soft_Revision;
 BLUECOM_Status Board_Status;
-unsigned char Input_Status;
-unsigned char Output_Status;
 
 unsigned char FlagRx;    // = 1 if a message has been receved
 unsigned char FlagTx;    // = 1 if a message must be transmit

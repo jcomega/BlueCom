@@ -20,7 +20,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -33,13 +36,16 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
+	
+	// Android application revision software
+	public static final String ANDROID_APK_REVISION = "0.9.2";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -127,17 +133,15 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	// adresse MAC puce bluetooth 
 	private String address;
 	
-	//VARIABLES FOR TRANSMITION + RECEPTION TRAME	
-	//Bluetooth_structure_trame BlueCom_Trame_Transmit = new Bluetooth_structure_trame();
-	Bluetooth_structure_trame BlueCom_Trame_Receive = new Bluetooth_structure_trame();
-	
+	//VARIABLES RECEPTION TRAME	
+	Bluetooth_structure_trame BlueCom_Trame_Receive = new Bluetooth_structure_trame();	
 	
 	// ENUM VARIABLES FOR DATA STRUCTURE
-	
 	enum BLUECOM_Type
 	{
 	BC_TYPE_1RELAYS,
 	BC_TYPE_4RELAYS,
+	BC_TYPE_1RELAYS_RGB,
 	BC_ERROR,
 	BC_DEFAUT
 	};
@@ -149,30 +153,35 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	BC_STATUS_DEGRADED,
 	BC_STATUS_OTHER,
 	BC_STATUS_NOCONNECTED,
+	BC_STATUS_CONNECTED,
+	BC_STATUS_CONNECTING,
 	BC_STATUS_DEFAULT
 	};
 	
-	private class Bluetooth_structure_receive
+	private class Bluetooth_structure_status
 	{
-		
-		BLUECOM_Type BlueCom_Type ; //bluecom board type
-		byte Soft_Revision;
+		// for the status Electronic board
+		BLUECOM_Type Board_BlueCom_Type ; //bluecom board type
+		byte Board_Soft_Revision_1;
+		byte Board_Soft_Revision_2;
+		byte Board_Soft_Revision_3;
 		BLUECOM_Status Board_Status;
-		byte Input_Status;
-		byte Output_Status;
+		// for this android application
+		BLUECOM_Status Apk_Status;
 		
-		public Bluetooth_structure_receive(){
+		public Bluetooth_structure_status(){
 		// main variable
-			BlueCom_Type = BLUECOM_Type.BC_DEFAUT;
-			Soft_Revision=0x00;
+			Board_BlueCom_Type = BLUECOM_Type.BC_DEFAUT;
+			Board_Soft_Revision_1=0;
+			Board_Soft_Revision_2=0;
+			Board_Soft_Revision_3=0;
 			Board_Status = BLUECOM_Status.BC_STATUS_DEFAULT;
-			Input_Status = 0x00;
-			Input_Status=0x00;
-			Output_Status=0x00;
+			
+			Apk_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;
 		}
 	}
 	
-	Bluetooth_structure_receive BlueCom_Structure_Receive = new Bluetooth_structure_receive();
+	Bluetooth_structure_status BlueCom_Structure_Status = new Bluetooth_structure_status();
 	
 	// END OF ENUM VARIABLES FOR DATA STRUCTURE
 
@@ -483,30 +492,126 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);	
     }
     private void BTDialog(){
-    
-    Resources res = getResources();	
-    	
-    AlertDialog.Builder boite;
-   boite = new AlertDialog.Builder(this);
-   boite.setTitle(R.string.txt_title_diag);
-   boite.setIcon(R.drawable.ic_launcher);
-   
-   String mot1="salut";
-   String mot2=res.getString(R.string.Version_Soft);
-   String Newligne=System.getProperty("line.separator");
-   String resultat=mot1+Newligne+mot2+R.string.bt_connect; 
-   boite.setMessage(mot1+Newligne+mot2+Newligne+res.getString(R.string.status_main_c));
-/*
-   boite.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
-      
-       public void onClick(DialogInterface dialog, int which) {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle(R.string.txt_title_diag);
+        //builder.setIcon(R.drawable.ic_launcher);
 
-       }
-       }
-   );
-   */
-   boite.show();
-    
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.main_dialogue, null);
+
+        TextView text = (TextView) layout.findViewById(R.id.text_git_www);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
+        text.setText(Html.fromHtml("<a href=\"https://github.com/jcomega/BlueCom\"> github.com/jcomega/BlueCom</a>"));
+        
+        TextView text2 = (TextView) layout.findViewById(R.id.text_blog_www);
+        text2.setMovementMethod(LinkMovementMethod.getInstance());
+        text2.setText(Html.fromHtml("<a href=\"http://www.jc-omega.com\"> www.jc-omega.com</a>"));
+        
+        TextView text3 = (TextView) layout.findViewById(R.id.text_mail_www);
+        //text3.setClickable(true);
+        text3.setMovementMethod(LinkMovementMethod.getInstance());
+        text3.setText(Html.fromHtml("<a href='mailto:jcomega03@gmail.com'>jcomega03@gmail.com</a>"));
+
+        TextView text_apk_rev = (TextView) layout.findViewById(R.id.text_apk_rev);
+        text_apk_rev.setText(ANDROID_APK_REVISION);
+        
+        // BOARD INFORMATIONS
+        TextView text_apk_status = (TextView) layout.findViewById(R.id.text_diag_status);
+    	BLUECOM_Status apk_status = BlueCom_Structure_Status.Apk_Status;
+    	switch(apk_status)
+    	{
+    	case BC_STATUS_NOCONNECTED:  
+    		text_apk_status.setText(R.string.status_main_nc);
+    		break;
+    	case BC_STATUS_CONNECTED:  
+    		text_apk_status.setText(R.string.status_main_c);
+    		break;
+    	case BC_STATUS_CONNECTING:  
+    		text_apk_status.setText(R.string.status_main_cc);
+    		break;
+    	default:
+    		text_apk_status.setText(R.string.status_main_nc);
+    		break;		
+    	}
+        
+    	if (apk_status==BLUECOM_Status.BC_STATUS_CONNECTED)
+    	{
+    		// Board revision :
+    		TextView text_board_rev = (TextView) layout.findViewById(R.id.text_board_rev);
+    		if (BlueCom_Structure_Status.Board_Soft_Revision_1==0 && BlueCom_Structure_Status.Board_Soft_Revision_2==0 && BlueCom_Structure_Status.Board_Soft_Revision_3==0)
+    		{
+    			text_board_rev.setText(R.string.txt_diag_board_rev);
+    		}
+    		else
+    		{
+    			text_board_rev.setText(BlueCom_Structure_Status.Board_Soft_Revision_1 +"."+BlueCom_Structure_Status.Board_Soft_Revision_2+"."+BlueCom_Structure_Status.Board_Soft_Revision_3);
+    		}
+    		// Board type connected :
+    		TextView text_board_type = (TextView) layout.findViewById(R.id.Text_board_type_www);
+    		BLUECOM_Type board_type = BlueCom_Structure_Status.Board_BlueCom_Type;
+        	switch(board_type)
+        	{
+        	case BC_TYPE_1RELAYS:  
+        		text_board_type.setText(R.string.txt_board_1relay);
+        		break;
+        	case BC_TYPE_4RELAYS:  
+        		text_board_type.setText(R.string.txt_board_4relay);
+        		break;
+        	case BC_TYPE_1RELAYS_RGB:  
+        		text_board_type.setText(R.string.txt_board_1relay_rgb);
+        		break;
+        	case BC_ERROR:  
+        		text_board_type.setText(R.string.txt_board_Unknown);
+        		break;
+        	case BC_DEFAUT:  
+        		text_board_type.setText(R.string.txt_board_Unknown);
+        		break;
+        	default:
+        		text_board_type.setText(R.string.txt_board_Unknown);
+        		break;		
+        	}
+    		// Board status connected :
+    		TextView text_board_status = (TextView) layout.findViewById(R.id.Text_board_status_www);
+    		BLUECOM_Status board_status = BlueCom_Structure_Status.Board_Status;
+        	switch(board_status)
+        	{
+        	case BC_STATUS_OK:  
+        		text_board_status.setText(R.string.txt_diag_board_status_ok);
+        		break;
+        	case BC_STATUS_DEGRADED:  
+        		text_board_status.setText(R.string.txt_diag_board_status_d);
+        		break;
+        	case BC_STATUS_FAIL:  
+        		text_board_status.setText(R.string.txt_diag_board_status_ee);
+        		break;
+        	case BC_STATUS_DEFAULT:  
+        		text_board_status.setText(R.string.txt_diag_board_status_e);
+        		break;
+
+        	default:
+        		text_board_status.setText(R.string.txt_diag_board_status_e);
+        		break;		
+        	}
+    	}
+    	else
+    	{	// NOT CONNECTED OR CONNECTING : delete text
+    		TextView text_delete = (TextView) layout.findViewById(R.id.text_board_main);
+    		text_delete.setText(R.string.txt_diag_empty);
+    		TextView text_delete2 = (TextView) layout.findViewById(R.id.text_board_rev);
+    		text_delete2.setText(R.string.txt_diag_empty);
+    		TextView text_delete3 = (TextView) layout.findViewById(R.id.Text_board_type);
+    		text_delete3.setText(R.string.txt_diag_empty);
+    		TextView text_delete4 = (TextView) layout.findViewById(R.id.Text_board_type_www);
+    		text_delete4.setText(R.string.txt_diag_empty);
+    		TextView text_delete5 = (TextView) layout.findViewById(R.id.Text_board_status);
+    		text_delete5.setText(R.string.txt_diag_empty);
+    		TextView text_delete6 = (TextView) layout.findViewById(R.id.Text_board_status_www);
+    		text_delete6.setText(R.string.txt_diag_empty);
+    	}
+        
+        
+        builder.setView(layout);
+        AlertDialog alert = builder.show();
     }
     
     
@@ -575,7 +680,8 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				img_bluetooth.setImageResource(R.drawable.bluetooth_blue); 
     				Log.w("BlueCom","BT connected");
     				img_state.setImageResource(R.drawable.stat_red); // state logo : orange
-
+    				BlueCom_Structure_Status.Apk_Status = BLUECOM_Status.BC_STATUS_CONNECTED;
+    				
     				// change button text:
     				//wakeup trame
     				mConnectButton.setText(R.string.bt_disconnect);
@@ -622,14 +728,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     			case BluetoothRfcommClient.STATE_CONNECTING:
     				Log.w("BlueCom","BT connecting...");
     				img_state.setImageResource(R.drawable.stat_orange); // state logo : orange
-
+    				BlueCom_Structure_Status.Apk_Status = BLUECOM_Status.BC_STATUS_CONNECTING;
     				title_status.setText(R.string.status_main_cc);
     				break;
     			case BluetoothRfcommClient.STATE_NONE:
     				img_bluetooth.setImageResource(R.drawable.bluetooth_black); 
     				Log.w("BlueCom","BT not connected");
     				img_state.setImageResource(R.drawable.stat_red); // state logo : orange
-
+    				BlueCom_Structure_Status.Apk_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;
     				// change button :
     				title_status.setText(R.string.status_main_nc);
     				mConnectButton.setText(R.string.bt_connect);
@@ -651,51 +757,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				BlueCom_Trame_Receive.data5 = readBuf[8];
     				BlueCom_Trame_Receive.data6 = readBuf[9];
     				BlueCom_Trame_Receive.data7 = readBuf[10];
-    				
-//    				// DATA2 : type of the bluecom board
-//        			switch (readBuf[2]){
-//            			case 1:
-//            				BlueCom_Trame_Receive.BlueCom_Type = BLUECOM_Type.BC_TYPE_1RELAYS;
-//            				break;
-//            			case 2:
-//            				BlueCom_Trame_Receive.BlueCom_Type = BLUECOM_Type.BC_TYPE_4RELAYS;
-//            				break;	
-//            			}
-//        			
-//    				// DATA3 : software revision			
-//        			BlueCom_Trame_Receive.Soft_Revision = readBuf[3];
-//    				// DATA4 :  status : 0=OK, 1=FAIL, 2=DEGRADED, 255=NA				
-//        			switch (readBuf[4]){
-//        			case 1:
-//        				BlueCom_Trame_Receive.Board_Status = BLUECOM_Status.BC_STATUS_OK;
-//        				break;
-//        			case 2:
-//        				BlueCom_Trame_Receive.Board_Status = BLUECOM_Status.BC_STATUS_FAIL;
-//        				break;
-//        			case 3:
-//        				BlueCom_Trame_Receive.Board_Status = BLUECOM_Status.BC_STATUS_DEGRADED;
-//        				break;
-//        			case 4:
-//        				BlueCom_Trame_Receive.Board_Status = BLUECOM_Status.BC_STATUS_OTHER;
-//        				break;
-//        			default:	
-//        				BlueCom_Trame_Receive.Board_Status = BLUECOM_Status.BC_STATUS_DEFAULT;
-//        				break;
-//        			}	
-//        			
-//    				// DATA5 : Read the input status :Binaire format : 1=input high state, 0=input low state (8 input Max)		
-//        			BlueCom_Trame_Receive.Input_Status = readBuf[5];
-//    				// DATA6 : Read the output status :Binaire format : 1=input high state, 0=input low state (8 output Max)			
-//        			BlueCom_Trame_Receive.Output_Status = readBuf[6];
-//    				
-    				img_state.setImageResource(R.drawable.stat_green); // state logo : orange
-    		      	
+	
+    				img_state.setImageResource(R.drawable.stat_green); // state logo : green 
+   	
     			}
     			else
     			{
     				// bad message or message traited
-    				BlueCom_Structure_Receive.Board_Status = BLUECOM_Status.BC_STATUS_NOCONNECTED;  
-    				img_state.setImageResource(R.drawable.stat_orange); // state logo : orange
+    				img_state.setImageResource(R.drawable.stat_orange); // state logo : orange	
     			}			
 				// Gestion information receved and command button
 				DecodeBlueCom();
@@ -724,45 +793,60 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	//Display the status of the board on the "title_status" TextView
     	
     	Resources res = getResources();
-    	
-    	BLUECOM_Status status = BlueCom_Structure_Receive.Board_Status;
-    	switch(status)
-    	{
-    	case BC_STATUS_NOCONNECTED:  
-    		// setup message
-    		//String chaine1 = res.getString(R.string.status_main_nc);
-    		
-    		//title_status.setText(chaine1);
-    		//Log.d("BlueCom",chaine1);
-    		
-    		break;
-    		
-    	default:
-    		// setup message
-    		String chaine2 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_1relay);
-    		
-    		title_status.setText(chaine2);
-    		//Log.d("BlueCom",chaine2);
-    		break;		
-    	}
-
-    	
-//    	BLUECOM_Type type = BlueCom_Trame.BlueCom_Type; 
-//		switch (type){
-//		case BC_TYPE_1RELAYS:
-//			title_status.setText(res.getString(R.string.status_main_c));
-//			break;
-//		case BC_TYPE_4RELAYS:
-//			title_status.setText("zzzz");
-//			break;
-//    }	
-		
+    			
     	// Commande scan
     	switch(BlueCom_Trame_Receive.command)
     	{
     	case CMD_STATUS_SYSTEMS:  
-
-    		
+    		//debug :
+        	Log.d("BlueCom", "Reception : CMD_STATUS_SYSTEMS : Module type: "+ BlueCom_Trame_Receive.data0 + ", Status: "+ BlueCom_Trame_Receive.data1 +", Revision:"+BlueCom_Trame_Receive.data5 +"."+BlueCom_Trame_Receive.data6 +"."+BlueCom_Trame_Receive.data7);
+        	
+			// Type of the bluecom board
+			switch (BlueCom_Trame_Receive.data0){
+    			case 1:
+    				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_1RELAYS;
+    	    		String chaine2 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_1relay);
+    	    		title_status.setText(chaine2);
+    				break;
+    			case 2:
+    				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_4RELAYS;
+    	    		String chaine3 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_4relay);
+    	    		title_status.setText(chaine3);
+    				break;	
+    			case 3:
+    				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_1RELAYS_RGB;
+    				String chaine4 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_1relay_rgb);
+    	    		title_status.setText(chaine4);
+    				break;	
+				default:	
+    				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_DEFAUT;
+    				String chaine5 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_Unknown);
+    	    		title_status.setText(chaine5);
+					break;
+    			}
+			
+			// Module board software revision			
+			BlueCom_Structure_Status.Board_Soft_Revision_1 = BlueCom_Trame_Receive.data5;
+			BlueCom_Structure_Status.Board_Soft_Revision_2 = BlueCom_Trame_Receive.data6;
+			BlueCom_Structure_Status.Board_Soft_Revision_3 = BlueCom_Trame_Receive.data7;
+			// Module board status : 0=OK, 1=FAIL, 2=DEGRADED, 255=NA				
+			switch (BlueCom_Trame_Receive.data1){
+				case 1:
+					BlueCom_Structure_Status.Board_Status = BLUECOM_Status.BC_STATUS_OK;
+					break;
+				case 2:
+					BlueCom_Structure_Status.Board_Status = BLUECOM_Status.BC_STATUS_FAIL;
+					break;
+				case 3:
+					BlueCom_Structure_Status.Board_Status = BLUECOM_Status.BC_STATUS_DEGRADED;
+					break;
+				case 4:
+					BlueCom_Structure_Status.Board_Status = BLUECOM_Status.BC_STATUS_OTHER;
+					break;
+				default:	
+					BlueCom_Structure_Status.Board_Status = BLUECOM_Status.BC_STATUS_DEFAULT;
+					break;
+				}		
     		
           	break;	
     	case CMD_SET_DIGITAL_OUTPUT:  

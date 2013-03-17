@@ -79,13 +79,8 @@ mRtcc_Clear_Intr_Status_Bit;				//clears the RTCC interrupt status bit
 RTCC_configure();					//Configure RTCC using library APIs
 
 // Select board version and software revision
-BlueCom_Struct.Soft_Revision=VERSION_SOFT_BLUECOM;
-BlueCom_Struct.BlueCom_Type = BC_TYPE_1RELAYS_RGBLED;
+BlueCom_Struct.Board_Status = BC_STATUS_OK;
 
-// init PWM output value
-//PWM_Setvalue(50,0); // red
-//PWM_Setvalue(0,0); //green
-//PWM_Setvalue(50,0); //blue
 
 SET_DIGITAL_OUTPUT0 = 0;
 SET_DIGITAL_OUTPUT1 = 0;

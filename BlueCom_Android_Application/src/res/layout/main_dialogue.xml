@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    tools:context=".BlueComActivity" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+    
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="5dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+       android:paddingBottom="5dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/text_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:text="@string/txt_title_diag"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FF2881D5"
+        android:textStyle="bold" />
+    
+  </RelativeLayout>
+
+    <View
+    android:layout_height="2dip"
+    android:background="#FF2881D5" />
+        
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp" >
+
+        <TextView
+            android:id="@+id/text_apk_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="@string/txt_diag_apk"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FF00FF00"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/text_apk_rev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/text_apk_main"
+            android:layout_alignBottom="@+id/text_apk_main"
+            android:layout_toRightOf="@+id/text_apk_main"
+            android:paddingLeft="2dp"
+            android:text="@string/txt_diag_apk_rev"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+         <TextView
+            android:id="@+id/text_diag_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_apk_main"
+            android:layout_alignParentLeft="true"
+            android:text="@string/status_main_nc"
+            android:textStyle="bold" />
+         
+        <TextView
+            android:id="@+id/text_board_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/text_diag_status"
+            android:paddingBottom="7dp"
+            android:paddingTop="10dp"
+            android:text="@string/txt_diag_board"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FF0000FF"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/text_board_rev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/text_board_main"
+            android:layout_alignBottom="@+id/text_board_main"
+            android:layout_toRightOf="@+id/text_board_main"
+            android:paddingLeft="3dp"
+            android:text="@string/txt_diag_board_rev"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Text_board_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/text_board_main"
+            android:layout_below="@+id/text_board_rev"
+            android:text="@string/txt_diag_board_type"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Text_board_type_www"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_board_main"
+            android:layout_toRightOf="@+id/Text_board_status"
+            android:paddingLeft="5dp"
+            android:text="@string/txt_board_Unknown"
+            android:textColor="#FFF" />
+
+        <TextView
+            android:id="@+id/Text_board_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/Text_board_type"
+            android:layout_below="@+id/Text_board_type"
+            android:text="@string/txt_diag_board_status"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Text_board_status_www"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Text_board_type"
+            android:layout_toRightOf="@+id/Text_board_status"
+            android:paddingLeft="5dp"
+            android:text="@string/txt_diag_board_status_e"
+            android:textColor="#FFF" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF2881D5" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp" >
+
+         <TextView
+            android:id="@+id/text_auteur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/txt_diag_auteur"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/text_auteur_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/text_auteur"
+            android:paddingLeft="2dp"
+            android:text="@string/txt_diag_auteur_name"
+            android:textColor="#FFF" />
+        
+        <TextView
+            android:id="@+id/text_git"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_auteur"
+            android:paddingLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/txt_diag_git"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/text_git_www"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_auteur"
+            android:layout_toRightOf="@+id/text_git"
+            android:paddingLeft="10dp"
+            android:text="github.com/jcomega/BlueCom"
+            android:textColor="#FFF" />
+
+         <TextView
+            android:id="@+id/text_blog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_git"
+            android:paddingLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/txt_diag_blog"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/text_blog_www"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_git"
+            android:layout_toRightOf="@+id/text_git"
+            android:paddingLeft="10dp"
+            android:text="www.jc-omega.com"
+            android:textColor="#FFF" />
+
+                 <TextView
+            android:id="@+id/text_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_blog"
+            android:paddingLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/txt_diag_mail"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/text_mail_www"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_blog"
+            android:layout_toRightOf="@+id/text_git"
+            android:paddingLeft="10dp"
+            android:clickable="true"
+            android:text="jcomega03@gmail.com"
+            android:textColor="#FFF" />
+        
+
+        
+    </RelativeLayout>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF2881D5" />
+
+
+
+</TableLayout>

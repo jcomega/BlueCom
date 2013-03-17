@@ -24,8 +24,25 @@
     <string name="bt_about">A propos</string>
     
     <!--  String for About Dialogue -->
-    <string name="txt_title_diag">A propos de BlueCom</string>
+    <string name="txt_title_diag">A propos </string>
+    <string name="txt_diag_auteur">Auteur: </string>
+    <string name="txt_diag_auteur_name">Jean-Christophe Papelard </string>
+    <string name="txt_diag_mail">E-Mail: </string>
+    <string name="txt_diag_blog">Blog: </string>
+    <string name="txt_diag_git">GitHub: </string>
+    <string name="txt_diag_apk">BlueCom Android App.</string>
+    <string name="txt_diag_apk_rev">1.0.0</string>
+    <string name="txt_diag_board">Module BlueCom</string> 
+    <string name="txt_diag_board_rev">"?.?.?"</string>    
+    <string name="txt_diag_board_type">Type:</string>
+    <string name="txt_diag_board_status">Statut:</string>     
+    <string name="txt_diag_board_status_ok">Fonctionne correctement</string> 
+    <string name="txt_diag_board_status_ee"> Module en panne</string> 
+    <string name="txt_diag_board_status_d"> Fonctionnement dégradé</string>
+    <string name="txt_diag_board_status_e">Inconnue</string>
+    <string name="txt_diag_empty">  </string>  
     
+    <!--  String for main title -->    
     <string name="title_main">BlueCom</string>
     <string name="title_main2">Télécommande.</string>
     <string name="status_main_nc">Statut : Non connecté</string>   
@@ -35,11 +52,10 @@
     
     <!--  String for Electronic board type -->
     <string name="txt_board_1relay">BlueCom \"1 Relais\"</string>
+    <string name="txt_board_4relay"> BlueCom \"4 Relais\"</string>
+    <string name="txt_board_1relay_rgb"> BlueCom \"1 Relais + RGB LED\"</string>
+    <string name="txt_board_Unknown"> BlueCom \"Inconnue\"</string>
 
-    
-    <!--  String for Blucom structure -->
-    <string name="txt_1RELAYS">BlueCom 1 relay</string>
-    <string name="txt_4RELAYS">4 Relays board</string>
     
     <!--  String for main.xml-->
     <string name="txt_output0">Sortie 0 :</string> 
@@ -87,7 +103,7 @@
     <string name="bt_not_enabled_leaving">Bluetooth non activé. Fermeture de BueCom.</string>
     <string name="not_connected">"Vous n'êtes pas connecté à un appareil"</string>
     <string name="status_label">Statut</string>
-    <string name="Version_Soft">Version : 05/03/13</string>
+
 
     
 </resources>

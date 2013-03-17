@@ -237,11 +237,6 @@ unsigned char BCM_TransmitUART(unsigned char uCommand, unsigned char *uDataPtr, 
     {
         UARTIntPutChar( *uDataPtr++ );
     }
-//    UARTIntPutChar(BlueCom_Trame.BlueCom_Type);  // type of the bluecom board
-//    UARTIntPutChar(BlueCom_Trame.Soft_Revision); //software revision
-//    UARTIntPutChar(BlueCom_Trame.Board_Status); // status : 0=OK, 1=FAIL, 2=DEGRADED, 255=NA
-//    UARTIntPutChar(BlueCom_Trame.Input_Status); //Read the input status :Binaire format : 1=input high state, 0=input low state (8 input Max)
-//    UARTIntPutChar(BlueCom_Trame.Output_Status); // Read the output status :Binaire format : 1=input high state, 0=input low state (8 output Max)
 
     UARTIntPutChar(0x00 );  //CKS (xor of message without cks and etx)
     UARTIntPutChar(ETX ); //ETX=3 : end of message
@@ -291,14 +286,14 @@ unsigned char BCM_Encode(void)
     {
     // Application configurations
         case CMD_STATUS_SYSTEMS:
-            BlueCom_Data_TX.Data0 = BC_TYPE_1RELAYS_RGBLED; // type of board
-            BlueCom_Data_TX.Data1 = 0xFF;   //board status;
+            BlueCom_Data_TX.Data0 = BLUECOM_BOARD_TYPE; // type of board
+            BlueCom_Data_TX.Data1 = BlueCom_Struct.Board_Status;   //board status;
             BlueCom_Data_TX.Data2 = 0xFF;   //Reserved
             BlueCom_Data_TX.Data3 = 0xFF;   //Reserved
             BlueCom_Data_TX.Data4 = 0xFF;   //Reserved
-            BlueCom_Data_TX.Data5 = 0xFF;   //Soft_Revision_1
-            BlueCom_Data_TX.Data6 = 0xFF;   //Soft_Revision_2
-            BlueCom_Data_TX.Data7 = 0xFF;   //Soft_Revision_3
+            BlueCom_Data_TX.Data5 = SOFT_REVISION_1;   //Soft_Revision_1
+            BlueCom_Data_TX.Data6 = SOFT_REVISION_2;   //Soft_Revision_2
+            BlueCom_Data_TX.Data7 = SOFT_REVISION_3;   //Soft_Revision_3
         break;
     // input/output
         case CMD_SET_DIGITAL_OUTPUT:
