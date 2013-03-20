@@ -68,8 +68,6 @@ unsigned char AlarmDayTime_return;
         RTCC_SetAlarmRptCount(10);	//set alarm repeat count
         PIR3bits.RTCCIF=0;
 
-
-
         //alarm check for output 0:
         if (BlueCom_Struct.FlagTx==0)   // do not read this alarm if a transmit is early in progress : read next time (1s)
         {
@@ -137,7 +135,6 @@ void InterruptServiceLow(void)
       {
         PIR1bits.TMR2IF = 0;     // clears TMR2IF       bit 1 TMR2IF: TMR2 to PR2 Match Interrupt Flag bit
         PWM_Generator();
-
       }
 
     // Check for another interrupt, examples:

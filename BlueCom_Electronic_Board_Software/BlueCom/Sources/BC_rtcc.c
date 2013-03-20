@@ -20,6 +20,15 @@
 rtccTimeDate RtccTimeDate ,RtccAlrmTimeDate, Rtcc_read_TimeDate;
 rtccTime  RtccAlrmTime;
 
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+/*! \fn  void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)
+ *  \brief This fonction configure RTCC time from BLUETOOTH_DATA structure
+ *
+ *  \return none
+ */
+//--------------------------------------------------------------------------------------------------------------------------------------------
 void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)
 {
    RtccTimeDate.f.hour = pBC_struct->Data0;		//Set Hour
@@ -32,6 +41,14 @@ void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)
    RtccWriteTimeDate(&RtccTimeDate,1);			//write into registers
 }
 
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+/*! \fn  void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)
+ *  \brief This fonction read RTCC time and write the value in BLUETOOTH_DATA structure
+ *
+ *  \return none
+ */
+//--------------------------------------------------------------------------------------------------------------------------------------------
 void RTCC_readTimeDate(BLUETOOTH_DATA* pBC_struct)
 {
     RtccReadTimeDate(&Rtcc_read_TimeDate);		//Rtcc_read_TimeDate will have latest time
@@ -45,6 +62,7 @@ void RTCC_readTimeDate(BLUETOOTH_DATA* pBC_struct)
    pBC_struct->Data7 = 0xFF;
 }
 
+// NOT USED : TO BE DEFINE
 void RTCC_setAlarmTime(BLUETOOTH_DATA* pBC_struct)
 {
    RtccAlrmTime.f.hour = pBC_struct->Data0;		//Set Hour
@@ -55,6 +73,7 @@ void RTCC_setAlarmTime(BLUETOOTH_DATA* pBC_struct)
    mRtccAlrmEnable();                               //enable the rtcc alarm to wake the device up from deep sleep
 }
 
+// NOT USED : TO BE DEFINE
 void RTCC_readAlarmTime(BLUETOOTH_DATA* pBC_struct)
 {
    RtccReadAlrmTime(&RtccAlrmTime);		//Rtcc_read_TimeDate will have latest time
@@ -66,8 +85,8 @@ void RTCC_readAlarmTime(BLUETOOTH_DATA* pBC_struct)
    pBC_struct->Data5 = 0; 	//set year
    pBC_struct->Data6 = 0;
    pBC_struct->Data7 = 0;
-
 }
+// NOT USED : TO BE DEFINE
 void RTCC_setAlarmDate(BLUETOOTH_DATA* pBC_struct)
 {
    RtccAlrmTimeDate.f.hour = pBC_struct->Data0;		//Set Hour
@@ -80,7 +99,7 @@ void RTCC_setAlarmDate(BLUETOOTH_DATA* pBC_struct)
    RtccWriteAlrmTimeDate(&RtccAlrmTimeDate);		//write into registers
    mRtccAlrmEnable();                               //enable the rtcc alarm to wake the device up from deep sleep
 }
-
+// NOT USED : TO BE DEFINE
 void RTCC_readAlarmDate(BLUETOOTH_DATA* pBC_struct)
 {
    //RtccReadAlrmTimeDate(&Rtcc_read_TimeDate);		//Rtcc_read_TimeDate will have latest time
@@ -95,6 +114,13 @@ void RTCC_readAlarmDate(BLUETOOTH_DATA* pBC_struct)
    pBC_struct->Data7 = 0xFF;
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------
+/*! \fn  void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
+ *  \brief This fonction read data in "BLUETOOTH_DATA" and copy this in "BLUECOM_ALARM_DAY__STRUCTURE"
+ *  If in "BLUETOOTH_DATA" the variable = 255 (-1) : this variable won't be copy
+ *  \return none
+ */
+//--------------------------------------------------------------------------------------------------------------------------------------------
 void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
 {
    //Transfert data BLUECOM_ALARM_DAY__STRUCTURE to BLUETOOTH_DATA
@@ -112,6 +138,13 @@ void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTUR
 
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------
+/*! \fn  void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
+ *  \brief This fonction read data in "BLUECOM_ALARM_DAY__STRUCTURE" and copy this in "BLUETOOTH_DATA"
+ *
+ *  \return none
+ */
+//--------------------------------------------------------------------------------------------------------------------------------------------
 void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
 {
    //Transfert data BLUETOOTH_DATA to BLUECOM_ALARM_DAY__STRUCTURE
@@ -141,7 +174,7 @@ void  RTCC_initAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct, unsigned c
    pAD_struct->min_Stop = 0xFF;		//Set minute
 
    pAD_struct->output_select = output_select;       // select output
-   pAD_struct->output_status = 1; 	//select status 1= On, 0)Off
+   pAD_struct->output_status = 0; 	//select status 1= On, 0)Off
    pAD_struct->Flag_alarm_active = 0;  // if =1 alarm active, if 0 alarm disable
    pAD_struct->Flag_manual_disable = false;  //manual button has never been pressed
    pAD_struct->Flag_alarm_current_state =  false;  //for activate the fist time
@@ -161,7 +194,7 @@ unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
     unsigned char checkAlarm;
     int Current_time_min, Alarm_start_min, Alarm_stop_min;
 
-    checkAlarm=0;
+    checkAlarm=0;//init var
 
     if (pAD_struct->Flag_alarm_active == true)   // alarm active ?
     {
@@ -195,7 +228,6 @@ unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
 
                if (pAD_struct->output_status == 1) return 99;      // output ON
                else  return 88;
-
            }
     }
     else
@@ -209,7 +241,6 @@ unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
            {
                if (pAD_struct->output_status == 1) return 88;      // output OFF
                else  return 99;
-
            }
         }
     }
@@ -244,11 +275,10 @@ unsigned int i=0,j=0;
    RtccTimeDate.f.hour = 0;							//Set Hour
    RtccTimeDate.f.min =  0;							//Set minute
    RtccTimeDate.f.sec =  0;							//Set second
-   RtccTimeDate.f.mday = 02;							//Set day
-   RtccTimeDate.f.mon =  11;							//Se month
-   RtccTimeDate.f.year = 12; 							//set year
+   RtccTimeDate.f.mday = 01;							//Set day
+   RtccTimeDate.f.mon =  01;							//Se month
+   RtccTimeDate.f.year = 13; 							//set year
    RtccTimeDate.f.wday = 4;  							//Set which day of the week for the corrsponding date
-
 
    //Set the alarm time and date using gloabl structures defined in libraries
    RtccAlrmTimeDate.f.hour = RtccTimeDate.f.hour;		//Set Hour

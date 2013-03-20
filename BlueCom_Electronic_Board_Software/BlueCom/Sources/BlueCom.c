@@ -127,6 +127,7 @@ unsigned char BCM_Decode(void)
             BlueCom_Data_TX.Command_return = CMD_STATUS_SYSTEMS;
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
+    //////////////////////////
     // input/output
         case CMD_SET_DIGITAL_OUTPUT:
             if (BlueCom_Data_RX.Data0==1) { SET_DIGITAL_OUTPUT0 =1; RtccAlarmOutput0.Flag_manual_disable =  true; }
@@ -189,6 +190,7 @@ unsigned char BCM_Decode(void)
             BlueCom_Data_TX.Command_return = CMD_READ_CURRENT_TIME;   //just send for de next transmition the time and data from this board
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
+
         case CMD_SET_ALARM_TIME:
             RTCC_setAlarmTime(&BlueCom_Data_RX);   //set date and time on this board
             BlueCom_Data_TX.Command_return = CMD_SET_ALARM_TIME;
@@ -203,6 +205,8 @@ unsigned char BCM_Decode(void)
             if(BlueCom_Data_RX.Data4==0) RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutput0);   //transfert data recetion to RtccAlarmOutput0 objet for save information
             //else if(BlueCom_Data_RX.Data4==1) RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutput1);   //transfert data recetion to RtccAlarmOutput1 objet for save information
             //...
+
+            // Only on the RGB output
             else if(BlueCom_Data_RX.Data4==99) RTCC_setAlarmDayTime(&BlueCom_Data_RX, &RtccAlarmOutputRGB);   //transfert data recetion to RtccAlarmOutputRGB objet for save information
 
             BlueCom_Data_TX.Command_return = CMD_SET_ALARM_DAY_TIME;

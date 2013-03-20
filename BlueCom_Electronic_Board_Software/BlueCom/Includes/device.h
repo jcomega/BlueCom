@@ -20,18 +20,17 @@
 //#define VERSION_SOFT_BLUECOM		06 	// 1.0.
 #define SOFT_REVISION_1     0
 #define SOFT_REVISION_2     9
-#define SOFT_REVISION_3     3
+#define SOFT_REVISION_3     4
 // Version = SOFT_REVISION_1.SOFT_REVISION_2.SOFT_REVISION_3
+// example : 0.9.3
 
-#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS_RGBLED
+#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS_RGBLED       // select type of board
 
 
 
 #define BC_TYPE_1RELAYS             1    // only 1 relay output
-#define BC_TYPE_4RELAYS             2      // 4 relay output
-#define BC_TYPE_1RELAYS_RGBLED      3 // 1 relay output and 3 PWM output for controling RGB LED projector
-
-
+#define BC_TYPE_4RELAYS             2    // 4 relay output
+#define BC_TYPE_1RELAYS_RGBLED      3    // 1 relay output and 3 PWM output for controling RGB LED projector
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /** \name 		P R O T O T Y P E S
@@ -114,7 +113,6 @@ typedef enum {false, true} Bool;
 //	Enumeration definition
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
-
 typedef enum
 {
 BC_STATUS_OK= 1,
@@ -147,7 +145,6 @@ unsigned char Data4;
 unsigned char Data5;
 unsigned char Data6;
 unsigned char Data7;
-
 }BLUETOOTH_DATA;
 
 typedef struct {
@@ -166,7 +163,7 @@ Bool    Flag_manual_disable;  //= true si alarm is disabled during activating (b
 }BLUECOM_ALARM_DAY__STRUCTURE;
 
 typedef struct {
-    // BCD code
+
 unsigned char pwm_red;       // PWM value for red
 unsigned char pwm_green;    // PWM value for green
 unsigned char pwm_blue;     // PWM value for blue
@@ -183,7 +180,7 @@ unsigned char status;  // 1= output active
 */
 //--------------------------------------------------------------------------------------------------------------------------------------------
         #define GetSystemClock()    (32000000ul)
-
+// you must define too : UARTIntC.h     UART_CLOCK_FREQ
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /*! \fn  GetPeripheralClock()

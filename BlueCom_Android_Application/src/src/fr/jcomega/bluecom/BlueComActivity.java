@@ -13,7 +13,6 @@ import fr.jcomega.bluecom.R;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -45,7 +44,7 @@ import java.util.TimerTask;
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	
 	// Android application revision software
-	public static final String ANDROID_APK_REVISION = "0.9.2";
+	public static final String ANDROID_APK_REVISION = "0.9.5";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -67,7 +66,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     // Bluecom length for transmit and receive  (#define in C )
     public static final int BLUECOM_RX_TRAME_LENGTH = 13;
     public static final int BLUECOM_TX_TRAME_LENGTH = 13;
-    public static final int BLUECOM_TIME_MS_TIMER_TASK = 200;  
+    public static final int BLUECOM_TIME_MS_TIMER_TASK = 250;  
     
  // Bluetooth command with uart
     public static final int CMD_DONOTHING = 				0x00;
@@ -131,7 +130,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	private ImageView img_state;
 	private boolean Flag_TimerTask_BC_Transmit = false;	
 	// adresse MAC puce bluetooth 
-	private String address;
+	//private String address;
 	
 	//VARIABLES RECEPTION TRAME	
 	Bluetooth_structure_trame BlueCom_Trame_Receive = new Bluetooth_structure_trame();	
@@ -348,7 +347,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
           		       Log.i("BlueCom", "ACTION : Bouton 0 detect true");
           		       //Transmit : output 0 must be OFF
           		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button01 = new Bluetooth_structure_trame(CMD_SET_DIGITAL_OUTPUT,0,-1,-1,-1,-1,-1,-1,-1);   				
-          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button01); 
+          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button01);    		       
           		       if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
          			}
@@ -357,7 +356,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
          		       Log.i("BlueCom", "ACTION : Bouton 0 detect false");
          		       //Transmit : output 0 must be OFF
           		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button01 = new Bluetooth_structure_trame(CMD_SET_DIGITAL_OUTPUT,1,-1,-1,-1,-1,-1,-1,-1);   				
-          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button01); 
+          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button01);  
           		       if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
          			}        			
@@ -410,7 +409,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
           		       Log.i("BlueCom", "ACTION : Bouton rgb on/off detect true");
           		       //Transmit : output rgb must be OFF
           		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button_rgb = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT,-1,-1,-1,-1,-1,-1,-1,0);   				
-          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button_rgb); 
+          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button_rgb);  
           		       if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
          			}
@@ -419,7 +418,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
          		       Log.i("BlueCom", "ACTION : Bouton rgb on/off detect false");
          		       //Transmit : output rgb must be ON
           		       Bluetooth_structure_trame BlueCom_Trame_Transmit_Button_rgb = new Bluetooth_structure_trame(CMD_SET_RGB_OUTPUT,-1,-1,-1,-1,-1,-1,-1,1);   				
-          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button_rgb); 
+          		       TransmitFifo.put(BlueCom_Trame_Transmit_Button_rgb);   
           		       if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); // start timer task if the previous timer task is not running
 
          			}        			
@@ -486,11 +485,16 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         
      }
     
-    
     private void BTConnect(){
     	Intent serverIntent = new Intent(this, DeviceListActivity.class);
     	startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);	
     }
+    
+	public int getConnectionState() {
+		return mRfcommClient.getState();
+	}
+
+/////////////////////////////      ABOUT DIALOGUE GESTION        ////////////////////////////////////////  
     private void BTDialog(){
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //builder.setTitle(R.string.txt_title_diag);
@@ -608,17 +612,10 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     		TextView text_delete6 = (TextView) layout.findViewById(R.id.Text_board_status_www);
     		text_delete6.setText(R.string.txt_diag_empty);
     	}
-        
-        
+           
         builder.setView(layout);
         AlertDialog alert = builder.show();
     }
-    
-    
-	public int getConnectionState() {
-		return mRfcommClient.getState();
-	}
-	
 
 	
 /////////////////////////////      RGB OUTPUT FUNCTION        ////////////////////////////////////////  
@@ -642,14 +639,11 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	// read alpha mask  	
     	alpha_float = (float)alpha/255;		//--> %
     	
-    	color =color & 0x00FFFFFF;	//delete alpha in color variable
-    	
+    	color =color & 0x00FFFFFF;	//delete alpha in color variable	
     	// read color
     	value_red = color >> 16;
-    	
     	value_green = color & 0x0000FF00;
     	value_green = value_green >> 8;
-
         value_blue = color & 0x000000FF;
         
         // calcul alpha + color result
@@ -759,7 +753,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				BlueCom_Trame_Receive.data7 = readBuf[10];
 	
     				img_state.setImageResource(R.drawable.stat_green); // state logo : green 
-   	
     			}
     			else
     			{
@@ -783,14 +776,10 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     			break;
     		}
     	}
-    	
-    	
-     
+   
     };
 /////////////////////////////   DECODING RECEPTION DATA      ////////////////////////////////////////  
     private void DecodeBlueCom(){
-    	
-    	//Display the status of the board on the "title_status" TextView
     	
     	Resources res = getResources();
     			
@@ -847,8 +836,8 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 					BlueCom_Structure_Status.Board_Status = BLUECOM_Status.BC_STATUS_DEFAULT;
 					break;
 				}		
-    		
-          	break;	
+        break;	
+        
     	case CMD_SET_DIGITAL_OUTPUT:  
             if(BlueCom_Trame_Receive.data0==0x01)
            	{
@@ -999,7 +988,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     		
     		break;
     	}
-	
     }
     
 /////////////////////////////   ACTIVITY RECUPERATION RESULT AND DATA      ////////////////////////////////////////

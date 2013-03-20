@@ -90,33 +90,32 @@ RTCC_initAlarmDayTime(&RtccAlarmOutput0,0); //INIT output alarm day structure
 RTCC_initAlarmDayTime(&RtccAlarmOutputRGB,99); //INIT output alarm day structure
 
 while (1)
-{
-
-  if(TICK_Is_Elapse(TICK_TX_BLUECOM))
     {
-    TICK_Set(TICK_TX_BLUECOM,100);  //1s
 
-    // TEST
-    temp++;
-    if (temp>6) temp=0;
+      if(TICK_Is_Elapse(TICK_TX_BLUECOM))
+        {
+        TICK_Set(TICK_TX_BLUECOM,1000);  //1s
 
-  }
+        //if (READ_DIGITAL_OUTPUT0==1) SET_DIGITAL_OUTPUT0 = 0;
+        //else SET_DIGITAL_OUTPUT0 = 1;
 
-   // Bluetooth Reception gestion
-  BCM_ReceiveUART();  // read RX buffer if a byte or trame has been receved
+      }
 
-  if(BlueCom_Struct.FlagRx) // if data trame has been receved
-    {
-      BlueCom_Struct.FlagRx=0;  // reset flag
-      BCM_Decode();  //decode trame only if a true message has been receved
-    }
+       // Bluetooth Reception gestion
+      BCM_ReceiveUART();  // read RX buffer if a byte or trame has been receved
 
-  if (BlueCom_Struct.FlagTx) // if data trame must be send
-  {
-      BlueCom_Struct.FlagTx = 0; //reset flag
-      BCM_Encode();
-      BCM_Transmit(&BlueCom_Data_TX); // transmit command return + data
-  }
+      if(BlueCom_Struct.FlagRx) // if data trame has been receved
+        {
+          BlueCom_Struct.FlagRx=0;  // reset flag
+          BCM_Decode();  //decode trame only if a true message has been receved
+        }
+
+      if (BlueCom_Struct.FlagTx) // if data trame must be send
+      {
+          BlueCom_Struct.FlagTx = 0; //reset flag
+          BCM_Encode();
+          BCM_Transmit(&BlueCom_Data_TX); // transmit command return + data
+      }
 
     }
     
