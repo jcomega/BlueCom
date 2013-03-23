@@ -173,7 +173,7 @@ unsigned char BCM_Decode(void)
                  PWM_Setvalue(0,1); // set PWM value for output 1
                  PWM_Setvalue(0,2); // set PWM value for output 2
                  RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
-                }Alarm
+                }
 
             BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
@@ -192,7 +192,7 @@ unsigned char BCM_Decode(void)
         break;
 
         case CMD_SET_ALARM_TIME:
-            RTCC_setAlarmTime(&BlueCom_Data_RX);   //set date and time on this board
+            //RTCC_setAlarmTime(&BlueCom_Data_RX);   //set date and time on this board
             BlueCom_Data_TX.Command_return = CMD_SET_ALARM_TIME;
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
@@ -334,7 +334,6 @@ unsigned char BCM_Encode(void)
             BlueCom_Data_TX.Data2 = BlueCom_outputRGB.pwm_blue;
 
             BlueCom_Data_TX.Data7 = BlueCom_outputRGB.status;
-
         break;
 
         case CMD_SET_CURRENT_TIME:
@@ -344,10 +343,10 @@ unsigned char BCM_Encode(void)
             RTCC_readTimeDate(&BlueCom_Data_TX);   //read date and time on this board
         break;
         case CMD_SET_ALARM_TIME:
-            RTCC_readAlarmTime(&BlueCom_Data_TX);   //read date and time on this board
+            //RTCC_readAlarmTime(&BlueCom_Data_TX);   //read date and time on this board
         break;
         case CMD_READ_ALARM_TIME:
-            RTCC_readAlarmTime(&BlueCom_Data_TX);   //read date and time on this board
+            //RTCC_readAlarmTime(&BlueCom_Data_TX);   //read date and time on this board
         break;
         case CMD_SET_ALARM_DAY_TIME:
             if (BlueCom_Data_RX.Data4==0) RTCC_readAlarmDayTime(&BlueCom_Data_TX, &RtccAlarmOutput0);   //transfert RtccAlarmOutput0 objet for load information

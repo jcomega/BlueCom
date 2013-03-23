@@ -38,6 +38,10 @@ This software into electronic board use a Microchip PIC18F44J100.
  
  ## Time and Date function :
  
+  ###Alarm time :
+  This functionality starts an output (On or OFF) at one exact moment (hour/date)
+ - No functional: must be written
+ 
  ###Alarm day time :
 	This functionality makes it possible to control an output between a time slot : example, between 7h00 and 14h00 output 0 will be ON
  - **Digital Output 0 :** Functional, used by program
