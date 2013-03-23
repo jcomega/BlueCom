@@ -173,7 +173,7 @@ unsigned char BCM_Decode(void)
                  PWM_Setvalue(0,1); // set PWM value for output 1
                  PWM_Setvalue(0,2); // set PWM value for output 2
                  RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
-                }
+                }Alarm
 
             BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit

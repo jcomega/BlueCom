@@ -18,13 +18,13 @@ This software into electronic board use a Microchip PIC18F44J100.
  - **DSO 1 to 7 :** No configurated, must be written
  
 ###Digital Input :
- - No functional: must be written
+ - **No functional :** must be written
  
 ###PWM Output:
  - **PWM_output_0 :** Functional, used by program for RGB Led projector (LED Red)
  - **PWM_output_1 :** Functional, used by program for RGB Led projector (LED Green)
  - **PWM_output_3 :** Functional, used by program for RGB Led projector (LED Blue)
- - **PWM_output 4 to 7: ** No functional: must be added in BC_pwm.c  (Ok in BlueCom.c)
+ - **PWM_output 4 to 7:* No functional: must be added in BC_pwm.c  (Ok in BlueCom.c)
  
 ###RGB LED projector Output :
  - **Functional, used by program :** LED Output : Red, Green, Blue + General On/OFF
@@ -38,4 +38,20 @@ This software into electronic board use a Microchip PIC18F44J100.
  
  ## Time and Date function :
  
+ ###Alarm day time :
+	This functionality makes it possible to control an output between a time slot : example, between 7h00 and 14h00 output 0 will be ON
+ - **Digital Output 0 :** Functional, used by program
+ - **RGB LED projector Output :** Functional, used by program
+ 
+  ###Current time setting :
+  - ** This function is used to write and read the current time in the board :** Functional, used by program
+  
+ ## Supervision function :
+ 
+ ###System Status :
+  - **Type of board (name):** Functional, used by program
+  - **Board Status (Ok, fail, degraded) :** 
+  - **Board software revision :** Functional, used by program 
+  
+  
  

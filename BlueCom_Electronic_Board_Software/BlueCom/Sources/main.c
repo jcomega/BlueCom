@@ -23,8 +23,12 @@
 #include "../Includes/BC_rtcc.h"
 #include "../Includes/BC_pwm.h"
 #include "rtcc.h"
+//--------------------------------------------------------------------------------------------------------------------------------------------
+//	Programme Functionnality
+//--------------------------------------------------------------------------------------------------------------------------------------------
+/*
 
-
+ */
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //	PIC Fuses references definition
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,8 +58,8 @@ void main (void)
 
 // PIC frequency= 32Mhz
 OSCCON = 0;
-OSCCONbits.IRCF = 0b111;  // IRCFx = 111 -> 8mhz, if 110 -> 4Mhz
-OSCTUNEbits.PLLEN = 1;  // x4 PLL enabled
+OSCCONbits.IRCF = 0b111;    // IRCFx = 111 -> 8mhz, if 110 -> 4Mhz
+OSCTUNEbits.PLLEN = 1;      // x4 PLL enabled
 
 // Init I/O
 TRISD = 0b00000000;     	// PORTD bits 7:0 are all outputs (0)
@@ -68,7 +72,6 @@ ADC_Init();
 
 // Init PWM generator
 PWM_Init();
-
 
 // Set up global interrupts
 RCONbits.IPEN = 1;          // Enable priority levels on interrupts
@@ -95,10 +98,8 @@ while (1)
       if(TICK_Is_Elapse(TICK_TX_BLUECOM))
         {
         TICK_Set(TICK_TX_BLUECOM,1000);  //1s
-
         //if (READ_DIGITAL_OUTPUT0==1) SET_DIGITAL_OUTPUT0 = 0;
         //else SET_DIGITAL_OUTPUT0 = 1;
-
       }
 
        // Bluetooth Reception gestion
