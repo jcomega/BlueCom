@@ -31,8 +31,8 @@ unsigned char uBCM_RxBuffer[BLUECOM_RX_BUFFER_SIZE];
 //unsigned char uMsgData[BLUECOM_TX_DATA_LENGTH];
 BLUECOM_STRUCTURE BlueCom_Struct;
 BLUETOOTH_DATA BlueCom_Data_TX, BlueCom_Data_RX;
-BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
-BLUECOM_RGB_PWM_LED__STRUCTURE BlueCom_outputRGB;
+BLUECOM_ALARM_DAY_STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
+BLUECOM_RGB_PWM_LED_STRUCTURE BlueCom_outputRGB;
 
 #pragma code    // declare executable instructions
 

@@ -121,7 +121,7 @@ void RTCC_readAlarmDate(BLUETOOTH_DATA* pBC_struct)
  *  \return none
  */
 //--------------------------------------------------------------------------------------------------------------------------------------------
-void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
+void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct)
 {
    //Transfert data BLUECOM_ALARM_DAY__STRUCTURE to BLUETOOTH_DATA
    if(pBC_struct->Data0!= -1) pAD_struct->hour_Start = pBC_struct->Data0;		//Set Hour
@@ -145,7 +145,7 @@ void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTUR
  *  \return none
  */
 //--------------------------------------------------------------------------------------------------------------------------------------------
-void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
+void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct)
 {
    //Transfert data BLUETOOTH_DATA to BLUECOM_ALARM_DAY__STRUCTURE
    pBC_struct->Data0 = pAD_struct->hour_Start;		//Set Hour
@@ -165,7 +165,7 @@ void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTU
  *  \return none
  */
 //--------------------------------------------------------------------------------------------------------------------------------------------
-void  RTCC_initAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct, unsigned char output_select)
+void  RTCC_initAlarmDayTime(BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct, unsigned char output_select)
 {
 
    pAD_struct->hour_Start = 0xFF;		//Set Hour
@@ -189,7 +189,7 @@ void  RTCC_initAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct, unsigned c
  *  \return 0 if alarm is not activate, return 99 if alarm has been activated/disabled and muust be ON, return 88 if alarm has been activated/disabled and muust be OFF
  */
 //--------------------------------------------------------------------------------------------------------------------------------------------
-unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct)
+unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct)
 {
     unsigned char checkAlarm;
     int Current_time_min, Alarm_start_min, Alarm_stop_min;

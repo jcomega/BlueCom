@@ -34,11 +34,11 @@ void RTCC_setAlarmDate(BLUETOOTH_DATA* pBC_struct);
 void RTCC_readAlarmDate(BLUETOOTH_DATA* pBC_struct);
 void RTCC_setAlarmTime(BLUETOOTH_DATA* pBC_struct);
 void RTCC_readAlarmTime(BLUETOOTH_DATA* pBC_struct);
-void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct);
-void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct);
+void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct);
+void RTCC_readAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct);
 void RTCC_SetAlarmRptCount(unsigned char rptCnt);
-void RTCC_initAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct, unsigned char output_select);
-unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY__STRUCTURE* pAD_struct);
+void RTCC_initAlarmDayTime(BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct, unsigned char output_select);
+unsigned char RTCC_checkAlarmDayTime(BLUECOM_ALARM_DAY_STRUCTURE* pAD_struct);
 void RTCC_configure(void);
 int  bcd2dec( int bcd);
 

@@ -154,13 +154,13 @@ unsigned char min_Start;    // min = 0x00 max=0x59
 unsigned char hour_Stop;     // min = 0x00 max=0x23
 unsigned char min_Stop;     // min = 0x00 max=0x59
 
-unsigned char output_select; // 0 at 7 for 8 output
+unsigned char output_select; // 0 at 7 for 8 output // or 99 for RGB led projector
 unsigned char output_status; // 1= output ON
 Bool    Flag_alarm_active;  //= true if alarm is active
 Bool    Flag_alarm_current_state;  //= true if alarm is activate
 Bool    Flag_alarm_previous_state;  //= true if alarm is activate
 Bool    Flag_manual_disable;  //= true si alarm is disabled during activating (button for example)
-}BLUECOM_ALARM_DAY__STRUCTURE;
+}BLUECOM_ALARM_DAY_STRUCTURE;
 
 typedef struct {
 
@@ -169,7 +169,7 @@ unsigned char pwm_green;    // PWM value for green
 unsigned char pwm_blue;     // PWM value for blue
 
 unsigned char status;  // 1= output active
-}BLUECOM_RGB_PWM_LED__STRUCTURE;
+}BLUECOM_RGB_PWM_LED_STRUCTURE;
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /*! \fn  GetSystemClock()

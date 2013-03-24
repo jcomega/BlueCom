@@ -26,8 +26,8 @@
 #pragma udata   // declare statically allocated uinitialized variables
 extern BLUECOM_STRUCTURE BlueCom_Struct;
 extern BLUETOOTH_DATA BlueCom_Data_TX, BlueCom_Data_RX;
-extern BLUECOM_ALARM_DAY__STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
-extern BLUECOM_RGB_PWM_LED__STRUCTURE BlueCom_outputRGB;
+extern BLUECOM_ALARM_DAY_STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
+extern BLUECOM_RGB_PWM_LED_STRUCTURE BlueCom_outputRGB;
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /** \name 	High priority interrupt vector
