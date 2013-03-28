@@ -332,7 +332,10 @@ unsigned char BCM_Encode(void)
             BlueCom_Data_TX.Data0 = BlueCom_outputRGB.pwm_red; // read PWM value for output 0
             BlueCom_Data_TX.Data1 = BlueCom_outputRGB.pwm_green;
             BlueCom_Data_TX.Data2 = BlueCom_outputRGB.pwm_blue;
-
+            BlueCom_Data_TX.Data3 = 0xFF;
+            BlueCom_Data_TX.Data4 = 0xFF;
+            BlueCom_Data_TX.Data5 = 0xFF;
+            BlueCom_Data_TX.Data6 = 0xFF;
             BlueCom_Data_TX.Data7 = BlueCom_outputRGB.status;
         break;
 

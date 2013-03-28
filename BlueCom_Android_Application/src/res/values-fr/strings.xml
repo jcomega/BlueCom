@@ -89,7 +89,8 @@
     <string name="txt_rtn_mess3">"L'alarme débutera à: "</string>  
     <string name="txt_rtn_mess4">", la sortie sera '"</string>  
     <string name="txt_rtn_mess5">"' et stoppera à: "</string>  
-    
+    <string name="txt_on">ON</string>
+    <string name="txt_off">OFF</string>   
     
     <!--  DeviceListActivity -->
     <string name="title_paired_devices">Appareils appairé :</string>

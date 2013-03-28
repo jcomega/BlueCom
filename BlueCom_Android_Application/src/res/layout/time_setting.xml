@@ -116,6 +116,8 @@
             android:background="@drawable/bluecom_toggle"
             android:gravity="center"
             android:hint="@string/title_space"
+            android:textOff="@string/txt_off"
+            android:textOn="@string/txt_on"
             android:textStyle="bold" />
 
     </LinearLayout>

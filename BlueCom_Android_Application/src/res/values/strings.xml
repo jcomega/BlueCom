@@ -87,7 +87,9 @@
     <string name="txt_rtn_mess2">"Alarm setting aborded"</string>
     <string name="txt_rtn_mess3">"Alarm will start at: "</string>  
     <string name="txt_rtn_mess4">", Output will be '"</string>  
-    <string name="txt_rtn_mess5">"' and will stop at: "</string>  
+    <string name="txt_rtn_mess5">"' and will stop at: "</string>
+    <string name="txt_on">ON</string>
+    <string name="txt_off">OFF</string>      
     
     <!--  DeviceListActivity -->
     <string name="title_paired_devices">Paired Devices :</string>

@@ -114,15 +114,15 @@ public final class R {
         public static final int bt_about=0x7f050004;
         public static final int bt_connect=0x7f050001;
         public static final int bt_disconnect=0x7f050003;
-        public static final int bt_not_enabled_leaving=0x7f050041;
+        public static final int bt_not_enabled_leaving=0x7f050043;
         public static final int bt_time_set=0x7f050032;
-        public static final int button_scan=0x7f05003c;
-        public static final int none_found=0x7f050040;
-        public static final int none_paired=0x7f05003e;
-        public static final int not_connected=0x7f050042;
-        public static final int scanning=0x7f05003f;
-        public static final int select_device=0x7f05003d;
-        public static final int status_label=0x7f050043;
+        public static final int button_scan=0x7f05003e;
+        public static final int none_found=0x7f050042;
+        public static final int none_paired=0x7f050040;
+        public static final int not_connected=0x7f050044;
+        public static final int scanning=0x7f050041;
+        public static final int select_device=0x7f05003f;
+        public static final int status_label=0x7f050045;
         public static final int status_main_c=0x7f050019;
         public static final int status_main_cc=0x7f05001a;
         public static final int status_main_nc=0x7f050018;
@@ -136,11 +136,11 @@ public final class R {
          */
         public static final int title_main=0x7f050016;
         public static final int title_main2=0x7f050017;
-        public static final int title_other_devices=0x7f05003b;
+        public static final int title_other_devices=0x7f05003d;
         /**   DeviceListActivity 
   DeviceListActivity 
          */
-        public static final int title_paired_devices=0x7f05003a;
+        public static final int title_paired_devices=0x7f05003c;
         public static final int title_space=0x7f050034;
         /**   String for BlueComTimeSet 
   String for BlueComTimeSet 
@@ -179,6 +179,8 @@ public final class R {
         public static final int txt_diag_empty=0x7f050015;
         public static final int txt_diag_git=0x7f05000a;
         public static final int txt_diag_mail=0x7f050008;
+        public static final int txt_off=0x7f05003b;
+        public static final int txt_on=0x7f05003a;
         /**   String for main.xml
   String for main.xml
          */

@@ -44,7 +44,7 @@ import java.util.TimerTask;
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	
 	// Android application revision software
-	public static final String ANDROID_APK_REVISION = "0.9.5";
+	public static final String ANDROID_APK_REVISION = "0.9.6";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -66,7 +66,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     // Bluecom length for transmit and receive  (#define in C )
     public static final int BLUECOM_RX_TRAME_LENGTH = 13;
     public static final int BLUECOM_TX_TRAME_LENGTH = 13;
-    public static final int BLUECOM_TIME_MS_TIMER_TASK = 250;  
+    public static final int BLUECOM_TIME_MS_TIMER_TASK = 300;  
     
  // Bluetooth command with uart
     public static final int CMD_DONOTHING = 				0x00;
@@ -853,17 +853,26 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
           	} 
           	// same code for other output...
           	break;
-    	case CMD_SET_RGB_OUTPUT:  
+    	case CMD_SET_RGB_OUTPUT:
+    		//read color : RGB_LED_Color
+
+    		int color_red_temp =BlueCom_Trame_Receive.data0 & 0x000000FF;
+    		int color_green_temp =BlueCom_Trame_Receive.data1 & 0x000000FF;
+    		int color_blue_temp =BlueCom_Trame_Receive.data2 & 0x000000FF;
+    		color_red_temp = color_red_temp << 16;
+    		color_green_temp = color_green_temp << 8;
+    		RGB_LED_Color = color_red_temp | color_green_temp | color_blue_temp | 0xFF000000; // get the actual color and save
+
             if(BlueCom_Trame_Receive.data7==0x01)
            	{
             	imageButton_OnOff_rgb.setImageResource(R.drawable.power_on_button_m); 
-          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB : On");
+          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB : On"+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));
           		Flag_imageButton_OnOff_rgb = true;
           	}
           	if(BlueCom_Trame_Receive.data7==0x00)
           	{
           		imageButton_OnOff_rgb.setImageResource(R.drawable.power_off_button_m); 
-          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT :Output RGB : Off");
+          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT :Output RGB : Off"+ "RED=" +Integer.toHexString(color_red_temp) + "| GREEN="+Integer.toHexString(color_green_temp) + "| BLUE=" + Integer.toHexString(color_blue_temp));
           		Flag_imageButton_OnOff_rgb = false; 
           	} 
           	// same code for other output...
