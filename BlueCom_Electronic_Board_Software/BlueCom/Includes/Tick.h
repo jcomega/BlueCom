@@ -24,6 +24,7 @@
 typedef enum {
 	TICK_MAIN_LED,
 	TICK_TX_BLUECOM,
+        TICK_BUTTON_SCAN,
    TICK_MAX
 } TICK_Name_T;
 

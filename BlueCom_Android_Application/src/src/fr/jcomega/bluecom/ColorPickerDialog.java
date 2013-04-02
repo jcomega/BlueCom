@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.*;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -41,8 +43,12 @@ public class ColorPickerDialog extends Dialog {
         
         private final int[] mColors;
         private OnColorChangedListener mListener;
-        private static final int STROKEWIDTH= 100;
-        private static final int LITTLESTROKEWIDTH= 15;
+        private int STROKEWIDTH= 100;
+        private int LITTLESTROKEWIDTH= 15;
+        private int CENTER_X = 250;
+        private int CENTER_Y = 250;
+        private int CENTER_RADIUS = 100;
+        private int BANDE_DOWN_Y = 20;
         
         ColorPickerView(Context c, OnColorChangedListener l, int color, int alpha) {
             super(c);
@@ -51,6 +57,29 @@ public class ColorPickerDialog extends Dialog {
                 0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00,
                 0xFFFFFF00, 0xFFFF0000
             };
+            DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+            int width = metrics.widthPixels;
+            int height = metrics.heightPixels; 
+            //Log.i("BlueCom", "Screen size : Width:"+  width + " Valeur Height:"+  height);	// debug only
+            if (width<500) 
+            	{
+            	STROKEWIDTH = 60;
+            	LITTLESTROKEWIDTH= 15;
+            	CENTER_X = 150;
+            	CENTER_Y = 150;
+            	CENTER_RADIUS = 50;
+            	BANDE_DOWN_Y = 20;
+            	}
+            else if (width>1000)
+            {
+            	STROKEWIDTH = 200;
+            	LITTLESTROKEWIDTH= 30;
+            	CENTER_X = 500;
+            	CENTER_Y = 500;
+            	CENTER_RADIUS = 200;
+            	BANDE_DOWN_Y = 40;
+            }
+            
             Shader s = new SweepGradient(0, 0, mColors, null);
             
             mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -82,12 +111,13 @@ public class ColorPickerDialog extends Dialog {
             canvas.drawCircle(0, 0, CENTER_RADIUS, mCenterPaint);
             
 
+
             for (int xligne= -CENTER_X + CENTER_X/5; xligne< (CENTER_X-CENTER_X/5); xligne++)
             {
             	float alpha;
         		alpha = ((255 * (xligne-CENTER_X)) / ((CENTER_X*2)-CENTER_X/5));
         		downPaint.setAlpha((int) alpha);
-            	canvas.drawLine(xligne, CENTER_Y+20, xligne, CENTER_Y+80, downPaint);
+            	canvas.drawLine(xligne, CENTER_Y+BANDE_DOWN_Y, xligne, CENTER_Y+(BANDE_DOWN_Y*4), downPaint);
             }
             
             if (mTrackingCenter) {
@@ -110,13 +140,9 @@ public class ColorPickerDialog extends Dialog {
         
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            setMeasuredDimension(CENTER_X*2, CENTER_Y*2+80);
+            setMeasuredDimension(CENTER_X*2, CENTER_Y*2+BANDE_DOWN_Y*4);
         }
         
-        private static final int CENTER_X = 250;
-        private static final int CENTER_Y = 250;
-        private static final int CENTER_RADIUS = 100;
-
         private int floatToByte(float x) {
             int n = java.lang.Math.round(x);
             return n;

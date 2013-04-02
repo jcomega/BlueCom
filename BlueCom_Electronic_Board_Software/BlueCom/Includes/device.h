@@ -20,7 +20,7 @@
 //#define VERSION_SOFT_BLUECOM		06 	// 1.0.
 #define SOFT_REVISION_1     0
 #define SOFT_REVISION_2     9
-#define SOFT_REVISION_3     4
+#define SOFT_REVISION_3     5
 // Version = SOFT_REVISION_1.SOFT_REVISION_2.SOFT_REVISION_3
 // example : 0.9.3
 
@@ -93,8 +93,8 @@ typedef enum {false, true} Bool;
 //    #define READ_DIGITAL_OUTPUT6 xxx;
 //    #define READ_DIGITAL_OUTPUT7 xxx;
 
-//    #define READ_DIGITAL_INPUT0 xxx;
-//    #define READ_DIGITAL_INPUT1 xxx;
+    #define READ_DIGITAL_INPUT0 PORTCbits.RC2
+    #define READ_DIGITAL_INPUT1 PORTCbits.RC3
 //    #define READ_DIGITAL_INPUT2 xxx;
 //    #define READ_DIGITAL_INPUT3 xxx;
 //    #define READ_DIGITAL_INPUT4 xxx;
@@ -108,6 +108,14 @@ typedef enum {false, true} Bool;
     //#define PWM_OUTPUT3 LATDbits.LATD4    // PWM output for
     //... TBD
 
+    // PORT CONFIG :
+    #define TRIS_DIGITAL_OUTPUT0 TRISDbits.TRISD0
+    #define TRIS_DIGITAL_OUTPUT1 TRISDbits.TRISD1
+    #define TRIS_DIGITAL_OUTPUT2 TRISDbits.TRISD2
+    #define TRIS_DIGITAL_OUTPUT3 TRISDbits.TRISD3
+
+    #define TRIS_DIGITAL_INPUT0 TRISCbits.TRISC2
+    #define TRIS_DIGITAL_INPUT1 TRISCbits.TRISC3
 //@}
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //	Enumeration definition

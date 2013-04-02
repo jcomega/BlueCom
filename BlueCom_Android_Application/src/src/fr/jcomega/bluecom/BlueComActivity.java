@@ -44,7 +44,7 @@ import java.util.TimerTask;
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	
 	// Android application revision software
-	public static final String ANDROID_APK_REVISION = "0.9.6";
+	public static final String ANDROID_APK_REVISION = "0.9.7";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -225,8 +225,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         this.mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Tag"); 
         this.mWakeLock.acquire();
-		*/
-        
+		*/    
     }
     
     @Override
@@ -753,14 +752,15 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     				BlueCom_Trame_Receive.data7 = readBuf[10];
 	
     				img_state.setImageResource(R.drawable.stat_green); // state logo : green 
+    				// Gestion information receved and command button
+    				DecodeBlueCom();
     			}
     			else
     			{
     				// bad message or message traited
     				img_state.setImageResource(R.drawable.stat_orange); // state logo : orange	
     			}			
-				// Gestion information receved and command button
-				DecodeBlueCom();
+
     			break;
 
     		case MESSAGE_DEVICE_NAME:
@@ -783,14 +783,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	
     	Resources res = getResources();
     			
-    	// Commande scan
+    	// Command scan
     	switch(BlueCom_Trame_Receive.command)
     	{
     	case CMD_STATUS_SYSTEMS:  
     		//debug :
         	Log.d("BlueCom", "Reception : CMD_STATUS_SYSTEMS : Module type: "+ BlueCom_Trame_Receive.data0 + ", Status: "+ BlueCom_Trame_Receive.data1 +", Revision:"+BlueCom_Trame_Receive.data5 +"."+BlueCom_Trame_Receive.data6 +"."+BlueCom_Trame_Receive.data7);
         	
-			// Type of the bluecom board
+			// Type of the Bluecom board
 			switch (BlueCom_Trame_Receive.data0){
     			case 1:
     				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_1RELAYS;

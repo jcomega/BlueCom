@@ -47,14 +47,15 @@
 extern BLUECOM_STRUCTURE BlueCom_Struct;
 extern BLUETOOTH_DATA BlueCom_Data_TX, BlueCom_Data_RX;
 extern BLUECOM_ALARM_DAY_STRUCTURE RtccAlarmOutput0,RtccAlarmOutputRGB;
-
+extern BLUECOM_RGB_PWM_LED_STRUCTURE BlueCom_outputRGB;
 
 /** D E C L A R A T I O N S *******************************************/
 #pragma code    // declare executable instructions
 
 void main (void)
 {
- unsigned char temp=0;
+ unsigned char prev_input0=1;
+ unsigned char prev_input1=1;
 
 // PIC frequency= 32Mhz
 OSCCON = 0;
@@ -62,8 +63,14 @@ OSCCONbits.IRCF = 0b111;    // IRCFx = 111 -> 8mhz, if 110 -> 4Mhz
 OSCTUNEbits.PLLEN = 1;      // x4 PLL enabled
 
 // Init I/O
-TRISD = 0b00000000;     	// PORTD bits 7:0 are all outputs (0)
-TRISAbits.TRISA0 = 1;		// TRISA0 input
+TRIS_DIGITAL_OUTPUT0 = 0; //output: relay
+TRIS_DIGITAL_OUTPUT1 = 0; //output: PWM RED LED
+TRIS_DIGITAL_OUTPUT2 = 0; //output: PWM GREEN LED
+TRIS_DIGITAL_OUTPUT3 = 0; //output: PWM BLUE LED
+
+TRIS_DIGITAL_INPUT0 = 1; // Input : Manual button ON/OFF for relay 1 output
+TRIS_DIGITAL_INPUT1 = 1; // Input : Manual button ON/OFF for LED RGB output
+
 // Init Timer0
 TICK_Init();             // now enables timer interrupt.
 
@@ -96,13 +103,59 @@ while (1)
     {
 
       if(TICK_Is_Elapse(TICK_TX_BLUECOM))
-        {
+      {
         TICK_Set(TICK_TX_BLUECOM,1000);  //1s
-        //if (READ_DIGITAL_OUTPUT0==1) SET_DIGITAL_OUTPUT0 = 0;
-        //else SET_DIGITAL_OUTPUT0 = 1;
+
       }
 
-       // Bluetooth Reception gestion
+      if(TICK_Is_Elapse(TICK_BUTTON_SCAN))
+      {
+        TICK_Set(TICK_BUTTON_SCAN,10);  //10ms
+        // FOR BUTTON 0
+        if (READ_DIGITAL_INPUT0 == 0) // if the button has been pressed
+            {
+                if ( prev_input0 != 0)  //debounce methode
+                {
+                    if (READ_DIGITAL_OUTPUT0==0) { SET_DIGITAL_OUTPUT0 =1; RtccAlarmOutput0.Flag_manual_disable =  true; }
+                    else if (READ_DIGITAL_OUTPUT0==1) { SET_DIGITAL_OUTPUT0 =0; RtccAlarmOutput0.Flag_manual_disable =  true; }
+                    BlueCom_Data_TX.Command_return = CMD_SET_DIGITAL_OUTPUT;
+                    BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+                }
+                prev_input0 = READ_DIGITAL_INPUT0;  // save current state (0)
+            }
+        else prev_input0=READ_DIGITAL_INPUT0;   // save current state (1)
+
+        // FOR BUTTON 1
+        if (READ_DIGITAL_INPUT1 == 0) // if the button has been pressed
+            {
+                if ( prev_input1 != 0)  //debounce methode
+                {
+                    if (BlueCom_outputRGB.status==0)    // if RGB LED is OFF : switch ON the LED !
+                        {
+                         BlueCom_outputRGB.status=1;    // change status : because led is ON now
+                         PWM_Setvalue(BlueCom_outputRGB.pwm_red,0); // set PWM value for output 0
+                         PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
+                         PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
+                         RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
+                        }
+                    else if (BlueCom_outputRGB.status==1) // if RGB LED is ON : switch OFF the LED !
+                        {
+                         BlueCom_outputRGB.status=0;    // change status : because led is OFF now
+                         PWM_Setvalue(0,0); // set PWM value for output 0
+                         PWM_Setvalue(0,1); // set PWM value for output 1
+                         PWM_Setvalue(0,2); // set PWM value for output 2
+                         RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
+                        }
+                    BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;
+                    BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+                }
+                prev_input1 = READ_DIGITAL_INPUT1;  // save current state (0)
+            }
+        else prev_input1=READ_DIGITAL_INPUT1;   // save current state (1)
+
+
+      }
+      // Bluetooth Reception gestion
       BCM_ReceiveUART();  // read RX buffer if a byte or trame has been receved
 
       if(BlueCom_Struct.FlagRx) // if data trame has been receved

@@ -179,6 +179,11 @@ unsigned char BCM_Decode(void)
             BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
         break;
 
+        case CMD_READ_DIGITAL_INPUT:
+            BlueCom_Data_TX.Command_return = CMD_READ_DIGITAL_INPUT;
+            BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit
+        break;
+
 // TIME AND DATE COMMAND ;
          case CMD_SET_CURRENT_TIME:
             RTCC_setTimeDate(&BlueCom_Data_RX);   //set date and time on this board
@@ -312,9 +317,17 @@ unsigned char BCM_Encode(void)
             BlueCom_Data_TX.Data7 = 0xFF;   //READ_DIGITAL_OUTPUT7;
         break;
 
-        //case CMD_READ_DIGITAL_INPUT:
-        // to be write
-        //break;
+        case CMD_READ_DIGITAL_INPUT:
+            // read input status directly on the port
+            BlueCom_Data_TX.Data0 = READ_DIGITAL_INPUT0;
+            BlueCom_Data_TX.Data1 = READ_DIGITAL_INPUT1;
+            BlueCom_Data_TX.Data2 = 0xFF;   //READ_DIGITAL_INPUT2;
+            BlueCom_Data_TX.Data3 = 0xFF;   //READ_DIGITAL_INPUT3;
+            BlueCom_Data_TX.Data4 = 0xFF;   //READ_DIGITAL_INPUT4;
+            BlueCom_Data_TX.Data5 = 0xFF;   //READ_DIGITAL_INPUT5;
+            BlueCom_Data_TX.Data6 = 0xFF;   //READ_DIGITAL_INPUT6;
+            BlueCom_Data_TX.Data7 = 0xFF;   //READ_DIGITAL_INPUT7;
+        break;
 
         case CMD_SET_PWM:
             BlueCom_Data_TX.Data0 = PWM_Readvalue(0); // read PWM value for output 0

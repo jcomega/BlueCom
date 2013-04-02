@@ -76,7 +76,7 @@ void TICK_IT(void)
    
    INTCONbits.TMR0IF = 0;          // clear (reset) flag
    TMR0H = 224;      // MSB from ADC
-   TMR0L = 192;   //10ms at 32Mhz
+   TMR0L = 192;   //1ms at 32Mhz
    //TMR0H = 177;      // MSB from ADC
    //TMR0L = 227;   //10ms at 32Mhz
    //TMR0H = 126;      // MSB from ADC
