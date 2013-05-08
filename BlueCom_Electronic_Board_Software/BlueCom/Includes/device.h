@@ -20,7 +20,7 @@
 //#define VERSION_SOFT_BLUECOM		06 	// 1.0.
 #define SOFT_REVISION_1     0
 #define SOFT_REVISION_2     9
-#define SOFT_REVISION_3     5
+#define SOFT_REVISION_3     6
 // Version = SOFT_REVISION_1.SOFT_REVISION_2.SOFT_REVISION_3
 // example : 0.9.3
 
@@ -116,6 +116,12 @@ typedef enum {false, true} Bool;
 
     #define TRIS_DIGITAL_INPUT0 TRISCbits.TRISC2
     #define TRIS_DIGITAL_INPUT1 TRISCbits.TRISC3
+
+// SPECIAL FOR FOR VERSION : 1 RELAY + 1 LED RGB OUTPUT
+    #define TRIS_LED_RGB_STATUS_OUT TRISBbits.TRISB3
+    #define SET_LED_RGB_STATUS_OUT LATBbits.LATB3
+    #define READ_LED_RGB_STATUS_OUT PORTBbits.RB3
+
 //@}
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //	Enumeration definition

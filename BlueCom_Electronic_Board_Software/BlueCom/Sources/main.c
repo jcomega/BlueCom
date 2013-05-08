@@ -71,6 +71,7 @@ TRIS_DIGITAL_OUTPUT3 = 0; //output: PWM BLUE LED
 TRIS_DIGITAL_INPUT0 = 1; // Input : Manual button ON/OFF for relay 1 output
 TRIS_DIGITAL_INPUT1 = 1; // Input : Manual button ON/OFF for LED RGB output
 
+
 // Init Timer0
 TICK_Init();             // now enables timer interrupt.
 
@@ -98,6 +99,14 @@ SET_DIGITAL_OUTPUT2 = 0;
 SET_DIGITAL_OUTPUT3 = 0;
 RTCC_initAlarmDayTime(&RtccAlarmOutput0,0); //INIT output alarm day structure
 RTCC_initAlarmDayTime(&RtccAlarmOutputRGB,99); //INIT output alarm day structure
+
+// SPECIAL FOR FOR VERSION : 1 RELAY + 1 LED RGB OUTPUT
+TRIS_LED_RGB_STATUS_OUT = 0 ; //out
+SET_LED_RGB_STATUS_OUT = 0 ;
+BlueCom_outputRGB.status=0;
+BlueCom_outputRGB.pwm_red = 128;
+BlueCom_outputRGB.pwm_green = 128;
+BlueCom_outputRGB.pwm_blue = 115;
 
 while (1)
     {
@@ -137,6 +146,7 @@ while (1)
                          PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
                          PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
                          RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
+                         SET_LED_RGB_STATUS_OUT = 1 ; // status LED is on
                         }
                     else if (BlueCom_outputRGB.status==1) // if RGB LED is ON : switch OFF the LED !
                         {
@@ -145,6 +155,7 @@ while (1)
                          PWM_Setvalue(0,1); // set PWM value for output 1
                          PWM_Setvalue(0,2); // set PWM value for output 2
                          RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
+                         SET_LED_RGB_STATUS_OUT = 0 ; // status LED is off
                         }
                     BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;
                     BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit

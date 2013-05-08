@@ -131,7 +131,7 @@ void RTCC_setAlarmDayTime(BLUETOOTH_DATA* pBC_struct,BLUECOM_ALARM_DAY_STRUCTURE
    
    if(pBC_struct->Data4!= -1) pAD_struct->output_select = pBC_struct->Data4;       // select output
    if(pBC_struct->Data5!= -1) pAD_struct->output_status = pBC_struct->Data5; 	//select status 1= On, 0)Off
-   if(pBC_struct->Data6!= -1) pAD_struct->Flag_alarm_active = pBC_struct->Data6;  // if =1 alarm active, if 0 alarm disable
+   if(pBC_struct->Data6!= -1 && pAD_struct->hour_Start!= -1) pAD_struct->Flag_alarm_active = pBC_struct->Data6;  // if =1 alarm active, if 0 alarm disable
    pAD_struct->Flag_manual_disable = false;  //manual button has never been pressed
    pAD_struct->Flag_alarm_current_state =  false;  //for activate the fist time
    pAD_struct->Flag_alarm_previous_state =  false;  //for activate the fist time

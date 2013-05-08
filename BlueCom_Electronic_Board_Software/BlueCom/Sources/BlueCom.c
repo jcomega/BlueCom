@@ -166,6 +166,7 @@ unsigned char BCM_Decode(void)
                  PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
                  PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
                  RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
+                 SET_LED_RGB_STATUS_OUT = 1 ; // status LED is on
                 }
             else if (BlueCom_outputRGB.status==0)
                 {
@@ -173,6 +174,7 @@ unsigned char BCM_Decode(void)
                  PWM_Setvalue(0,1); // set PWM value for output 1
                  PWM_Setvalue(0,2); // set PWM value for output 2
                  RtccAlarmOutputRGB.Flag_manual_disable =  true;  //disable alarm if active
+                 SET_LED_RGB_STATUS_OUT = 0 ; // status LED is off
                 }
 
             BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;

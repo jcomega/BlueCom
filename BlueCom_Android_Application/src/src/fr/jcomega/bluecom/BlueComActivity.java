@@ -44,7 +44,7 @@ import java.util.TimerTask;
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	
 	// Android application revision software
-	public static final String ANDROID_APK_REVISION = "0.9.7";
+	public static final String ANDROID_APK_REVISION = "0.9.8'";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -385,14 +385,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
            		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test4 = new Bluetooth_structure_trame(CMD_SET_ALARM_DAY_TIME,-1,-1,-1,-1,0,-1,1,-1);   
            		  TransmitFifo.put(BlueCom_Trame_Transmit_test4);  
            		  if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); 
-           		mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
+           		//mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
                 }
                 else
                 {	//alarm OFF
            		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test5 = new Bluetooth_structure_trame(CMD_SET_ALARM_DAY_TIME,-1,-1,-1,-1,0,-1,0,-1);   
            		  TransmitFifo.put(BlueCom_Trame_Transmit_test5);  
            		  if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK);
-           		mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+           		//mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
                 }	
         	}
         });    
@@ -457,17 +457,17 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
      	public void onClick(View arg0){
              if (Flag_alarmONOFF_rgb == false)
              {	//alarm ON
-        		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test4 = new Bluetooth_structure_trame(CMD_SET_ALARM_DAY_TIME,-1,-1,-1,-1,99,-1,1,-1);   
-        		  TransmitFifo.put(BlueCom_Trame_Transmit_test4);  
+        		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test4b = new Bluetooth_structure_trame(CMD_SET_ALARM_DAY_TIME,-1,-1,-1,-1,99,-1,1,-1);   
+        		  TransmitFifo.put(BlueCom_Trame_Transmit_test4b);  
         		  if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK); 
-        		mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
+        		//mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
              }
              else
              {	//alarm OFF
-        		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test5 = new Bluetooth_structure_trame(CMD_SET_ALARM_DAY_TIME,-1,-1,-1,-1,99,-1,0,-1);   
-        		  TransmitFifo.put(BlueCom_Trame_Transmit_test5);  
+        		  Bluetooth_structure_trame BlueCom_Trame_Transmit_test5b = new Bluetooth_structure_trame(CMD_SET_ALARM_DAY_TIME,-1,-1,-1,-1,99,-1,0,-1);   
+        		  TransmitFifo.put(BlueCom_Trame_Transmit_test5b);  
         		  if (Flag_TimerTask_BC_Transmit == false) MyTimer.scheduleAtFixedRate(new TransmitTask(), 0, BLUECOM_TIME_MS_TIMER_TASK);
-        		mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+        		//mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
              }	
      	}
      });    
@@ -866,14 +866,13 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
             if(BlueCom_Trame_Receive.data7==0x01)
            	{
             	imageButton_OnOff_rgb.setImageResource(R.drawable.power_on_button_m); 
-          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB : On"+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));
+          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB On : "+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));
           		Flag_imageButton_OnOff_rgb = true;
           	}
           	if(BlueCom_Trame_Receive.data7==0x00)
           	{
           		imageButton_OnOff_rgb.setImageResource(R.drawable.power_off_button_m); 
-          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT :Output RGB : Off"+ "RED=" +Integer.toHexString(color_red_temp) + "| GREEN="+Integer.toHexString(color_green_temp) + "| BLUE=" + Integer.toHexString(color_blue_temp));
-          		Flag_imageButton_OnOff_rgb = false; 
+          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB Off : "+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));          		Flag_imageButton_OnOff_rgb = false; 
           	} 
           	// same code for other output...
           	break;	
@@ -895,16 +894,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         			bcd2dec(BlueCom_Trame_Receive.data3) +" month="+bcd2dec(BlueCom_Trame_Receive.data4)+ " Year=20"+bcd2dec(BlueCom_Trame_Receive.data5) +" Weekday="+ bcd2dec(BlueCom_Trame_Receive.data6));
         	break;  
     	case CMD_SET_ALARM_DAY_TIME:  
-    		String Status_alarm_set;
-        	if (BlueCom_Trame_Receive.data5==1) Status_alarm_set = "On"; else Status_alarm_set = "Off";
-        	Log.d("BlueCom", "Reception : CMD_SET_ALARM_DAY_TIME : Alarm will start at: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+", Output "+ BlueCom_Trame_Receive.data4 +" will be '"+ Status_alarm_set + "' and will stop at: " + bcd2dec(BlueCom_Trame_Receive.data2) + "h "+ bcd2dec(BlueCom_Trame_Receive.data3) +"min");
-        	//change status
-        	//display alarm value
-        	DecodeBlueCom_display_alarm(BlueCom_Trame_Receive.data4);
+    		//Same code than CMD_READ_ALARM_DAY_TIME : I disable the break line
 	
-    		break;
+    		//break;
     	case CMD_READ_ALARM_DAY_TIME:  
         	String chaine_info;
+    		String Status_alarm_read;
+    		String Status_alarm_status_read;
+    		
     		if (BlueCom_Trame_Receive.data0==-1)
     		{
             	switch(BlueCom_Trame_Receive.data4)
@@ -931,13 +928,25 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 	        		mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
 	        		Flag_alarmONOFF_rgb = false;
 	        		break;
-            	}	
+            	}
+            	
+            	if (BlueCom_Trame_Receive.data6==1) Status_alarm_status_read = "Activate"; else Status_alarm_status_read = "Disable";
+            	if (BlueCom_Trame_Receive.data5==1) Status_alarm_read = "On"; else Status_alarm_read = "Off";
+            	if (BlueCom_Trame_Receive.command== CMD_SET_ALARM_DAY_TIME)
+            		Log.d("BlueCom", "Reception : CMD_SET_ALARM_DAY_TIME : "+", Output "+ BlueCom_Trame_Receive.data4 +" | Alarm status : "+ Status_alarm_status_read);
+            	else
+            		Log.d("BlueCom", "Reception : CMD_READ_ALARM_DAY_TIME : "+", Output "+ BlueCom_Trame_Receive.data4 +" | Alarm status : "+ Status_alarm_status_read);
+            	//quit scan
     			break; 
     		}
     		    		
-    		String Status_alarm_read;
         	if (BlueCom_Trame_Receive.data5==1) Status_alarm_read = "On"; else Status_alarm_read = "Off";
-        	Log.d("BlueCom", "Reception : CMD_READ_ALARM_DAY_TIME : Alarm will start at: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+", Output "+ BlueCom_Trame_Receive.data4 +" will be '"+ Status_alarm_read + "' and will stop at: " + bcd2dec(BlueCom_Trame_Receive.data2) + "h "+ bcd2dec(BlueCom_Trame_Receive.data3) +"min ");
+        	if (BlueCom_Trame_Receive.data6==1) Status_alarm_status_read = "Activate"; else Status_alarm_status_read = "Disable";
+        	if (BlueCom_Trame_Receive.command== CMD_SET_ALARM_DAY_TIME)
+        		Log.d("BlueCom", "Reception : CMD_SET_ALARM_DAY_TIME : Alarm will start at: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+", Output "+ BlueCom_Trame_Receive.data4 +" will be '"+ Status_alarm_read + "' and will stop at: " + bcd2dec(BlueCom_Trame_Receive.data2) + "h "+ bcd2dec(BlueCom_Trame_Receive.data3) +"min | Alarm status : "+ Status_alarm_status_read);
+        	else
+        		Log.d("BlueCom", "Reception : CMD_READ_ALARM_DAY_TIME : Alarm will start at: "+ bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+", Output "+ BlueCom_Trame_Receive.data4 +" will be '"+ Status_alarm_read + "' and will stop at: " + bcd2dec(BlueCom_Trame_Receive.data2) + "h "+ bcd2dec(BlueCom_Trame_Receive.data3) +"min | Alarm status : "+ Status_alarm_status_read);
+
         	//change status
         	//display alarm value
         	DecodeBlueCom_display_alarm(BlueCom_Trame_Receive.data4);
