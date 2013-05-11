@@ -93,6 +93,7 @@ unsigned char AlarmDayTime_return;
                   PWM_Setvalue(BlueCom_outputRGB.pwm_green,1); // set PWM value for output 1
                   PWM_Setvalue(BlueCom_outputRGB.pwm_blue,2); // set PWM value for output 2
                   BlueCom_outputRGB.status=1;   //output ON = status ON
+                  SET_LED_RGB_STATUS_OUT = 1 ; // status LED is on
                }
                else if (AlarmDayTime_return == 88)
                {
@@ -100,6 +101,7 @@ unsigned char AlarmDayTime_return;
                   PWM_Setvalue(0,1); // set PWM value for output 1
                   PWM_Setvalue(0,2); // set PWM value for output 2
                   BlueCom_outputRGB.status=0;
+                  SET_LED_RGB_STATUS_OUT = 0 ; // status LED is off
                }
                BlueCom_Data_TX.Command_return = CMD_SET_RGB_OUTPUT;    //send the new output status to the android device
                BlueCom_Struct.FlagTx = 1; //set to 1, because the reponse trame must be transmit

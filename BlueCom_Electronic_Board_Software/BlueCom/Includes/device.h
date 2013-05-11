@@ -18,16 +18,15 @@
 #include "p18f44j11.h"
 
 //#define VERSION_SOFT_BLUECOM		06 	// 1.0.
-#define SOFT_REVISION_1     0
-#define SOFT_REVISION_2     9
-#define SOFT_REVISION_3     6
+#define SOFT_REVISION_1     1
+#define SOFT_REVISION_2     0
+#define SOFT_REVISION_3     0
 // Version = SOFT_REVISION_1.SOFT_REVISION_2.SOFT_REVISION_3
 // example : 0.9.3
 
-#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS_RGBLED       // select type of board
+#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS       // select type of board
 
-
-
+//remplace the previous code by :
 #define BC_TYPE_1RELAYS             1    // only 1 relay output
 #define BC_TYPE_4RELAYS             2    // 4 relay output
 #define BC_TYPE_1RELAYS_RGBLED      3    // 1 relay output and 3 PWM output for controling RGB LED projector

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    tools:context=".BlueComActivity" >
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dip" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </TableRow>
+
+        
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp" >
+        
+        <ImageView
+            android:id="@+id/imageView_bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bluetooth_black" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/title_main2"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView_bluetooth"
+            android:text="@string/title_main"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0000FF"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <View android:layout_height="10dp" />
+
+    <View android:layout_height="60dp" />
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:paddingTop="1dp" >
+
+        <TextView
+            android:id="@+id/title_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="false"
+            android:text="@string/status_main_nc" />
+
+        <TextView
+            android:id="@+id/title_state2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/title_status"
+            android:text="@string/status_state" />
+
+        <ImageView
+            android:id="@+id/imageView_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/title_state2"
+            android:layout_toRightOf="@+id/title_state2"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:src="@drawable/stat_red" />
+        
+    </RelativeLayout>
+
+    <TableRow>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" >
+        
+        <Button
+            android:id="@+id/button_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/bluecom_button_normal"
+            android:hint="@string/bt_disconnect"
+            android:text="@string/bt_connect" />
+      
+              <Button
+                  android:id="@+id/button_about"
+                  style="?android:attr/buttonStyleSmall"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerInParent="true"
+                  android:background="@drawable/bluecom_button_normal"
+                  android:hint="@string/bt_disconnect"
+                  android:text="@string/bt_about" />
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bluecom_button_normal"
+            android:hint="@string/bt_disconnect"
+            android:text="@string/bt_Exit" />
+
+    </RelativeLayout>
+
+
+    
+    </TableRow>
+
+</TableLayout>

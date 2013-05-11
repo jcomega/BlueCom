@@ -20,7 +20,6 @@
 #include "BlueCom/Includes/GenericTypeDefs.h"
 
 
-
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //	Global Variables definition
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,8 +49,6 @@ unsigned char BCM_ReceiveUART(void)
     static unsigned char uRxBuffer[BLUECOM_RX_BUFFER_SIZE];
     static unsigned char uRxIdx;
 
-
-
     if (vUARTIntStatus.UARTIntRxBufferEmpty)             // if fifo is empty, quit this function
         return 0;
 
@@ -59,7 +56,6 @@ unsigned char BCM_ReceiveUART(void)
     {
         PIE1bits.TMR2IE = 0;          // desactive interruption PWM
         UARTIntGetChar(&uData);
-
 
         if(uRxIdx==0)
         {							// Waiting for STX ?

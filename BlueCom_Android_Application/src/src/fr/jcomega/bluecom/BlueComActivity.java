@@ -44,7 +44,7 @@ import java.util.TimerTask;
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	
 	// Android application revision software
-	public static final String ANDROID_APK_REVISION = "0.9.8'";
+	public static final String ANDROID_APK_REVISION = "0.9.9";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -209,7 +209,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         
         // Set up the window layout
         requestWindowFeature(Window.FEATURE_NO_TITLE);        
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_default);
         
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -240,7 +240,8 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	else{
     		if (mRfcommClient == null)
     			{
-    				setupIHM();
+    			    InitIHM_Default();
+    				setupIHM_Default();
     			}
     	}    	
     }
@@ -272,32 +273,15 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         //}
     }
     
-    private void setupIHM(){       
-        // button/textview output1
-        imageButton_OnOff_out0 = (ImageButton)findViewById(R.id.imageButton_OnOff_out0);
-        title_alarm_start_out0 = (TextView)findViewById(R.id.title_Alarm_start_out0); 
-        title_alarm_stop_out0 = (TextView)findViewById(R.id.title_Alarm_stop_out0); 
-        title_alarm_status_out0 = (TextView)findViewById(R.id.title_Alarm_status_out0); 
-        mAlarmSettingButton_out0 = (Button) findViewById(R.id.button_alarm_set_out0); 
-        mAlarmButtonONOFF_out0 = (Button) findViewById(R.id.Button_alarmONOFF_out0);
-        
-        // button/textview output rgb  
-        imageButton_OnOff_rgb = (ImageButton)findViewById(R.id.imageButton_OnOff_rgb);
-        imageButton_RGB_rgb = (ImageButton)findViewById(R.id.imageButton_RGB_rgb);
-        title_alarm_start_rgb = (TextView)findViewById(R.id.title_Alarm_start_rgb); 
-        title_alarm_stop_rgb = (TextView)findViewById(R.id.title_Alarm_stop_rgb); 
-        title_alarm_status_rgb = (TextView)findViewById(R.id.title_Alarm_status_rgb); 
-        mAlarmSettingButton_rgb = (Button) findViewById(R.id.button_alarm_set_rgb); 
-        mAlarmButtonONOFF_rgb = (Button) findViewById(R.id.Button_alarmONOFF_rgb);
-        
+    private void setupIHM_Default(){    
         // button/textview genral
         mConnectButton = (Button) findViewById(R.id.button_connect);
         mExitButton = (Button) findViewById(R.id.button_exit);
         mAboutButton =  (Button) findViewById(R.id.button_about);
         title_status = (TextView)findViewById(R.id.title_status); 
         img_bluetooth = (ImageView)findViewById(R.id.imageView_bluetooth);  
-        img_state = (ImageView)findViewById(R.id.imageView_state);       
-        
+        img_state = (ImageView)findViewById(R.id.imageView_state);
+
         /////////////////////////////////////   GENERAL  LISTENER	//////////////////////////
         
         mExitButton.setOnClickListener( new View.OnClickListener() {  
@@ -333,6 +317,27 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 		        	}
 			}
 		});
+
+    	// Initialize the BluetoothRfcommClient to perform bluetooth connections
+        //mRfcommClient = new BluetoothRfcommClient(this, mHandler);
+        
+        BTConnect();
+
+        // Start IHM :
+        //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        // Attempt to connect to the device
+        //mRfcommClient.connect(device);
+        
+     }
+    
+    private void setupIHM_1Relay(){    
+        // button/textview output1
+        imageButton_OnOff_out0 = (ImageButton)findViewById(R.id.imageButton_OnOff_out0);
+        title_alarm_start_out0 = (TextView)findViewById(R.id.title_Alarm_start_out0); 
+        title_alarm_stop_out0 = (TextView)findViewById(R.id.title_Alarm_stop_out0); 
+        title_alarm_status_out0 = (TextView)findViewById(R.id.title_Alarm_status_out0); 
+        mAlarmSettingButton_out0 = (Button) findViewById(R.id.button_alarm_set_out0); 
+        mAlarmButtonONOFF_out0 = (Button) findViewById(R.id.Button_alarmONOFF_out0); 
 
         /////////////////////////////////////   OUTPUT 0  LISTENER	//////////////////////////
         // Bouton 0 for output 0
@@ -395,8 +400,19 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
            		//mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
                 }	
         	}
-        });    
-
+        });        
+     }
+    private void SetupIHM_RGB_LED(){
+        
+        // button/textview output rgb  
+        imageButton_OnOff_rgb = (ImageButton)findViewById(R.id.imageButton_OnOff_rgb);
+        imageButton_RGB_rgb = (ImageButton)findViewById(R.id.imageButton_RGB_rgb);
+        title_alarm_start_rgb = (TextView)findViewById(R.id.title_Alarm_start_rgb); 
+        title_alarm_stop_rgb = (TextView)findViewById(R.id.title_Alarm_stop_rgb); 
+        title_alarm_status_rgb = (TextView)findViewById(R.id.title_Alarm_status_rgb); 
+        mAlarmSettingButton_rgb = (Button) findViewById(R.id.button_alarm_set_rgb); 
+        mAlarmButtonONOFF_rgb = (Button) findViewById(R.id.Button_alarmONOFF_rgb);
+  
         /////////////////////////////////////   OUTPUT RGB  LISTENER	//////////////////////////
         imageButton_OnOff_rgb.setOnTouchListener(new OnTouchListener() {
             @Override
@@ -471,19 +487,14 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
              }	
      	}
      });    
-  
-    	// Initialize the BluetoothRfcommClient to perform bluetooth connections
-        mRfcommClient = new BluetoothRfcommClient(this, mHandler);
-        
-        BTConnect();
 
-        // Start IHM :
-        //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-        // Attempt to connect to the device
-        //mRfcommClient.connect(device);
+    }
+   
+    private void InitIHM_Default(){
         
-     }
-    
+        mRfcommClient = new BluetoothRfcommClient(this, mHandler);
+    }
+
     private void BTConnect(){
     	Intent serverIntent = new Intent(this, DeviceListActivity.class);
     	startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);	
@@ -616,7 +627,6 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         AlertDialog alert = builder.show();
     }
 
-	
 /////////////////////////////      RGB OUTPUT FUNCTION        ////////////////////////////////////////  
     private void ColorP(){
         ColorPickerDialog dialog = new ColorPickerDialog(this, this,RGB_LED_Color,RGB_LED_Alpha);
@@ -794,21 +804,38 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
 			switch (BlueCom_Trame_Receive.data0){
     			case 1:
     				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_1RELAYS;
+    				setContentView(R.layout.main_1relay);	// change layout
+    				setupIHM_Default();
+    				setupIHM_1Relay();
+    				
     	    		String chaine2 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_1relay);
     	    		title_status.setText(chaine2);
     				break;
     			case 2:
     				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_4RELAYS;
+    				// must to be write :
+    				//setContentView(R.layout.main_4relay);	// change layout
+    				//setupIHM_Default();
+    				//setupIHM_4Relay();
+
     	    		String chaine3 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_4relay);
     	    		title_status.setText(chaine3);
     				break;	
     			case 3:
     				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_TYPE_1RELAYS_RGB;
+    				setContentView(R.layout.main_1relay_rgb);	// change layout
+    				setupIHM_Default();
+    				setupIHM_1Relay();
+    				SetupIHM_RGB_LED();
+    		        
     				String chaine4 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_1relay_rgb);
     	    		title_status.setText(chaine4);
     				break;	
 				default:	
-    				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_DEFAUT;
+    				BlueCom_Structure_Status.Board_BlueCom_Type = BLUECOM_Type.BC_ERROR;
+    				setContentView(R.layout.main_default);	// change layout
+    				setupIHM_Default();
+    				
     				String chaine5 = res.getString(R.string.status_main_c) + " " + res.getString(R.string.txt_board_Unknown);
     	    		title_status.setText(chaine5);
 					break;
@@ -839,42 +866,50 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         break;	
         
     	case CMD_SET_DIGITAL_OUTPUT:  
-            if(BlueCom_Trame_Receive.data0==0x01)
-           	{
-            	imageButton_OnOff_out0.setImageResource(R.drawable.power_on_button); 
-          		Log.d("BlueCom","Reception : CMD_SET_DIGITAL_OUTPUT : Output 1 : On");
-          		Flag_imageButton_OnOff_out0 = true;
-          	}
-          	if(BlueCom_Trame_Receive.data0==0x00)
-          	{
-          		imageButton_OnOff_out0.setImageResource(R.drawable.power_off_button); 
-          		Log.d("BlueCom","Reception : CMD_SET_DIGITAL_OUTPUT :Output 1 : Off");
-          		Flag_imageButton_OnOff_out0 = false; 
-          	} 
-          	// same code for other output...
+    		if ((BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS) || (BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS_RGB))
+    		{
+	            if(BlueCom_Trame_Receive.data0==0x01)
+	           	{
+	            	imageButton_OnOff_out0.setImageResource(R.drawable.power_on_button); 
+	          		Log.d("BlueCom","Reception : CMD_SET_DIGITAL_OUTPUT : Output 1 : On");
+	          		Flag_imageButton_OnOff_out0 = true;
+	          	}
+	          	if(BlueCom_Trame_Receive.data0==0x00)
+	          	{
+	          		imageButton_OnOff_out0.setImageResource(R.drawable.power_off_button); 
+	          		Log.d("BlueCom","Reception : CMD_SET_DIGITAL_OUTPUT :Output 1 : Off");
+	          		Flag_imageButton_OnOff_out0 = false; 
+	          	}
+	          	// same code for other output...
+    		}
+
           	break;
     	case CMD_SET_RGB_OUTPUT:
-    		//read color : RGB_LED_Color
-
-    		int color_red_temp =BlueCom_Trame_Receive.data0 & 0x000000FF;
-    		int color_green_temp =BlueCom_Trame_Receive.data1 & 0x000000FF;
-    		int color_blue_temp =BlueCom_Trame_Receive.data2 & 0x000000FF;
-    		color_red_temp = color_red_temp << 16;
-    		color_green_temp = color_green_temp << 8;
-    		RGB_LED_Color = color_red_temp | color_green_temp | color_blue_temp | 0xFF000000; // get the actual color and save
-
-            if(BlueCom_Trame_Receive.data7==0x01)
-           	{
-            	imageButton_OnOff_rgb.setImageResource(R.drawable.power_on_button_m); 
-          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB On : "+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));
-          		Flag_imageButton_OnOff_rgb = true;
-          	}
-          	if(BlueCom_Trame_Receive.data7==0x00)
-          	{
-          		imageButton_OnOff_rgb.setImageResource(R.drawable.power_off_button_m); 
-          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB Off : "+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));          		Flag_imageButton_OnOff_rgb = false; 
-          	} 
-          	// same code for other output...
+    		if (BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS_RGB)
+    		{
+	    		//read color : RGB_LED_Color
+	
+	    		int color_red_temp =BlueCom_Trame_Receive.data0 & 0x000000FF;
+	    		int color_green_temp =BlueCom_Trame_Receive.data1 & 0x000000FF;
+	    		int color_blue_temp =BlueCom_Trame_Receive.data2 & 0x000000FF;
+	    		color_red_temp = color_red_temp << 16;
+	    		color_green_temp = color_green_temp << 8;
+	    		RGB_LED_Color = color_red_temp | color_green_temp | color_blue_temp | 0xFF000000; // get the actual color and save
+	
+	            if(BlueCom_Trame_Receive.data7==0x01)
+	           	{
+	            	imageButton_OnOff_rgb.setImageResource(R.drawable.power_on_button_m); 
+	          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB On : "+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));
+	          		Flag_imageButton_OnOff_rgb = true;
+	          	}
+	          	if(BlueCom_Trame_Receive.data7==0x00)
+	          	{
+	          		imageButton_OnOff_rgb.setImageResource(R.drawable.power_off_button_m); 
+	          		Log.d("BlueCom","Reception : CMD_SET_RGB_OUTPUT : Output RGB Off : "+ "RED=" +Integer.toHexString(BlueCom_Trame_Receive.data0 & 0x000000FF) + "| GREEN="+Integer.toHexString(BlueCom_Trame_Receive.data1 & 0x000000FF) + "| BLUE=" + Integer.toHexString(BlueCom_Trame_Receive.data2 & 0x000000FF));          		Flag_imageButton_OnOff_rgb = false; 
+	          	} 
+	          	// same code for other output...
+          	 
+    		}
           	break;	
     	case CMD_SET_CURRENT_TIME:  
         	Log.d("BlueCom","Reception : CMD_SET_CURRENT_TIME : Date read:" + bcd2dec(BlueCom_Trame_Receive.data0) + "h "+ bcd2dec(BlueCom_Trame_Receive.data1) +"min "+ bcd2dec(BlueCom_Trame_Receive.data2) + "s | day="+
@@ -901,32 +936,37 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
         	String chaine_info;
     		String Status_alarm_read;
     		String Status_alarm_status_read;
-    		
+
     		if (BlueCom_Trame_Receive.data0==-1)
     		{
             	switch(BlueCom_Trame_Receive.data4)
             	{
             	case 0:
-	    			//output not configured : display message and quit
-	    			chaine_info = res.getString(R.string.txt_alarm_noconfig);
-	    			title_alarm_stop_out0.setText(chaine_info);
-	    			title_alarm_start_out0.setText(" ");
-	    			title_alarm_status_out0.setText(" ");
-	    			mAlarmButtonONOFF_out0.setText(R.string.txt_alarm_off); // button off : alarm OFF
-	    			mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
-	    			Flag_alarmONOFF_0 = false;
+            		if (BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS_RGB || BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS)
+            		{
+		    			//output not configured : display message and quit
+		    			chaine_info = res.getString(R.string.txt_alarm_noconfig);
+		    			title_alarm_stop_out0.setText(chaine_info);
+		    			title_alarm_start_out0.setText(" ");
+		    			title_alarm_status_out0.setText(" ");
+		    			mAlarmButtonONOFF_out0.setText(R.string.txt_alarm_off); // button off : alarm OFF
+		    			mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+		    			Flag_alarmONOFF_0 = false;
+            		}
     			break;
     			
             	case 99:
-	        		//output not configured : display message and quit
-            		
-	        		chaine_info = res.getString(R.string.txt_alarm_noconfig);
-	        		title_alarm_stop_rgb.setText(chaine_info);
-	        		title_alarm_start_rgb.setText(" ");
-	        		title_alarm_status_rgb.setText(" ");
-	        		mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_off); // button off : alarm OFF
-	        		mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
-	        		Flag_alarmONOFF_rgb = false;
+            		if (BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS_RGB)
+            		{
+		        		//output not configured : display message and quit
+	            			        		chaine_info = res.getString(R.string.txt_alarm_noconfig);
+		        		title_alarm_stop_rgb.setText(chaine_info);
+		        		title_alarm_start_rgb.setText(" ");
+		        		title_alarm_status_rgb.setText(" ");
+		        		mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_off); // button off : alarm OFF
+		        		mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+		        		Flag_alarmONOFF_rgb = false;
+            		}	
 	        		break;
             	}
             	
@@ -966,44 +1006,48 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	switch(output_select)
     	{
     	case 0:
-        	//change status for output 0
-    		chaine_info = res.getString(R.string.txt_alarm_start) + " "+ bcd2dec(BlueCom_Trame_Receive.data0) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data1));
-    		title_alarm_start_out0.setText(chaine_info);
-    		chaine_info = res.getString(R.string.txt_alarm_stop) + " "+ bcd2dec(BlueCom_Trame_Receive.data2) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data3));
-    		title_alarm_stop_out0.setText(chaine_info);
-    		chaine_info = res.getString(R.string.txt_alarm_status) + Status_alarm;
-    		title_alarm_status_out0.setText(chaine_info);
-    		if (BlueCom_Trame_Receive.data6==1) 		{
-    			mAlarmButtonONOFF_out0.setText(R.string.txt_alarm_on); // button on : alarm ON
-    			Flag_alarmONOFF_0 = true;
-    			mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
-    		}
-    		else {
-    			mAlarmButtonONOFF_out0.setText(R.string.txt_alarm_off); // button off : alarm OFF
-    			Flag_alarmONOFF_0 = false;
-    			mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+    		if (BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS_RGB || BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS)
+    		{
+	        	//change status for output 0
+	    		chaine_info = res.getString(R.string.txt_alarm_start) + " "+ bcd2dec(BlueCom_Trame_Receive.data0) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data1));
+	    		title_alarm_start_out0.setText(chaine_info);
+	    		chaine_info = res.getString(R.string.txt_alarm_stop) + " "+ bcd2dec(BlueCom_Trame_Receive.data2) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data3));
+	    		title_alarm_stop_out0.setText(chaine_info);
+	    		chaine_info = res.getString(R.string.txt_alarm_status) + Status_alarm;
+	    		title_alarm_status_out0.setText(chaine_info);
+	    		if (BlueCom_Trame_Receive.data6==1) 		{
+	    			mAlarmButtonONOFF_out0.setText(R.string.txt_alarm_on); // button on : alarm ON
+	    			Flag_alarmONOFF_0 = true;
+	    			mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
+	    		}
+	    		else {
+	    			mAlarmButtonONOFF_out0.setText(R.string.txt_alarm_off); // button off : alarm OFF
+	    			Flag_alarmONOFF_0 = false;
+	    			mAlarmButtonONOFF_out0.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+	    		}
     		}
     		break;
     	case 99:
-    		
-        	//change status for output RGB
-    		chaine_info = res.getString(R.string.txt_alarm_start) + " "+ bcd2dec(BlueCom_Trame_Receive.data0) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data1));
-    		title_alarm_start_rgb.setText(chaine_info);
-    		chaine_info = res.getString(R.string.txt_alarm_stop) + " "+ bcd2dec(BlueCom_Trame_Receive.data2) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data3));
-    		title_alarm_stop_rgb.setText(chaine_info);
-    		chaine_info = res.getString(R.string.txt_alarm_status) + Status_alarm;
-    		title_alarm_status_rgb.setText(chaine_info);
-    		if (BlueCom_Trame_Receive.data6==1) 		{
-    			mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_on); // button on : alarm ON
-    			Flag_alarmONOFF_rgb = true;
-    			mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
+    		if (BlueCom_Structure_Status.Board_BlueCom_Type == BLUECOM_Type.BC_TYPE_1RELAYS_RGB)
+    		{
+	        	//change status for output RGB
+	    		chaine_info = res.getString(R.string.txt_alarm_start) + " "+ bcd2dec(BlueCom_Trame_Receive.data0) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data1));
+	    		title_alarm_start_rgb.setText(chaine_info);
+	    		chaine_info = res.getString(R.string.txt_alarm_stop) + " "+ bcd2dec(BlueCom_Trame_Receive.data2) + ":"+ pad(bcd2dec(BlueCom_Trame_Receive.data3));
+	    		title_alarm_stop_rgb.setText(chaine_info);
+	    		chaine_info = res.getString(R.string.txt_alarm_status) + Status_alarm;
+	    		title_alarm_status_rgb.setText(chaine_info);
+	    		if (BlueCom_Trame_Receive.data6==1) 		{
+	    			mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_on); // button on : alarm ON
+	    			Flag_alarmONOFF_rgb = true;
+	    			mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_on));
+	    		}
+	    		else {
+	    			mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_off); // button off : alarm OFF
+	    			Flag_alarmONOFF_rgb = false;
+	    			mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
+	    		}
     		}
-    		else {
-    			mAlarmButtonONOFF_rgb.setText(R.string.txt_alarm_off); // button off : alarm OFF
-    			Flag_alarmONOFF_rgb = false;
-    			mAlarmButtonONOFF_rgb.setBackgroundDrawable(getResources().getDrawable(R.drawable.bluecom_button_off));
-    		}
-    		
     		break;
     	}
     }
@@ -1026,7 +1070,8 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	case REQUEST_ENABLE_BT:
     		// When the request to enable Bluetooth returns
             if (resultCode == Activity.RESULT_OK){
-            	setupIHM();
+            	InitIHM_Default();
+            	setupIHM_Default();
             }else{
             	// User did not enable Bluetooth or an error occured
                 Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();

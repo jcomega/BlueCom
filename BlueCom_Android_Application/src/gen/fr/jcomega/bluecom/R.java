@@ -41,7 +41,7 @@ public final class R {
     }
     public static final class id {
         public static final int Button_alarmONOFF_out0=0x7f07000f;
-        public static final int Button_alarmONOFF_rgb=0x7f070018;
+        public static final int Button_alarmONOFF_rgb=0x7f07001e;
         public static final int Text_board_status=0x7f07002b;
         public static final int Text_board_status_www=0x7f07002c;
         public static final int Text_board_type=0x7f070029;
@@ -49,21 +49,21 @@ public final class R {
         public static final int button_Alarm_Start=0x7f070036;
         public static final int button_Alarm_Stop=0x7f070038;
         public static final int button_Time_Set=0x7f07003b;
-        public static final int button_about=0x7f07001f;
+        public static final int button_about=0x7f070015;
         public static final int button_alarm_set_out0=0x7f07000e;
-        public static final int button_alarm_set_rgb=0x7f070017;
-        public static final int button_connect=0x7f07001e;
-        public static final int button_exit=0x7f070020;
+        public static final int button_alarm_set_rgb=0x7f07001d;
+        public static final int button_connect=0x7f070014;
+        public static final int button_exit=0x7f070016;
         public static final int button_scan=0x7f070004;
         public static final int imageButton_OnOff_out0=0x7f070010;
-        public static final int imageButton_OnOff_rgb=0x7f070019;
-        public static final int imageButton_RGB_rgb=0x7f07001a;
+        public static final int imageButton_OnOff_rgb=0x7f07001f;
+        public static final int imageButton_RGB_rgb=0x7f070020;
         public static final int imageView1=0x7f070022;
         public static final int imageView2=0x7f070021;
         public static final int imageView_bluetooth=0x7f070005;
-        public static final int imageView_state=0x7f07001d;
+        public static final int imageView_state=0x7f070013;
         public static final int linearLayout1=0x7f070009;
-        public static final int linearLayout2=0x7f070012;
+        public static final int linearLayout2=0x7f070018;
         public static final int new_devices=0x7f070003;
         public static final int paired_devices=0x7f070001;
         public static final int textView1=0x7f070007;
@@ -72,7 +72,7 @@ public final class R {
         public static final int textView_alarm_start=0x7f070035;
         public static final int textView_alarm_stop=0x7f070037;
         public static final int textView_out0=0x7f070008;
-        public static final int textView_out2=0x7f070011;
+        public static final int textView_out2=0x7f070017;
         public static final int text_about=0x7f070023;
         public static final int text_apk_main=0x7f070024;
         public static final int text_apk_rev=0x7f070025;
@@ -88,25 +88,27 @@ public final class R {
         public static final int text_mail=0x7f070033;
         public static final int text_mail_www=0x7f070034;
         public static final int title_Alarm=0x7f07000a;
-        public static final int title_Alarm_rgb=0x7f070013;
+        public static final int title_Alarm_rgb=0x7f070019;
         public static final int title_Alarm_start_out0=0x7f07000b;
-        public static final int title_Alarm_start_rgb=0x7f070014;
+        public static final int title_Alarm_start_rgb=0x7f07001a;
         public static final int title_Alarm_status_out0=0x7f07000d;
-        public static final int title_Alarm_status_rgb=0x7f070016;
+        public static final int title_Alarm_status_rgb=0x7f07001c;
         public static final int title_Alarm_stop_out0=0x7f07000c;
-        public static final int title_Alarm_stop_rgb=0x7f070015;
+        public static final int title_Alarm_stop_rgb=0x7f07001b;
         public static final int title_new_devices=0x7f070002;
         public static final int title_paired_devices=0x7f070000;
-        public static final int title_state2=0x7f07001c;
-        public static final int title_status=0x7f07001b;
+        public static final int title_state2=0x7f070012;
+        public static final int title_status=0x7f070011;
         public static final int toggle_Time_Status=0x7f07003a;
     }
     public static final class layout {
         public static final int device_list=0x7f030000;
         public static final int device_name=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int main_dialogue=0x7f030003;
-        public static final int time_setting=0x7f030004;
+        public static final int main_1relay=0x7f030002;
+        public static final int main_1relay_rgb=0x7f030003;
+        public static final int main_default=0x7f030004;
+        public static final int main_dialogue=0x7f030005;
+        public static final int time_setting=0x7f030006;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

@@ -14,13 +14,9 @@
 #include "../Includes/BC_rtcc.h"
 #include "rtcc.h"
 
-
-
 //-----------------Global structures used in deep sleep library-------------------------------------------------------
 rtccTimeDate RtccTimeDate ,RtccAlrmTimeDate, Rtcc_read_TimeDate;
 rtccTime  RtccAlrmTime;
-
-
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /*! \fn  void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)
@@ -40,7 +36,6 @@ void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)
    RtccTimeDate.f.wday = pBC_struct->Data6;  		//Set which day of the week for the corrsponding date
    RtccWriteTimeDate(&RtccTimeDate,1);			//write into registers
 }
-
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /*! \fn  void RTCC_setTimeDate(BLUETOOTH_DATA* pBC_struct)

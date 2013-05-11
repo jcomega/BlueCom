@@ -10,6 +10,7 @@
 //		version	|  Date		|  Author   		| 	Modification
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //		v0.0.1	|  05/05/12	| Jean-Christophe Papelard	|	Creation
+//		v1.0.0	|  11/05/13	| Jean-Christophe Papelard	|	First final version : 1 relay output version and 1 relay + RBG led output
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //	External dependency definition
@@ -27,7 +28,9 @@
 //	Programme Functionnality
 //--------------------------------------------------------------------------------------------------------------------------------------------
 /*
-
+ *  - 1 relay output version
+ *  - 1 relay + RBG led output
+ *
  */
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //	PIC Fuses references definition
@@ -71,15 +74,11 @@ TRIS_DIGITAL_OUTPUT3 = 0; //output: PWM BLUE LED
 TRIS_DIGITAL_INPUT0 = 1; // Input : Manual button ON/OFF for relay 1 output
 TRIS_DIGITAL_INPUT1 = 1; // Input : Manual button ON/OFF for LED RGB output
 
-
 // Init Timer0
 TICK_Init();             // now enables timer interrupt.
 
 // Init ADC
-ADC_Init();
-
-// Init PWM generator
-PWM_Init();
+ADC_Init(); // no tested and implemented
 
 // Set up global interrupts
 RCONbits.IPEN = 1;          // Enable priority levels on interrupts
@@ -92,21 +91,23 @@ RTCC_configure();					//Configure RTCC using library APIs
 // Select board version and software revision
 BlueCom_Struct.Board_Status = BC_STATUS_OK;
 
-
+// Init for relay routput
 SET_DIGITAL_OUTPUT0 = 0;
 SET_DIGITAL_OUTPUT1 = 0;
 SET_DIGITAL_OUTPUT2 = 0;
 SET_DIGITAL_OUTPUT3 = 0;
 RTCC_initAlarmDayTime(&RtccAlarmOutput0,0); //INIT output alarm day structure
-RTCC_initAlarmDayTime(&RtccAlarmOutputRGB,99); //INIT output alarm day structure
+
 
 // SPECIAL FOR FOR VERSION : 1 RELAY + 1 LED RGB OUTPUT
-TRIS_LED_RGB_STATUS_OUT = 0 ; //out
+PWM_Init();                     // Init PWM generator
+TRIS_LED_RGB_STATUS_OUT = 0 ;   //out
 SET_LED_RGB_STATUS_OUT = 0 ;
 BlueCom_outputRGB.status=0;
 BlueCom_outputRGB.pwm_red = 128;
 BlueCom_outputRGB.pwm_green = 128;
 BlueCom_outputRGB.pwm_blue = 115;
+RTCC_initAlarmDayTime(&RtccAlarmOutputRGB,99); //INIT output alarm day structure
 
 while (1)
     {
@@ -120,7 +121,7 @@ while (1)
       if(TICK_Is_Elapse(TICK_BUTTON_SCAN))
       {
         TICK_Set(TICK_BUTTON_SCAN,10);  //10ms
-        // FOR BUTTON 0
+        // FOR BUTTON 0 (Output 1 for relay)
         if (READ_DIGITAL_INPUT0 == 0) // if the button has been pressed
             {
                 if ( prev_input0 != 0)  //debounce methode
@@ -134,7 +135,8 @@ while (1)
             }
         else prev_input0=READ_DIGITAL_INPUT0;   // save current state (1)
 
-        // FOR BUTTON 1
+#if (BLUECOM_BOARD_TYPE == BC_TYPE_1RELAYS_RGBLED)  //rgb led input only
+        // FOR BUTTON 1 ( RGB LED command)
         if (READ_DIGITAL_INPUT1 == 0) // if the button has been pressed
             {
                 if ( prev_input1 != 0)  //debounce methode
@@ -163,7 +165,7 @@ while (1)
                 prev_input1 = READ_DIGITAL_INPUT1;  // save current state (0)
             }
         else prev_input1=READ_DIGITAL_INPUT1;   // save current state (1)
-
+#endif
 
       }
       // Bluetooth Reception gestion
@@ -183,10 +185,7 @@ while (1)
       }
 
     }
-    
-	
 }
-
 
 void ADC_Init(void)
 { // initialize the Analog-To-Digital converter.

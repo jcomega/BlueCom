@@ -82,14 +82,12 @@ void PWM_Generator(void)
     // rezet timer flag :
    PIR1bits.TMR2IF = 0;          // clear (reset) flag
 
-
    if(PWM_Time == 0)
    {
     Buffer_PWM.Val = 0b11111111; //8 buffer output =1
     PWM_OUTPUT0 = 0;
     PWM_OUTPUT1 = 0;
     PWM_OUTPUT2 = 0;
-
    }
 
     if (PWM_Time>=PWM_Value[0]) Buffer_PWM.bits.b0 = 0;
@@ -107,8 +105,6 @@ void PWM_Generator(void)
 
     PWM_Time++;
     if (PWM_Time>PWM_RESOLUTION) PWM_Time=0;
-
-
 }
 
 /*********************************************************************
