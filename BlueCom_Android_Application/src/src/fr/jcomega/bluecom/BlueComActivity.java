@@ -44,7 +44,7 @@ import java.util.TimerTask;
 public class BlueComActivity extends Activity implements ColorPickerDialog.OnColorChangedListener {
 	
 	// Android application revision software
-	public static final String ANDROID_APK_REVISION = "0.9.9";
+	public static final String ANDROID_APK_REVISION = "1.0.0";
 	
 	// Message types sent from the BluetoothRfcommClient Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -321,7 +321,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     	// Initialize the BluetoothRfcommClient to perform bluetooth connections
         //mRfcommClient = new BluetoothRfcommClient(this, mHandler);
         
-        BTConnect();
+        //BTConnect();
 
         // Start IHM :
         //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
@@ -493,6 +493,7 @@ public class BlueComActivity extends Activity implements ColorPickerDialog.OnCol
     private void InitIHM_Default(){
         
         mRfcommClient = new BluetoothRfcommClient(this, mHandler);
+        BTConnect();
     }
 
     private void BTConnect(){

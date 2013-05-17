@@ -19,25 +19,27 @@ public final class R {
         public static final int status_color=0x7f040001;
     }
     public static final class drawable {
-        public static final int bluecom_button_normal=0x7f020000;
-        public static final int bluecom_button_off=0x7f020001;
-        public static final int bluecom_button_on=0x7f020002;
-        public static final int bluecom_toggle=0x7f020003;
-        public static final int bluetooth_black=0x7f020004;
-        public static final int bluetooth_blue=0x7f020005;
-        public static final int button_bc_focus=0x7f020006;
-        public static final int button_bc_normal=0x7f020007;
-        public static final int button_bc_toggle_off=0x7f020008;
-        public static final int button_bc_toggle_on=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int power_off_button=0x7f02000b;
-        public static final int power_off_button_m=0x7f02000c;
-        public static final int power_on_button=0x7f02000d;
-        public static final int power_on_button_m=0x7f02000e;
-        public static final int rgb_button=0x7f02000f;
-        public static final int stat_green=0x7f020010;
-        public static final int stat_orange=0x7f020011;
-        public static final int stat_red=0x7f020012;
+        public static final int bluebom_intro_200px=0x7f020000;
+        public static final int bluecom_button_normal=0x7f020001;
+        public static final int bluecom_button_off=0x7f020002;
+        public static final int bluecom_button_on=0x7f020003;
+        public static final int bluecom_intro_300px=0x7f020004;
+        public static final int bluecom_toggle=0x7f020005;
+        public static final int bluetooth_black=0x7f020006;
+        public static final int bluetooth_blue=0x7f020007;
+        public static final int button_bc_focus=0x7f020008;
+        public static final int button_bc_normal=0x7f020009;
+        public static final int button_bc_toggle_off=0x7f02000a;
+        public static final int button_bc_toggle_on=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int power_off_button=0x7f02000d;
+        public static final int power_off_button_m=0x7f02000e;
+        public static final int power_on_button=0x7f02000f;
+        public static final int power_on_button_m=0x7f020010;
+        public static final int rgb_button=0x7f020011;
+        public static final int stat_green=0x7f020012;
+        public static final int stat_orange=0x7f020013;
+        public static final int stat_red=0x7f020014;
     }
     public static final class id {
         public static final int Button_alarmONOFF_out0=0x7f07000f;
@@ -58,8 +60,8 @@ public final class R {
         public static final int imageButton_OnOff_out0=0x7f070010;
         public static final int imageButton_OnOff_rgb=0x7f07001f;
         public static final int imageButton_RGB_rgb=0x7f070020;
-        public static final int imageView1=0x7f070022;
-        public static final int imageView2=0x7f070021;
+        public static final int imageView1=0x7f070021;
+        public static final int imageView2=0x7f070022;
         public static final int imageView_bluetooth=0x7f070005;
         public static final int imageView_state=0x7f070013;
         public static final int linearLayout1=0x7f070009;

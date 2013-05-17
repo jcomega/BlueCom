@@ -6,10 +6,6 @@
     android:stretchColumns="1"
     tools:context=".BlueComActivity" >
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="2dip" />
-
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
@@ -52,11 +48,22 @@
 
     <View android:layout_height="10dp" />
 
-    <View android:layout_height="60dp" />
+    <View
+        android:layout_height="4dip"
+        android:background="#FF0000FF" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:src="@drawable/bluebom_intro_200px" />
 
     <View
-        android:layout_height="2dip"
-        android:background="#FF909090" />
+        android:layout_height="4dip"
+        android:background="#FF0000FF" />
     
     <RelativeLayout
         android:layout_width="wrap_content"
