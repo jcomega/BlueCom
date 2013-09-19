@@ -67,7 +67,7 @@ FIXDEPS=fixDeps
 
 # The following macros may be used in the pre and post step lines
 Device=PIC18F44J11
-ProjectDir="M:\projet_jc\Projets\BlueCom\BlueCom_Electronic_Board_Software\BlueCom"
+ProjectDir="F:\CloudStation\Projets_JC\BlueCom\BlueCom_Electronic_Board_Software\BlueCom"
 ConfName=default
 ImagePath="dist\default\${IMAGE_TYPE}\BlueCom.${IMAGE_TYPE}.${OUTPUT_SUFFIX}"
 ImageDir="dist\default\${IMAGE_TYPE}"
