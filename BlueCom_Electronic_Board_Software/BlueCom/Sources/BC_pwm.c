@@ -43,7 +43,7 @@ unsigned char temp;
 //T2CON.T2CKPS1 = 0;// bits 1-0  Prescaler Rate Select bits
 //T2CON.T2CKPS0 = 0;
 T2CON = 0b00011100;
-//PR2 = 200;           // PR2 (Timer2 Match value) // for PWM 100 value
+//PR2 = 90;           // PR2 (Timer2 Match value) // for PWM 100 value
 PR2 = 78;           // PR2 (Timer2 Match value) // for PWM 256 value
 
 for (temp=0; temp<PWM_MAXOUTPUT; temp++) PWM_Value[temp]=0;
@@ -98,7 +98,7 @@ void PWM_Generator(void)
 //    if (PWM_Time>=PWM_Value[5]) PWM_OUTPUT5 = 0;
 //    if (PWM_Time>=PWM_Value[6]) PWM_OUTPUT6 = 0;
 //    if (PWM_Time>=PWM_Value[7]) PWM_OUTPUT7 = 0;
-   
+
     PWM_OUTPUT0 = Buffer_PWM.bits.b0;
     PWM_OUTPUT1 = Buffer_PWM.bits.b1;
     PWM_OUTPUT2 = Buffer_PWM.bits.b2;

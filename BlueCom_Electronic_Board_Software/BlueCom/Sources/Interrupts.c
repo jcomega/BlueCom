@@ -126,6 +126,11 @@ void InterruptServiceLow(void)
 {
     // Check to see what caused the interrupt
     // (Necessary when more than 1 interrupt at a priority level)
+      if (PIR1bits.TMR2IF == 1)          // timer 2 interrupt flag
+      {
+        PIR1bits.TMR2IF = 0;     // clears TMR2IF       bit 1 TMR2IF: TMR2 to PR2 Match Interrupt Flag bit
+        PWM_Generator();
+      }
 
        if  (INTCONbits.TMR0IF)
        {    
@@ -133,11 +138,6 @@ void InterruptServiceLow(void)
            TICK_IT();  //update tick timer
        }
       // Timer2 Interrupt- Freq = 10000.00 Hz - Period = 0.000100 seconds
-      if (PIR1bits.TMR2IF == 1)          // timer 2 interrupt flag
-      {
-        PIR1bits.TMR2IF = 0;     // clears TMR2IF       bit 1 TMR2IF: TMR2 to PR2 Match Interrupt Flag bit
-        PWM_Generator();
-      }
 
     // Check for another interrupt, examples:
     // if (PIR1bits.TMR1IF)     // Timer 1

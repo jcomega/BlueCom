@@ -95,49 +95,49 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/Sources/BlueCom.o: Sources/BlueCom.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/BlueCom.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BlueCom.o   Sources/BlueCom.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BlueCom.o   Sources/BlueCom.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/BlueCom.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/BlueCom.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/Interrupts.o: Sources/Interrupts.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/Interrupts.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/Interrupts.o   Sources/Interrupts.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/Interrupts.o   Sources/Interrupts.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/Interrupts.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/Interrupts.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/main.o: Sources/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/main.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/main.o   Sources/main.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/main.o   Sources/main.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/main.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/UARTIntC.o: Sources/UARTIntC.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/UARTIntC.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/UARTIntC.o   Sources/UARTIntC.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/UARTIntC.o   Sources/UARTIntC.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/UARTIntC.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/UARTIntC.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/tick.o: Sources/tick.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/tick.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/tick.o   Sources/tick.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/tick.o   Sources/tick.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/tick.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/tick.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/BC_rtcc.o: Sources/BC_rtcc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/BC_rtcc.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_rtcc.o   Sources/BC_rtcc.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_rtcc.o   Sources/BC_rtcc.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/BC_rtcc.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/BC_rtcc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/BC_pwm.o: Sources/BC_pwm.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/BC_pwm.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_pwm.o   Sources/BC_pwm.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_pwm.o   Sources/BC_pwm.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/BC_pwm.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/BC_pwm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
@@ -145,49 +145,49 @@ else
 ${OBJECTDIR}/Sources/BlueCom.o: Sources/BlueCom.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/BlueCom.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BlueCom.o   Sources/BlueCom.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BlueCom.o   Sources/BlueCom.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/BlueCom.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/BlueCom.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/Interrupts.o: Sources/Interrupts.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/Interrupts.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/Interrupts.o   Sources/Interrupts.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/Interrupts.o   Sources/Interrupts.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/Interrupts.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/Interrupts.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/main.o: Sources/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/main.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/main.o   Sources/main.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/main.o   Sources/main.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/main.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/UARTIntC.o: Sources/UARTIntC.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/UARTIntC.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/UARTIntC.o   Sources/UARTIntC.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/UARTIntC.o   Sources/UARTIntC.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/UARTIntC.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/UARTIntC.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/tick.o: Sources/tick.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/tick.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/tick.o   Sources/tick.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/tick.o   Sources/tick.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/tick.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/tick.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/BC_rtcc.o: Sources/BC_rtcc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/BC_rtcc.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_rtcc.o   Sources/BC_rtcc.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_rtcc.o   Sources/BC_rtcc.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/BC_rtcc.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/BC_rtcc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 ${OBJECTDIR}/Sources/BC_pwm.o: Sources/BC_pwm.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/Sources 
 	@${RM} ${OBJECTDIR}/Sources/BC_pwm.o.d 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_pwm.o   Sources/BC_pwm.c 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I".." -ms -oa- -pa=5  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/Sources/BC_pwm.o   Sources/BC_pwm.c 
 	@${DEP_GEN} -d ${OBJECTDIR}/Sources/BC_pwm.o 
 	@${FIXDEPS} "${OBJECTDIR}/Sources/BC_pwm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	

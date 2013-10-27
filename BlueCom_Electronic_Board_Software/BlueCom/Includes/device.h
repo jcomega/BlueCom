@@ -24,7 +24,7 @@
 // Version = SOFT_REVISION_1.SOFT_REVISION_2.SOFT_REVISION_3
 // example : 0.9.3
 
-#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS       // select type of board
+#define BLUECOM_BOARD_TYPE BC_TYPE_1RELAYS_RGBLED       // select type of board
 
 //remplace the previous code by :
 #define BC_TYPE_1RELAYS             1    // only 1 relay output
